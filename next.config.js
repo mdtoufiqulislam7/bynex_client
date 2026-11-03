@@ -10,7 +10,11 @@ const nextConfig = {
     ],
   },
   async rewrites() {
-    const backendUrl = process.env.INTERNAL_BACKEND_URL || 'http://localhost:8000';
+    const backendUrl =
+      process.env.INTERNAL_BACKEND_URL ||
+      (process.env.NODE_ENV === 'production'
+        ? 'https://bynex-server.onrender.com'
+        : 'http://localhost:8000');
     return [
       {
         source: '/api/v1/:path*',
