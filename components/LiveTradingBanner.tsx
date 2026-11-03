@@ -16,6 +16,9 @@ import {
   UserPlus,
   Play,
   VolumeX,
+  ShieldCheck,
+  Flame,
+  Activity,
 } from 'lucide-react';
 
 interface ActiveStream {
@@ -29,7 +32,6 @@ interface ActiveStream {
 
 export default function LiveTradingBanner() {
   const [stream, setStream] = useState<ActiveStream | null>(null);
-  const [isDismissed, setIsDismissed] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const router = useRouter();
 
@@ -48,7 +50,6 @@ export default function LiveTradingBanner() {
         if (!res.ok) return;
         const json = await res.json();
         if (isMounted) {
-          // Support both data.attributes and direct data
           const attributes = json?.data?.attributes || json?.data;
           if (attributes?.active && attributes?.stream) {
             setStream(attributes.stream);
@@ -57,12 +58,11 @@ export default function LiveTradingBanner() {
           }
         }
       } catch (err) {
-        // Silent fail on network error
+        // Silent fail
       }
     };
 
     checkActiveLive();
-    // Poll every 10 seconds to auto-show when admin starts live
     const interval = setInterval(checkActiveLive, 10000);
     return () => {
       isMounted = false;
@@ -70,9 +70,8 @@ export default function LiveTradingBanner() {
     };
   }, []);
 
-  if (!stream || isDismissed) return null;
+  if (!stream) return null;
 
-  // Check login state: Redux state or localStorage token
   const checkIsUserLoggedIn = () => {
     if (isAuthenticated) return true;
     if (typeof window !== 'undefined') {
@@ -82,7 +81,7 @@ export default function LiveTradingBanner() {
     return false;
   };
 
-  const handleBannerClick = (e: React.MouseEvent) => {
+  const handleEnterStream = (e: React.MouseEvent) => {
     e.preventDefault();
     if (checkIsUserLoggedIn()) {
       router.push('/live-trading');
@@ -92,41 +91,41 @@ export default function LiveTradingBanner() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = '/api/v1/auth/google?redirect=true&source=website';
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('post_login_redirect', '/live-trading');
+    }
+    window.location.href = '/api/v1/auth/google?redirect=true&source=website&postLoginRedirect=%2Flive-trading';
   };
 
   return (
     <>
-      {/* Prominent Floating Live Stream Banner with Mini Video Playing */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 max-w-sm sm:max-w-md w-full animate-in slide-in-from-bottom-5 duration-300">
-        <div className="relative rounded-2xl bg-[#0b101d]/95 border-2 border-red-500/60 text-white shadow-2xl shadow-red-950/50 backdrop-blur-xl overflow-hidden group">
-          {/* Top Header Strip */}
-          <div className="flex items-center justify-between px-3.5 py-2 bg-gradient-to-r from-red-950/80 via-slate-900 to-rose-950/80 border-b border-red-500/30">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-black uppercase tracking-wider shadow-sm animate-pulse">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                <Radio size={11} className="shrink-0" />
-                LIVE NOW
+      {/* Wide Centered Middle Live Broadcast Showcase in Hero */}
+      <div className="w-full max-w-4xl lg:max-w-5xl mx-auto mb-10 sm:mb-12 text-left animate-in fade-in zoom-in-95 duration-300">
+        <div
+          onClick={handleEnterStream}
+          className="relative rounded-3xl bg-gradient-to-b from-[#1c0b17]/95 via-[#0c1220]/95 to-[#070b14]/95 border-2 border-red-500/80 text-white shadow-[0_0_60px_-10px_rgba(239,68,68,0.5)] backdrop-blur-2xl overflow-hidden cursor-pointer group hover:border-red-400 transition-all duration-300 transform hover:-translate-y-1"
+        >
+          {/* Top Live Bar */}
+          <div className="flex items-center justify-between px-5 sm:px-8 py-3.5 bg-gradient-to-r from-red-950/90 via-slate-900 to-rose-950/90 border-b border-red-500/30">
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600 text-white text-xs font-black uppercase tracking-wider shadow-md shadow-red-600/40 animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                <Radio size={13} className="shrink-0" />
+                STREAMING LIVE
               </span>
-              <span className="text-[11px] font-bold text-rose-300 truncate max-w-[170px] sm:max-w-[210px]">
+              <span className="text-sm sm:text-base font-bold text-white truncate group-hover:text-cyan-400 transition-colors">
                 {stream.title}
               </span>
             </div>
 
-            <button
-              onClick={() => setIsDismissed(true)}
-              aria-label="Close banner"
-              className="text-slate-400 hover:text-white p-1 rounded-md hover:bg-slate-800/60 transition-colors"
-            >
-              <X size={15} />
-            </button>
+            <div className="hidden sm:flex items-center gap-2 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 px-3 py-1 rounded-full shrink-0">
+              <Flame size={13} className="text-red-400 fill-red-400" />
+              <span className="font-semibold">Trading Floor Session Active</span>
+            </div>
           </div>
 
-          {/* Embedded Playing Video Preview */}
-          <div
-            onClick={handleBannerClick}
-            className="relative aspect-video w-full bg-black cursor-pointer overflow-hidden group/vid"
-          >
+          {/* Wide Video Preview with Live Feed */}
+          <div className="relative aspect-video w-full bg-black overflow-hidden group/player">
             {stream.youtubeVideoId ? (
               <iframe
                 src={`https://www.youtube.com/embed/${stream.youtubeVideoId}?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0`}
@@ -136,35 +135,59 @@ export default function LiveTradingBanner() {
               />
             ) : null}
 
-            {/* Overlay Click Mask */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex flex-col justify-end p-3 transition-opacity">
-              <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1 text-[11px] text-slate-300 font-medium bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm">
-                  <VolumeX size={12} className="text-slate-400" />
-                  Muted preview • Click to enter
+            {/* Dark Gradient Overlay for text clarity */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent flex flex-col justify-between p-5 sm:p-8 transition-all group-hover/player:from-slate-950/95">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-xs text-slate-200 bg-black/75 border border-slate-700/70 px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-lg">
+                  <VolumeX size={14} className="text-slate-400" />
+                  Live Preview Playing • Click to join with audio
                 </span>
-                <span className="inline-flex items-center gap-1 text-xs font-bold text-cyan-400 bg-cyan-950/80 border border-cyan-500/40 px-2.5 py-1 rounded-lg shadow-md group-hover/vid:bg-cyan-500 group-hover/vid:text-slate-950 transition-all">
-                  Join Room
-                  <ChevronRight size={13} />
+                <span className="inline-flex items-center gap-1.5 text-xs text-cyan-300 bg-cyan-950/85 border border-cyan-500/40 px-3.5 py-1.5 rounded-full backdrop-blur-md font-semibold shadow-lg">
+                  <ShieldCheck size={14} className="text-cyan-400" />
+                  Verified Institutional Desk
                 </span>
+              </div>
+
+              {/* Center Play Button Cue */}
+              <div className="flex items-center justify-center my-auto">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl shadow-red-600/60 group-hover:scale-110 group-hover:bg-red-500 transition-all duration-300">
+                  <Play size={32} className="fill-current ml-1" />
+                </div>
+              </div>
+
+              {/* Bottom Cue */}
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <Activity size={13} className="text-emerald-400 animate-pulse" />
+                    <p className="text-xs text-emerald-400 font-bold uppercase tracking-wider">
+                      Live Market Execution & Signals
+                    </p>
+                  </div>
+                  <p className="text-base sm:text-xl font-extrabold text-white truncate">
+                    {stream.title}
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 group-hover:from-red-500 group-hover:to-amber-500 text-white font-bold text-sm sm:text-base shadow-xl shadow-red-600/35 transition-all">
+                    <Sparkles size={16} />
+                    Watch Live Stream
+                    <ChevronRight size={16} />
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Action Footer */}
-          <div className="p-3 bg-slate-950/80 flex items-center justify-between gap-2 border-t border-slate-800/60">
-            <div className="text-[11px] text-slate-400 flex items-center gap-1.5 truncate">
-              <TrendingUp size={13} className="text-cyan-400 shrink-0" />
-              <span>Real-Time Signals & Trading Room</span>
-            </div>
-
-            <button
-              onClick={handleBannerClick}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold transition-all shadow-md shadow-red-600/30 active:scale-95 shrink-0"
-            >
-              <Sparkles size={12} />
-              Watch Live
-            </button>
+          {/* Bottom Alert Footer */}
+          <div className="px-5 sm:px-8 py-3 bg-slate-950 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800/80">
+            <span className="flex items-center gap-2 truncate">
+              <TrendingUp size={14} className="text-cyan-400 shrink-0" />
+              <span>Real-time technical analysis, high-probability trade setups, and live host notes.</span>
+            </span>
+            <span className="text-cyan-400 font-bold group-hover:underline shrink-0 hidden sm:inline">
+              Join Live Floor (Members Only) →
+            </span>
           </div>
         </div>
       </div>
@@ -227,14 +250,24 @@ export default function LiveTradingBanner() {
 
               <div className="flex items-center gap-2 pt-1">
                 <Link
-                  href="/login"
+                  href="/login?redirect=/live-trading"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                    }
+                  }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-colors"
                 >
                   <LogIn size={13} />
                   Sign In
                 </Link>
                 <Link
-                  href="/register"
+                  href="/register?redirect=/live-trading"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                    }
+                  }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white font-bold text-xs transition-colors"
                 >
                   <UserPlus size={13} />

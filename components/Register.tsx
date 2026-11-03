@@ -27,6 +27,13 @@ function RegisterForm() {
     if (referralCode.trim()) {
       url += `&referralCode=${encodeURIComponent(referralCode.trim())}`;
     }
+    const redirect = searchParams.get('redirect');
+    if (redirect) {
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('post_login_redirect', redirect);
+      }
+      url += `&postLoginRedirect=${encodeURIComponent(redirect)}`;
+    }
     window.location.href = url;
   };
 

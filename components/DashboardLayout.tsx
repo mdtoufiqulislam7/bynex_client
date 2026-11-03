@@ -21,7 +21,8 @@ import {
   ChevronDown,
   ChevronRight,
   TrendingUp,
-  BookOpen
+  BookOpen,
+  Radio
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -120,6 +121,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   const menuItems: MenuItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+    { label: 'Live Trading', icon: Radio, path: '/live-trading' },
     { label: 'Investing Info', icon: BookOpen, path: '/investing-info' },
     {
       label: 'Wallet',
@@ -299,6 +301,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                   >
                     <item.icon size={20} />
                     <span className="font-medium">{item.label}</span>
+                    {item.label === 'Live Trading' && (
+                      <span className="ml-auto inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-600/90 text-white text-[10px] font-black uppercase tracking-wider animate-pulse">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                        LIVE
+                      </span>
+                    )}
                   </Link>
                 )}
               </div>

@@ -48,6 +48,46 @@ interface LiveStreamData {
   viewerCount?: number;
 }
 
+/**
+ * Robust cleaner and renderer for rich highlights:
+ * - Decodes encoded entities (&lt; -> <)
+ * - Strips AI placeholder tags like <response-element...>
+ * - Cleans data-path-to-node attributes
+ * - Preserves line breaks if plain text
+ */
+function cleanCommentHtml(raw: string): string {
+  if (!raw) return '';
+  let text = raw.trim();
+
+  // Decode encoded HTML entities if present
+  if (text.includes('&lt;') && text.includes('&gt;')) {
+    text = text
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, '&');
+  }
+
+  // Strip out AI / system junk tags (like <response-element ...> or comment markers)
+  text = text.replace(/<response-element[\s\S]*?<\/response-element>/gi, '');
+  text = text.replace(/<response-element[^>]*>/gi, '');
+  text = text.replace(/<\/response-element>/gi, '');
+  text = text.replace(/<!---->/g, '');
+  text = text.replace(/<!--[\s\S]*?-->/g, '');
+
+  // Strip data-path attributes for clean rendering
+  text = text.replace(/\sdata-path-to-node="[^"]*"/gi, '');
+  text = text.replace(/\sdata-index-in-node="[^"]*"/gi, '');
+
+  // If no HTML tags are present, preserve newlines
+  if (!/<[a-z][\s\S]*>/i.test(text)) {
+    text = text.replace(/\n/g, '<br />');
+  }
+
+  return text;
+}
+
 export default function LiveTradingRoom() {
   const [stream, setStream] = useState<LiveStreamData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -87,7 +127,6 @@ export default function LiveTradingRoom() {
         const currentStream: LiveStreamData = attributes.stream;
         setStream(currentStream);
 
-        // Check if a new highlight arrived to notify the user
         const newCount = currentStream.highlights?.length || 0;
         if (
           prevHighlightsCountRef.current > 0 &&
@@ -131,7 +170,10 @@ export default function LiveTradingRoom() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = '/api/v1/auth/google?redirect=true&source=website';
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('post_login_redirect', '/live-trading');
+    }
+    window.location.href = '/api/v1/auth/google?redirect=true&source=website&postLoginRedirect=%2Flive-trading';
   };
 
   // Find active pinned highlight (or latest highlight)
@@ -157,7 +199,7 @@ export default function LiveTradingRoom() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070B14] text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#070B14] text-slate-100 pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8">
       {/* Toast Alert */}
       {toast && (
         <Toast
@@ -168,22 +210,22 @@ export default function LiveTradingRoom() {
       )}
 
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Top Header Breadcrumb & Controls */}
-        <div className="flex items-center justify-between flex-wrap gap-4 pb-2 border-b border-slate-800/80">
+        {/* Top Header Breadcrumb & Controls (Plentiful spacing below fixed navbar) */}
+        <div className="flex items-center justify-between flex-wrap gap-4 pb-3 border-b border-slate-800/80">
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="text-xs sm:text-sm text-slate-400 hover:text-cyan-400 transition-colors"
+              className="text-xs sm:text-sm font-semibold text-slate-400 hover:text-cyan-400 transition-colors"
             >
               ← Back to Home
             </Link>
             <span className="text-slate-600">/</span>
             <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm font-semibold text-slate-200">
+              <span className="text-xs sm:text-sm font-bold text-white">
                 Live Trading Floor
               </span>
               {stream?.status === 'live' && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600/90 text-white text-xs font-black tracking-wider uppercase shadow-md shadow-red-600/30 animate-pulse">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600 text-white text-xs font-black tracking-wider uppercase shadow-md shadow-red-600/30 animate-pulse">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                   LIVE
                 </span>
@@ -248,7 +290,7 @@ export default function LiveTradingRoom() {
             <div className="max-w-sm mx-auto space-y-3">
               <button
                 onClick={handleGoogleLogin}
-                className="w-full inline-flex items-center justify-center gap-3 py-3 px-5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow-xl shadow-cyan-500/10 transition-all active:scale-95"
+                className="w-full inline-flex items-center justify-center gap-3 py-3 px-5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow-xl shadow-cyan-500/10 transition-all active:scale-95 cursor-pointer"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -273,14 +315,24 @@ export default function LiveTradingRoom() {
 
               <div className="flex items-center gap-3 pt-1">
                 <Link
-                  href="/login"
+                  href="/login?redirect=/live-trading"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                    }
+                  }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-colors"
                 >
                   <LogIn size={14} />
                   Sign In
                 </Link>
                 <Link
-                  href="/register"
+                  href="/register?redirect=/live-trading"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                    }
+                  }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white font-bold text-xs transition-colors"
                 >
                   <UserPlus size={14} />
@@ -413,8 +465,8 @@ export default function LiveTradingRoom() {
                         )}
                       </div>
                       <div
-                        className="text-sm sm:text-base font-semibold text-white leading-relaxed overflow-x-auto"
-                        dangerouslySetInnerHTML={{ __html: pinnedHighlight.text }}
+                        className="text-xs sm:text-sm text-slate-100 leading-relaxed overflow-x-auto break-words [&_p]:mb-2 [&_p:last-child]:mb-0 [&_span]:inline [&_ul]:list-disc [&_ul]:pl-5 [&_b]:font-bold [&_strong]:font-bold"
+                        dangerouslySetInnerHTML={{ __html: cleanCommentHtml(pinnedHighlight.text) }}
                       />
                     </div>
                   </div>
@@ -488,8 +540,8 @@ export default function LiveTradingRoom() {
                           </div>
 
                           <div
-                            className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words font-medium overflow-x-auto"
-                            dangerouslySetInnerHTML={{ __html: highlight.text }}
+                            className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium overflow-x-auto break-words [&_p]:mb-2 [&_p:last-child]:mb-0 [&_span]:inline [&_ul]:list-disc [&_ul]:pl-5 [&_b]:font-bold [&_strong]:font-bold"
+                            dangerouslySetInnerHTML={{ __html: cleanCommentHtml(highlight.text) }}
                           />
                         </div>
                       );

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import LiveTradingBanner from './LiveTradingBanner';
 
 const Hero = () => {
   const [tickerIndex, setTickerIndex] = useState(0);
@@ -33,7 +34,10 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-900/60"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 sm:pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 sm:pt-28 pb-12">
+        {/* Prominent Middle Position Live Trading Broadcast Showcase */}
+        <LiveTradingBanner />
+
         <div className="inline-flex items-center space-x-2 bg-slate-800/50 border border-slate-700 rounded-full px-3 sm:px-4 py-1.5 mb-6 sm:mb-8 backdrop-blur-sm animate-fade-in-up">
           <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
           <span className="text-xs sm:text-sm text-slate-300 font-medium">Platform Live & Paying</span>
@@ -59,27 +63,17 @@ const Hero = () => {
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
         </div>
-      </div>
 
-      {/* Live Ticker */}
-      <div className="absolute bottom-0 w-full bg-slate-900/80 border-t border-slate-800 backdrop-blur-md py-2.5 sm:py-4 z-20">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-center sm:justify-between">
-          <div className="hidden sm:flex items-center space-x-2 text-cyan-400 font-semibold uppercase tracking-widest text-xs">
-            <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-            <span>Live Transactions</span>
+        {/* Live Ticker Bar */}
+        <div className="mt-12 sm:mt-16 border-t border-slate-800/80 pt-6 flex items-center justify-between text-xs text-slate-400 max-w-xl mx-auto px-4">
+          <div className="flex items-center space-x-2">
+            <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
+            <span className="uppercase tracking-wider font-semibold text-slate-300">Live Transactions</span>
           </div>
-
-          <div className="flex items-center space-x-2 sm:space-x-4 overflow-hidden">
-             <div className="flex items-center space-x-1.5 sm:space-x-2 text-slate-300 animate-fade-in transition-all duration-500" key={tickerIndex}>
-                <span className="text-xs sm:text-sm font-medium">Latest:</span>
-                <span className="text-white font-bold text-xs sm:text-sm">{recentDeposits[tickerIndex].user}</span>
-                <span className="text-green-400 font-mono font-bold text-xs sm:text-sm">+${recentDeposits[tickerIndex].amount}</span>
-                <span className="text-[10px] sm:text-xs text-slate-500">({recentDeposits[tickerIndex].time})</span>
-             </div>
-          </div>
-
-          <div className="hidden sm:block text-slate-500 text-xs">
-            Server Time: {new Date().toLocaleTimeString()}
+          <div>
+            Latest: <span className="text-white font-medium">{recentDeposits[tickerIndex].user}</span>{' '}
+            <span className="text-green-400 font-bold">+${recentDeposits[tickerIndex].amount}</span>{' '}
+            <span className="text-slate-500 text-[10px]">({recentDeposits[tickerIndex].time})</span>
           </div>
         </div>
       </div>
