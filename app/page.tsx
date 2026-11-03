@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar'
+import LiveTradingBanner from '@/components/LiveTradingBanner'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Plans from '@/components/Plans'
@@ -26,6 +27,7 @@ export default async function Home() {
   return (
     <>
       <Navbar />
+      <LiveTradingBanner />
       <Hero />
       <About />
       <Plans initialPlans={plans} />
@@ -35,4 +37,3 @@ export default async function Home() {
     </>
   );
 }
-
