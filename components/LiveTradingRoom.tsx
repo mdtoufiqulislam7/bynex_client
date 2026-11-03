@@ -317,9 +317,10 @@ export default function LiveTradingRoom() {
                           </span>
                         )}
                       </div>
-                      <p className="text-sm sm:text-base font-semibold text-white leading-relaxed">
-                        {pinnedHighlight.text}
-                      </p>
+                      <div
+                        className="text-sm sm:text-base font-semibold text-white leading-relaxed overflow-x-auto"
+                        dangerouslySetInnerHTML={{ __html: pinnedHighlight.text }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -391,9 +392,10 @@ export default function LiveTradingRoom() {
                             </div>
                           </div>
 
-                          <p className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words font-medium">
-                            {highlight.text}
-                          </p>
+                          <div
+                            className="text-xs sm:text-sm text-slate-200 leading-relaxed break-words font-medium overflow-x-auto"
+                            dangerouslySetInnerHTML={{ __html: highlight.text }}
+                          />
                         </div>
                       );
                     })
