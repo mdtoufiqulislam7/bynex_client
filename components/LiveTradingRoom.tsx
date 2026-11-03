@@ -49,44 +49,126 @@ interface LiveStreamData {
 }
 
 /**
- * Robust cleaner and renderer for rich highlights:
- * - Decodes encoded entities (&lt; -> <)
- * - Strips AI placeholder tags like <response-element...>
- * - Cleans data-path-to-node attributes
- * - Preserves line breaks if plain text
+ * Convert any HTML, AI markup, or encoded tags into pure solid text.
  */
-function cleanCommentHtml(raw: string): string {
-  if (!raw) return '';
+function cleanToSolidText(raw: string): string {
+  if (!raw || typeof raw !== 'string') return '';
   let text = raw.trim();
 
-  // Decode encoded HTML entities if present
-  if (text.includes('&lt;') && text.includes('&gt;')) {
-    text = text
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
-      .replace(/&amp;/g, '&');
-  }
+  // Decode common HTML entities
+  text = text
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&nbsp;/g, ' ');
 
-  // Strip out AI / system junk tags (like <response-element ...> or comment markers)
-  text = text.replace(/<response-element[\s\S]*?<\/response-element>/gi, '');
-  text = text.replace(/<response-element[^>]*>/gi, '');
-  text = text.replace(/<\/response-element>/gi, '');
+  // Extract clean links from <a href="...">...</a> before stripping tags
+  text = text.replace(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, (_, href, content) => {
+    const cleanContent = content.replace(/<[^>]+>/g, '').trim();
+    if (!cleanContent || href.includes(cleanContent) || cleanContent.includes(href)) {
+      return href;
+    }
+    return `${cleanContent}: ${href}`;
+  });
+
+  // Strip Google/AI junk tags: <response-element...>, <!---->, <link-block...>
+  text = text.replace(/<response-element[\s\S]*?<\/response-element>/gi, (match) => {
+    const linkMatch = match.match(/https?:\/\/[^\s"'<>]+/);
+    return linkMatch ? ` ${linkMatch[0]} ` : ' ';
+  });
+  text = text.replace(/<link-block[^>]*>/gi, '');
+  text = text.replace(/<\/link-block>/gi, '');
   text = text.replace(/<!---->/g, '');
   text = text.replace(/<!--[\s\S]*?-->/g, '');
 
-  // Strip data-path attributes for clean rendering
-  text = text.replace(/\sdata-path-to-node="[^"]*"/gi, '');
-  text = text.replace(/\sdata-index-in-node="[^"]*"/gi, '');
+  // Convert HTML structural tags into natural linebreaks & bullet points
+  text = text.replace(/<br\s*\/?>/gi, '\n');
+  text = text.replace(/<\/p>/gi, '\n\n');
+  text = text.replace(/<\/div>/gi, '\n');
+  text = text.replace(/<li>/gi, '\n• ');
+  text = text.replace(/<\/li>/gi, '');
+  text = text.replace(/<\/ul>/gi, '\n');
+  text = text.replace(/<\/ol>/gi, '\n');
+  text = text.replace(/<h[1-6][^>]*>/gi, '\n\n');
+  text = text.replace(/<\/h[1-6]>/gi, '\n');
 
-  // If no HTML tags are present, preserve newlines
-  if (!/<[a-z][\s\S]*>/i.test(text)) {
-    text = text.replace(/\n/g, '<br />');
-  }
+  // Strip all remaining HTML tags
+  text = text.replace(/<[^>]+>/g, '');
 
-  return text;
+  // Normalize whitespace: remove leading/trailing spaces per line and excessive empty lines
+  const lines = text
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line, i, arr) => !(line === '' && arr[i - 1] === ''));
+
+  return lines.join('\n').trim();
 }
+
+/**
+ * Format URLs and trading signal badges in solid text into clickable, styled elements.
+ */
+function renderSolidTextTokens(solidText: string) {
+  const tokenRegex = /(https?:\/\/[^\s<]+|\[(?:🟢 BUY|🔴 SELL|🎯 TP|🛑 SL|⚡ ALERT|💎 VIP)[^\]]*\])/g;
+  const parts = solidText.split(tokenRegex);
+
+  return parts.map((part, index) => {
+    if (!part) return null;
+
+    if (part.startsWith('http://') || part.startsWith('https://')) {
+      return (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-400 hover:text-cyan-300 underline font-semibold break-all inline-flex items-center gap-0.5 mx-0.5"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {part}
+          <ExternalLink size={12} className="inline-block shrink-0" />
+        </a>
+      );
+    }
+
+    if (part.startsWith('[') && part.endsWith(']')) {
+      const isBuy = part.includes('BUY');
+      const isSell = part.includes('SELL');
+      const isTp = part.includes('TP');
+      const isSl = part.includes('SL');
+      const colorClass = isBuy
+        ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+        : isSell
+        ? 'bg-rose-500/20 text-rose-400 border-rose-500/40'
+        : isTp
+        ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/40'
+        : isSl
+        ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
+        : 'bg-purple-500/20 text-purple-400 border-purple-500/40';
+
+      return (
+        <span
+          key={index}
+          className={`inline-block px-2 py-0.5 rounded font-black text-xs uppercase tracking-wider border mx-1 shadow-sm ${colorClass}`}
+        >
+          {part.slice(1, -1)}
+        </span>
+      );
+    }
+
+    return <React.Fragment key={index}>{part}</React.Fragment>;
+  });
+}
+
+const SolidTextDisplay: React.FC<{ text: string; className?: string }> = ({ text, className }) => {
+  const solid = cleanToSolidText(text);
+  return (
+    <div className={`whitespace-pre-line leading-relaxed break-words font-sans select-text ${className || ''}`}>
+      {renderSolidTextTokens(solid)}
+    </div>
+  );
+};
 
 export default function LiveTradingRoom() {
   const [stream, setStream] = useState<LiveStreamData | null>(null);
@@ -464,9 +546,9 @@ export default function LiveTradingRoom() {
                           </span>
                         )}
                       </div>
-                      <div
-                        className="text-xs sm:text-sm text-slate-100 leading-relaxed overflow-x-auto break-words [&_p]:mb-2 [&_p:last-child]:mb-0 [&_span]:inline [&_ul]:list-disc [&_ul]:pl-5 [&_b]:font-bold [&_strong]:font-bold"
-                        dangerouslySetInnerHTML={{ __html: cleanCommentHtml(pinnedHighlight.text) }}
+                      <SolidTextDisplay
+                        text={pinnedHighlight.text}
+                        className="text-xs sm:text-sm text-slate-100"
                       />
                     </div>
                   </div>
@@ -539,9 +621,9 @@ export default function LiveTradingRoom() {
                             </div>
                           </div>
 
-                          <div
-                            className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium overflow-x-auto break-words [&_p]:mb-2 [&_p:last-child]:mb-0 [&_span]:inline [&_ul]:list-disc [&_ul]:pl-5 [&_b]:font-bold [&_strong]:font-bold"
-                            dangerouslySetInnerHTML={{ __html: cleanCommentHtml(highlight.text) }}
+                          <SolidTextDisplay
+                            text={highlight.text}
+                            className="text-xs sm:text-sm text-slate-200 font-medium"
                           />
                         </div>
                       );
