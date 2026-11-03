@@ -46,12 +46,16 @@ export default function Login() {
         .then((res) => res.json())
         .then((data) => {
           const user = data.data?.attributes?.user || data.data?.user;
-          const redirectTarget =
+          let redirectTarget =
             searchParams.get('redirect') ||
             (typeof window !== 'undefined'
               ? sessionStorage.getItem('post_login_redirect')
               : null) ||
             '/dashboard';
+
+          if (redirectTarget === '/live-trading' || redirectTarget === '/live-tradding') {
+            redirectTarget = '/dashboard/live-trading';
+          }
 
           if (typeof window !== 'undefined') {
             sessionStorage.removeItem('post_login_redirect');
@@ -83,12 +87,15 @@ export default function Login() {
           }
         })
         .catch(() => {
-          const fallbackTarget =
+          let fallbackTarget =
             searchParams.get('redirect') ||
             (typeof window !== 'undefined'
               ? sessionStorage.getItem('post_login_redirect')
               : null) ||
             '/dashboard';
+          if (fallbackTarget === '/live-trading' || fallbackTarget === '/live-tradding') {
+            fallbackTarget = '/dashboard/live-trading';
+          }
           router.push(fallbackTarget);
         })
         .finally(() => {

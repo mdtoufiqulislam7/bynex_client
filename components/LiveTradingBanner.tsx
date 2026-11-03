@@ -84,7 +84,7 @@ export default function LiveTradingBanner() {
   const handleEnterStream = (e: React.MouseEvent) => {
     e.preventDefault();
     if (checkIsUserLoggedIn()) {
-      router.push('/live-trading');
+      router.push('/dashboard/live-trading');
     } else {
       setAuthModalOpen(true);
     }
@@ -92,9 +92,9 @@ export default function LiveTradingBanner() {
 
   const handleGoogleLogin = () => {
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('post_login_redirect', '/live-trading');
+      sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
     }
-    window.location.href = '/api/v1/auth/google?redirect=true&source=website&postLoginRedirect=%2Flive-trading';
+    window.location.href = '/api/v1/auth/google?redirect=true&source=website&postLoginRedirect=%2Fdashboard%2Flive-trading';
   };
 
   return (
@@ -250,10 +250,10 @@ export default function LiveTradingBanner() {
 
               <div className="flex items-center gap-2 pt-1">
                 <Link
-                  href="/login?redirect=/live-trading"
+                  href="/login?redirect=/dashboard/live-trading"
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                      sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
                     }
                   }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-colors"
@@ -262,10 +262,10 @@ export default function LiveTradingBanner() {
                   Sign In
                 </Link>
                 <Link
-                  href="/register?redirect=/live-trading"
+                  href="/register?redirect=/dashboard/live-trading"
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                      sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
                     }
                   }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white font-bold text-xs transition-colors"

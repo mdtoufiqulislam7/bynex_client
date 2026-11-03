@@ -121,7 +121,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   const menuItems: MenuItem[] = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-    { label: 'Live Trading', icon: Radio, path: '/live-trading' },
+    { label: 'Live Trading', icon: Radio, path: '/dashboard/live-trading' },
     { label: 'Investing Info', icon: BookOpen, path: '/investing-info' },
     {
       label: 'Wallet',

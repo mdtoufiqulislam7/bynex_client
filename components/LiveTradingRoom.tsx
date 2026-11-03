@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import {
@@ -170,7 +171,12 @@ const SolidTextDisplay: React.FC<{ text: string; className?: string }> = ({ text
   );
 };
 
-export default function LiveTradingRoom() {
+interface LiveTradingRoomProps {
+  embedded?: boolean;
+}
+
+export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomProps) {
+  const router = useRouter();
   const [stream, setStream] = useState<LiveStreamData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -191,6 +197,13 @@ export default function LiveTradingRoom() {
       setIsUserLoggedIn(Boolean(token));
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    // If user is on the public page and already logged in, redirect into the dashboard room
+    if (!embedded && isUserLoggedIn) {
+      router.replace('/dashboard/live-trading');
+    }
+  }, [embedded, isUserLoggedIn, router]);
 
   const fetchStream = async (showRefreshIndicator = false) => {
     if (showRefreshIndicator) setIsRefreshing(true);
@@ -253,9 +266,9 @@ export default function LiveTradingRoom() {
 
   const handleGoogleLogin = () => {
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('post_login_redirect', '/live-trading');
+      sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
     }
-    window.location.href = '/api/v1/auth/google?redirect=true&source=website&postLoginRedirect=%2Flive-trading';
+    window.location.href = '/api/v1/auth/google?redirect=true&source=website&postLoginRedirect=%2Fdashboard%2Flive-trading';
   };
 
   // Find active pinned highlight (or latest highlight)
@@ -281,7 +294,13 @@ export default function LiveTradingRoom() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070B14] text-slate-100 pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+    <div
+      className={
+        embedded
+          ? 'space-y-6'
+          : 'min-h-screen bg-[#070B14] text-slate-100 pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8'
+      }
+    >
       {/* Toast Alert */}
       {toast && (
         <Toast
@@ -291,15 +310,15 @@ export default function LiveTradingRoom() {
         />
       )}
 
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Top Header Breadcrumb & Controls (Plentiful spacing below fixed navbar) */}
+      <div className={embedded ? 'space-y-6' : 'max-w-7xl mx-auto space-y-6'}>
+        {/* Top Header Breadcrumb & Controls */}
         <div className="flex items-center justify-between flex-wrap gap-4 pb-3 border-b border-slate-800/80">
           <div className="flex items-center gap-3">
             <Link
-              href="/"
+              href={embedded ? '/dashboard' : '/'}
               className="text-xs sm:text-sm font-semibold text-slate-400 hover:text-cyan-400 transition-colors"
             >
-              ← Back to Home
+              {embedded ? 'Dashboard' : '← Back to Home'}
             </Link>
             <span className="text-slate-600">/</span>
             <div className="flex items-center gap-2">
@@ -397,10 +416,10 @@ export default function LiveTradingRoom() {
 
               <div className="flex items-center gap-3 pt-1">
                 <Link
-                  href="/login?redirect=/live-trading"
+                  href="/login?redirect=/dashboard/live-trading"
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                      sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
                     }
                   }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-colors"
@@ -409,10 +428,10 @@ export default function LiveTradingRoom() {
                   Sign In
                 </Link>
                 <Link
-                  href="/register?redirect=/live-trading"
+                  href="/register?redirect=/dashboard/live-trading"
                   onClick={() => {
                     if (typeof window !== 'undefined') {
-                      sessionStorage.setItem('post_login_redirect', '/live-trading');
+                      sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
                     }
                   }}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white font-bold text-xs transition-colors"
