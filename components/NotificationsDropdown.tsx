@@ -26,7 +26,7 @@ const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({ notificat
     switch (type) {
       case 'transaction': return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
       case 'security': return 'bg-rose-500/10 text-rose-500 border-rose-500/20';
-      case 'promotion': return 'bg-gold-500/10 text-gold-500 border-gold-500/20';
+      case 'promotion': return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
       case 'profit': return 'bg-green-500/10 text-green-500 border-green-500/20';
       case 'investment': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
       case 'support': return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
@@ -67,7 +67,7 @@ const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({ notificat
             {unreadCount > 0 && (
               <button 
                 onClick={onMarkAllRead}
-                className="text-xs text-gold-500 hover:text-gold-400 font-medium transition-colors"
+                className="text-xs text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
               >
                 Mark all read
               </button>
@@ -116,7 +116,7 @@ const NotificationsDropdown: React.FC<NotificationsDropdownProps> = ({ notificat
                   </div>
                   {notif.status === 'unread' && (
                     <div className="shrink-0 pt-2">
-                      <div className="w-2 h-2 rounded-full bg-gold-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]"></div>
+                      <div className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(14,165,233,0.5)]"></div>
                     </div>
                   )}
                 </div>

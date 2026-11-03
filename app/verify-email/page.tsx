@@ -130,7 +130,7 @@ function VerifyEmailContent() {
             </div>
             <Link
               href="/login"
-              className="inline-block bg-gradient-to-r from-gold-500 to-amber-600 text-white font-bold px-8 py-3 rounded-lg hover:from-gold-600 hover:to-amber-700 transition-all shadow-lg shadow-gold-500/20"
+              className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold px-8 py-3 rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/20"
             >
               Go to Login
             </Link>
@@ -139,15 +139,15 @@ function VerifyEmailContent() {
           <>
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gold-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Mail className="text-gold-500" size={32} />
+              <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Mail className="text-cyan-400" size={32} />
               </div>
               <h2 className="text-2xl font-bold text-white mb-3">Verify Your Email</h2>
               <p className="text-slate-400 text-sm">
                 We&apos;ve sent a 6-digit verification code to
               </p>
               {email && (
-                <p className="text-gold-500 font-medium mt-1">{email}</p>
+                <p className="text-cyan-400 font-medium mt-1">{email}</p>
               )}
             </div>
 
@@ -167,7 +167,7 @@ function VerifyEmailContent() {
                     className={`w-10 h-12 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold rounded-lg border bg-slate-950/50 text-white focus:outline-none focus:ring-2 transition-all ${
                       status === 'error'
                         ? 'border-rose-500/50 focus:ring-rose-500/50 focus:border-rose-500'
-                        : 'border-slate-700 focus:ring-gold-500/50 focus:border-gold-500'
+                        : 'border-slate-700 focus:ring-cyan-500/50 focus:border-cyan-500'
                     }`}
                   />
                 ))}
@@ -184,7 +184,7 @@ function VerifyEmailContent() {
               <button
                 type="submit"
                 disabled={isVerifying || otp.join('').length !== 6}
-                className="w-full bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-slate-950 font-bold py-3 px-4 rounded-lg shadow-lg shadow-gold-500/20 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-3 px-4 rounded-lg shadow-lg shadow-cyan-500/20 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isVerifying ? (
                   <>
@@ -204,7 +204,7 @@ function VerifyEmailContent() {
                 <button
                   onClick={handleResendEmail}
                   disabled={isResending}
-                  className="text-gold-500 font-semibold hover:text-gold-400 hover:underline disabled:opacity-50"
+                  className="text-cyan-400 font-semibold hover:text-cyan-300 hover:underline disabled:opacity-50"
                 >
                   {isResending ? 'Sending...' : 'Resend Code'}
                 </button>
@@ -228,8 +228,8 @@ export default function VerifyEmail() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
-        <div className="w-16 h-16 bg-gold-500/10 rounded-full flex items-center justify-center animate-pulse">
-          <Loader2 className="text-gold-500 animate-spin" size={32} />
+        <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center animate-pulse">
+          <Loader2 className="text-cyan-400 animate-spin" size={32} />
         </div>
       </div>
     }>

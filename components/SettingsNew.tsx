@@ -38,7 +38,7 @@ export default function SettingsNew() {
   const { data: rankData, refetch: refetchRank } = useGetMyRankQuery();
   const [checkUpgrade, { isLoading: isCheckingUpgrade }] = useCheckAndUpgradeRankMutation();
   const rankInfo = rankData?.data?.attributes;
-  const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || 'https://api.pipguardian.com';
+  const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || '';
   const { data: rankDefsData } = useGetRankDefinitionsQuery();
   const rankDefinitions = rankDefsData?.data?.attributes || [];
 
@@ -115,7 +115,7 @@ export default function SettingsNew() {
 
   // Profile image URL from backend
   const profileImageUrl = user?.image
-    ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || 'https://api.pipguardian.com'}${user.image}`
+    ? (user.image.startsWith('http') ? user.image : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ''}${user.image}`)
     : null;
 
   // Handle file selection
@@ -380,7 +380,7 @@ export default function SettingsNew() {
               onClick={() => setActiveTab(tab.key as any)}
               className={`flex-1 min-w-0 py-3 sm:py-4 text-xs sm:text-sm font-medium flex items-center justify-center gap-1 sm:gap-2 border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === tab.key
-                  ? 'border-gold-500 text-white'
+                  ? 'border-cyan-500 text-white'
                   : 'border-transparent text-slate-400 hover:text-white'
               }`}
             >
@@ -428,7 +428,7 @@ export default function SettingsNew() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isUploading || isDeleting}
-                    className="flex items-center gap-2 bg-gold-500 hover:bg-gold-600 disabled:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                   >
                     <Upload size={16} /> Upload Image
                   </button>
@@ -465,7 +465,7 @@ export default function SettingsNew() {
                         <p className="text-xs text-slate-400 uppercase tracking-wider">Current Rank</p>
                         <p className="text-lg font-bold text-white">{rankInfo.currentRankInfo.name}</p>
                         {rankInfo.currentRankInfo.monthlySalary > 0 && (
-                          <p className="text-xs text-gold-400">
+                          <p className="text-xs text-cyan-400">
                             Monthly Salary: <span className="font-semibold">${rankInfo.currentRankInfo.monthlySalary}</span>
                           </p>
                         )}
@@ -482,7 +482,7 @@ export default function SettingsNew() {
                       type="button"
                       onClick={handleCheckRankUpgrade}
                       disabled={isCheckingUpgrade || rankInfo.currentRank >= 7}
-                      className="flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500/20 disabled:opacity-40 text-gold-400 border border-gold-500/30 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="flex items-center gap-2 bg-cyan-500/10 hover:bg-cyan-500/20 disabled:opacity-40 text-cyan-400 border border-cyan-500/30 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       <Star size={14} />
                       {rankInfo.currentRank >= 7 ? 'Max Rank' : isCheckingUpgrade ? 'Checking…' : 'Check Upgrade'}
@@ -506,7 +506,7 @@ export default function SettingsNew() {
                         </div>
                         <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gold-500 rounded-full transition-all"
+                            className="h-full bg-cyan-500 rounded-full transition-all"
                             style={{ width: `${rankInfo.progress.businessVolume.percentage}%` }}
                           />
                         </div>
@@ -554,7 +554,7 @@ export default function SettingsNew() {
                         <div className="text-xs text-slate-400">
                           Next: <span className="text-white font-semibold">{rankInfo.nextRankInfo.name}</span>
                           {rankInfo.nextRankInfo.bonus && (
-                            <span className="text-gold-400"> · {rankInfo.nextRankInfo.bonus}</span>
+                            <span className="text-cyan-400"> · {rankInfo.nextRankInfo.bonus}</span>
                           )}
                         </div>
                       </div>
@@ -578,7 +578,7 @@ export default function SettingsNew() {
                     type="text"
                     value={profileForm.firstName}
                     onChange={(e) => setProfileForm({ ...profileForm, firstName: e.target.value })}
-                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 cursor-text"
+                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 cursor-text"
                   />
                 </div>
                 <div>
@@ -587,7 +587,7 @@ export default function SettingsNew() {
                     type="text"
                     value={profileForm.lastName}
                     onChange={(e) => setProfileForm({ ...profileForm, lastName: e.target.value })}
-                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 cursor-text"
+                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 cursor-text"
                   />
                 </div>
                 <div className="md:col-span-2">
@@ -604,7 +604,7 @@ export default function SettingsNew() {
               <button
                 type="submit"
                 disabled={isUpdating}
-                className="flex items-center gap-2 bg-gold-500 hover:bg-gold-600 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
               >
                 {isUpdating ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 {isUpdating ? 'Saving...' : 'Save Changes'}
@@ -634,7 +634,7 @@ export default function SettingsNew() {
                   type="password"
                   value={passwordForm.oldPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, oldPassword: e.target.value })}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                   required
                 />
               </div>
@@ -644,7 +644,7 @@ export default function SettingsNew() {
                   type="password"
                   value={passwordForm.newPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                   required
                   minLength={8}
                 />
@@ -655,7 +655,7 @@ export default function SettingsNew() {
                   type="password"
                   value={passwordForm.confirmPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                   required
                 />
               </div>
@@ -663,7 +663,7 @@ export default function SettingsNew() {
               <button
                 type="submit"
                 disabled={isChangingPassword}
-                className="w-full flex items-center justify-center gap-2 bg-gold-500 hover:bg-gold-600 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
               >
                 {isChangingPassword ? <Loader2 size={18} className="animate-spin" /> : <Lock size={18} />}
                 {isChangingPassword ? 'Updating...' : 'Update Password'}
@@ -681,7 +681,7 @@ export default function SettingsNew() {
                 </div>
                 <button
                   onClick={handleOpenAddModal}
-                  className="flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors w-fit"
+                  className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors w-fit"
                 >
                   <Plus size={16} /> Add Account
                 </button>
@@ -689,7 +689,7 @@ export default function SettingsNew() {
 
               {loadingAccounts ? (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="animate-spin text-gold-500" size={32} />
+                  <Loader2 className="animate-spin text-cyan-400" size={32} />
                 </div>
               ) : savedAccounts.length === 0 ? (
                 <div className="text-center py-12 text-slate-400">
@@ -712,7 +712,7 @@ export default function SettingsNew() {
                           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                             <span className="text-white font-medium text-sm">{account.label}</span>
                             {account.isDefault && (
-                              <span className="bg-gold-500/20 text-gold-500 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-medium">Default</span>
+                              <span className="bg-cyan-500/20 text-cyan-400 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-medium">Default</span>
                             )}
                             <span className="bg-slate-800 text-slate-400 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full capitalize">{account.accountType}</span>
                           </div>
@@ -728,7 +728,7 @@ export default function SettingsNew() {
                         {!account.isDefault && (
                           <button
                             onClick={() => handleSetDefault(account.id)}
-                            className="text-slate-400 hover:text-gold-500 p-2 rounded-lg hover:bg-slate-800 transition-colors"
+                            className="text-slate-400 hover:text-cyan-400 p-2 rounded-lg hover:bg-slate-800 transition-colors"
                             title="Set as default"
                           >
                             <Star size={16} />
@@ -769,7 +769,7 @@ export default function SettingsNew() {
                           <select
                             value={accountForm.accountType}
                             onChange={(e) => setAccountForm({ ...accountForm, accountType: e.target.value as any })}
-                            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                           >
                             <option value="crypto">Crypto Wallet</option>
                             <option value="bank">Bank Account</option>
@@ -786,7 +786,7 @@ export default function SettingsNew() {
                           value={accountForm.label}
                           onChange={(e) => setAccountForm({ ...accountForm, label: e.target.value })}
                           placeholder="e.g. My Bitcoin Wallet"
-                          className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                          className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                           required
                           maxLength={50}
                         />
@@ -802,7 +802,7 @@ export default function SettingsNew() {
                               value={accountForm.currency}
                               onChange={(e) => setAccountForm({ ...accountForm, currency: e.target.value })}
                               placeholder="e.g. BTC, USDT, ETH"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                               required
                             />
                           </div>
@@ -813,7 +813,7 @@ export default function SettingsNew() {
                               value={accountForm.network}
                               onChange={(e) => setAccountForm({ ...accountForm, network: e.target.value })}
                               placeholder="e.g. ERC-20, TRC-20, BEP-20"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                             />
                           </div>
                           <div>
@@ -823,7 +823,7 @@ export default function SettingsNew() {
                               value={accountForm.walletAddress}
                               onChange={(e) => setAccountForm({ ...accountForm, walletAddress: e.target.value })}
                               placeholder="Enter wallet address"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 font-mono text-sm"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 font-mono text-sm"
                               required
                             />
                           </div>
@@ -840,7 +840,7 @@ export default function SettingsNew() {
                               value={accountForm.bankDetails.bankName}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, bankName: e.target.value } })}
                               placeholder="Enter bank name"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                               required
                             />
                           </div>
@@ -851,7 +851,7 @@ export default function SettingsNew() {
                               value={accountForm.bankDetails.accountNumber}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, accountNumber: e.target.value } })}
                               placeholder="Enter account number"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                               required
                             />
                           </div>
@@ -862,7 +862,7 @@ export default function SettingsNew() {
                               value={accountForm.bankDetails.accountName}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, accountName: e.target.value } })}
                               placeholder="Enter account holder name"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                               required
                             />
                           </div>
@@ -874,7 +874,7 @@ export default function SettingsNew() {
                                 value={accountForm.bankDetails.routingNumber}
                                 onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, routingNumber: e.target.value } })}
                                 placeholder="Optional"
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                               />
                             </div>
                             <div>
@@ -884,7 +884,7 @@ export default function SettingsNew() {
                                 value={accountForm.bankDetails.swiftCode}
                                 onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, swiftCode: e.target.value } })}
                                 placeholder="Optional"
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                               />
                             </div>
                           </div>
@@ -895,7 +895,7 @@ export default function SettingsNew() {
                               value={accountForm.bankDetails.iban}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, iban: e.target.value } })}
                               placeholder="Enter IBAN"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500"
+                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
                             />
                           </div>
                         </>
@@ -924,7 +924,7 @@ export default function SettingsNew() {
                         <button
                           type="submit"
                           disabled={isCreating || isUpdatingAccount}
-                          className="flex-1 bg-gold-500 hover:bg-gold-600 disabled:bg-slate-600 text-white px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                          className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
                         >
                           {(isCreating || isUpdatingAccount) && <Loader2 size={18} className="animate-spin" />}
                           {editingAccount ? 'Update' : 'Save Account'}

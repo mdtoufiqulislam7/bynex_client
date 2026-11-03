@@ -16,14 +16,14 @@ export default function TransactionDetail() {
   // Fetch transaction from API
   const { data: transactionResponse, isLoading, error } = useGetTransactionByIdQuery(transactionId)
 
-  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || 'https://api.pipguardian.com'
+  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ''
   const transaction = transactionResponse?.data?.attributes
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="animate-spin text-gold-500 mx-auto mb-4" size={32} />
+          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={32} />
           <p className="text-slate-400">Loading transaction details...</p>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function TransactionDetail() {
 
   const getStatusIcon = (status: string) => {
     const icons: Record<string, JSX.Element> = {
-      pending: <Clock className="text-amber-500" size={24} />,
+      pending: <Clock className="text-cyan-400" size={24} />,
       processing: <Clock className="text-blue-500" size={24} />,
       completed: <CheckCircle className="text-emerald-500" size={24} />,
       rejected: <XCircle className="text-rose-500" size={24} />,
@@ -70,7 +70,7 @@ export default function TransactionDetail() {
 
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
-      pending: 'text-amber-500 bg-amber-500/10 border-amber-500/30',
+      pending: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
       processing: 'text-blue-500 bg-blue-500/10 border-blue-500/30',
       completed: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/30',
       rejected: 'text-rose-500 bg-rose-500/10 border-rose-500/30',
@@ -84,8 +84,8 @@ export default function TransactionDetail() {
       deposit: 'text-emerald-500 bg-emerald-500/10',
       withdraw: 'text-rose-500 bg-rose-500/10',
       investment: 'text-blue-500 bg-blue-500/10',
-      profit: 'text-gold-500 bg-gold-500/10',
-      referral: 'text-amber-500 bg-amber-500/10',
+      profit: 'text-cyan-400 bg-cyan-500/10',
+      referral: 'text-cyan-400 bg-cyan-500/10',
       bonus: 'text-purple-500 bg-purple-500/10',
     }
     return colors[type] || 'text-slate-500 bg-slate-500/10'
@@ -118,7 +118,7 @@ export default function TransactionDetail() {
           ? 'bg-emerald-500/5 border-emerald-500/30'
           : transaction.status === 'rejected'
           ? 'bg-rose-500/5 border-rose-500/30'
-          : 'bg-amber-500/5 border-amber-500/30'
+          : 'bg-cyan-500/5 border-cyan-500/30'
       }`}>
         <div className="flex items-start gap-4">
           <div className={`p-3 rounded-lg ${
@@ -126,7 +126,7 @@ export default function TransactionDetail() {
               ? 'bg-emerald-500/10'
               : transaction.status === 'rejected'
               ? 'bg-rose-500/10'
-              : 'bg-amber-500/10'
+              : 'bg-cyan-500/10'
           }`}>
             {getStatusIcon(transaction.status)}
           </div>
@@ -150,7 +150,7 @@ export default function TransactionDetail() {
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-slate-400 text-sm">Amount</p>
-            <DollarSign className="text-gold-500" size={20} />
+            <DollarSign className="text-cyan-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${transaction.amount.toFixed(2)}</p>
           <p className="text-xs text-slate-400 mt-2 capitalize">{transaction.type} amount</p>
@@ -284,7 +284,7 @@ export default function TransactionDetail() {
                   <p className="text-slate-400 text-xs mb-1">Payment Proof</p>
                   <button
                     onClick={() => setShowProofImage(true)}
-                    className="text-gold-500 hover:text-gold-400 text-sm font-medium flex items-center gap-1"
+                    className="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center gap-1"
                   >
                     View Screenshot
                     <Eye size={14} />

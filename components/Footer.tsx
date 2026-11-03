@@ -8,9 +8,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-12 mb-8 sm:mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-3 sm:mb-4 leading-none">Pip<span className="text-gold-500">guardian</span><span className="text-green-400 text-xs font-bold ml-0.5 align-bottom">elt</span></h3>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-3 sm:mb-4 leading-none">Bynex <span className="text-cyan-400">Markets</span></h3>
             <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-              Leading the industry in automated pipguardian generation. Our algorithms work 24/7 so you don&apos;t have to.
+              Leading the industry in automated wealth and algorithmic portfolio management. Intelligent execution engineered for global market leaders.
             </p>
           </div>
 
@@ -18,9 +18,9 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-bold text-sm sm:text-base mb-4 sm:mb-6">Company</h4>
             <ul className="space-y-3 text-slate-400 text-sm">
-              <li><a href="#" className="hover:text-gold-500 transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-gold-500 transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-gold-500 transition-colors">Press</a></li>
+              <li><a href="#" className="hover:text-cyan-400 transition-colors">About Us</a></li>
+              <li><a href="#" className="hover:text-cyan-400 transition-colors">Careers</a></li>
+              <li><a href="#" className="hover:text-cyan-400 transition-colors">Press</a></li>
             </ul>
           </div>
 
@@ -28,8 +28,8 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-bold text-sm sm:text-base mb-4 sm:mb-6">Legal</h4>
             <ul className="space-y-3 text-slate-400 text-sm">
-              <li className="flex items-center"><Lock className="w-3 h-3 mr-2" /><a href="#" className="hover:text-gold-500 transition-colors">Privacy Policy</a></li>
-              <li className="flex items-center"><FileText className="w-3 h-3 mr-2" /><a href="#" className="hover:text-gold-500 transition-colors">Terms of Service</a></li>
+              <li className="flex items-center"><Lock className="w-3 h-3 mr-2" /><a href="#" className="hover:text-cyan-400 transition-colors">Privacy Policy</a></li>
+              <li className="flex items-center"><FileText className="w-3 h-3 mr-2" /><a href="#" className="hover:text-cyan-400 transition-colors">Terms of Service</a></li>
             </ul>
           </div>
 
@@ -37,7 +37,7 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-bold text-sm sm:text-base mb-4 sm:mb-6">Contact</h4>
             <ul className="space-y-3 text-slate-400 text-sm">
-              {/* <li className="flex items-center"><Mail className="w-4 h-4 mr-2" /> pipguardian1@gmail.com</li> */}
+              {/* <li className="flex items-center"><Mail className="w-4 h-4 mr-2" /> support@bynexmarkets.com</li> */}
               <li>12 Rue de Rivoli, 75004 Paris, France</li>
               <li>Moscow, Russia — Suite 45, Floor 12, Freedom Tower East, 12 Presnenskaya Naberezhnaya, 123112</li>
             </ul>
@@ -53,7 +53,7 @@ const Footer = () => {
             </p>
           </div>
           <div className="text-center text-slate-600 text-sm mt-8">
-            @ 2016 Pipguardian<span className="text-green-400 text-xs font-bold">elt</span>. All rights reserved.
+            © 2026 Bynex Markets. All rights reserved.
           </div>
         </div>
       </div>

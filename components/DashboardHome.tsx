@@ -159,7 +159,7 @@ const DashboardHome = () => {
       case 'withdraw':
         return 'text-rose-400';
       case 'profit':
-        return 'text-gold-500';
+        return 'text-cyan-400';
       case 'investment':
         return 'text-blue-400';
       case 'referral':
@@ -191,7 +191,7 @@ const DashboardHome = () => {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <Loader2 className="animate-spin text-gold-500 mx-auto mb-4" size={48} />
+          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={48} />
           <p className="text-slate-400">Loading dashboard...</p>
         </div>
       </div>
@@ -269,7 +269,7 @@ const DashboardHome = () => {
         </Link>
 
         {/* Total Profit */}
-        <Link href="/dashboard/profits/history" className="bg-gradient-to-br from-gold-500 to-amber-600 rounded-xl sm:rounded-2xl p-3 sm:p-6 text-slate-950 shadow-xl shadow-gold-500/20 relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all">
+        <Link href="/dashboard/profits/history" className="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl sm:rounded-2xl p-3 sm:p-6 text-slate-950 shadow-xl shadow-cyan-500/20 relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all">
           <div className="absolute top-0 right-0 p-2 sm:p-4 opacity-10">
              <DollarSign size={40} className="sm:hidden" />
              <DollarSign size={64} className="hidden sm:block" />
@@ -329,7 +329,7 @@ const DashboardHome = () => {
       <div className="bg-slate-900 border border-slate-800 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg">
         {/* <div className="p-4 sm:p-6 border-b border-slate-800 flex justify-between items-center">
           <h3 className="text-sm sm:text-lg font-bold text-white">Recent Transactions</h3>
-          <Link href="/dashboard/transactions" className="text-gold-500 text-xs sm:text-sm hover:underline font-medium">View All</Link>
+          <Link href="/dashboard/transactions" className="text-cyan-400 text-xs sm:text-sm hover:underline font-medium">View All</Link>
         </div> */}
 
         {/* Desktop Table View */}
@@ -395,7 +395,7 @@ const DashboardHome = () => {
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                     tx.type === 'deposit' ? 'bg-emerald-500/10 text-emerald-400' :
                     tx.type === 'withdraw' ? 'bg-rose-500/10 text-rose-400' :
-                    tx.type === 'profit' ? 'bg-gold-500/10 text-gold-500' :
+                    tx.type === 'profit' ? 'bg-cyan-500/10 text-cyan-400' :
                     'bg-blue-500/10 text-blue-400'
                   }`}>
                     {tx.type === 'deposit' ? <ArrowDownLeft size={14} /> :

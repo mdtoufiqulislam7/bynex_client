@@ -4,13 +4,17 @@ import { ReduxProvider } from '../components/ReduxProvider'
 import { FAVICON_URL } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Pipguardian Premier',
-  description: 'PipGuardian is a smart forex platform built for confident growth. We focus on disciplined trading and capital protection.',
-  /** Uses Cloudinary + `?fv=` cache bust (see `lib/site.ts`). Do not add `app/favicon.ico` or it overrides this. */
+  title: 'Bynex Markets | Next-Gen Investment & Wealth Management',
+  description: 'Bynex Markets is a smart forex and algorithmic trading platform built for confident growth, disciplined trading, and institutional capital protection.',
   icons: {
-    icon: [{ url: FAVICON_URL, type: 'image/jpeg' }],
-    shortcut: FAVICON_URL,
-    apple: FAVICON_URL,
+    icon: [
+      { url: '/icon.svg?v=3', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png?v=3', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png?v=3', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.ico?v=3', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico?v=3',
+    apple: '/apple-touch-icon.png?v=3',
   },
 }
 

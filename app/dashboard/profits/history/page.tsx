@@ -62,7 +62,7 @@ export default function ProfitHistory() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <Loader2 className="animate-spin text-gold-500 mx-auto mb-4" size={48} />
+          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={48} />
           <p className="text-slate-400">Loading profit history...</p>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function ProfitHistory() {
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-slate-400 text-sm">Pending Profit</p>
-            <TrendingUp className="text-amber-500" size={20} />
+            <TrendingUp className="text-cyan-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${stats.pendingProfit.toFixed(2)}</p>
           <p className="text-xs text-slate-400 mt-2">To be distributed</p>
@@ -118,7 +118,7 @@ export default function ProfitHistory() {
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-slate-400 text-sm">Distributions</p>
-            <TrendingUp className="text-gold-500" size={20} />
+            <TrendingUp className="text-cyan-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">{stats.distributionCount}</p>
           <p className="text-xs text-slate-400 mt-2">Total payments</p>
@@ -135,7 +135,7 @@ export default function ProfitHistory() {
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
               statusFilter === 'all'
-                ? 'bg-gold-500 text-white shadow-lg shadow-gold-500/20'
+                ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20'
                 : 'bg-slate-900/50 border border-slate-800 text-slate-400 hover:text-white'
             }`}
           >
@@ -148,7 +148,7 @@ export default function ProfitHistory() {
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
               statusFilter === 'completed'
-                ? 'bg-gold-500 text-white shadow-lg shadow-gold-500/20'
+                ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20'
                 : 'bg-slate-900/50 border border-slate-800 text-slate-400 hover:text-white'
             }`}
           >
@@ -161,7 +161,7 @@ export default function ProfitHistory() {
             }}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
               statusFilter === 'pending'
-                ? 'bg-gold-500 text-white shadow-lg shadow-gold-500/20'
+                ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20'
                 : 'bg-slate-900/50 border border-slate-800 text-slate-400 hover:text-white'
             }`}
           >
@@ -219,7 +219,7 @@ export default function ProfitHistory() {
                         profit.status === 'completed'
                           ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
                           : profit.status === 'pending'
-                          ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
+                          ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
                           : 'bg-slate-500/10 text-slate-400 border border-slate-500/30'
                       }`}>
                         {profit.status}
@@ -228,7 +228,7 @@ export default function ProfitHistory() {
                     <td className="p-4 text-center">
                       <Link
                         href={`/dashboard/transactions/${profit.id}`}
-                        className="text-gold-500 hover:text-gold-400 text-sm inline-flex items-center gap-1"
+                        className="text-cyan-400 hover:text-cyan-300 text-sm inline-flex items-center gap-1"
                       >
                         <Eye size={14} />
                         View

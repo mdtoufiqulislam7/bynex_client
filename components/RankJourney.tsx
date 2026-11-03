@@ -57,7 +57,7 @@ const RankTooltip = ({ def, imageBase }: { def: RankDefinition; imageBase: strin
         {def.monthlySalary > 0 && (
           <div className="flex justify-between">
             <span className="text-slate-400">Monthly salary</span>
-            <span className="text-gold-400 font-semibold">${def.monthlySalary}</span>
+            <span className="text-cyan-400 font-semibold">${def.monthlySalary}</span>
           </div>
         )}
         {def.bonus && (
@@ -101,20 +101,20 @@ const RankNode = ({
 
   // Outer ring classes
   const ringClass = isActive
-    ? 'ring-2 ring-gold-500 ring-offset-2 ring-offset-slate-950'
+    ? 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-slate-950'
     : isCompleted
     ? 'ring-1 ring-emerald-500/50 ring-offset-1 ring-offset-slate-950'
     : 'ring-1 ring-slate-700 ring-offset-1 ring-offset-slate-950';
 
   // Container bg
   const containerBg = isActive
-    ? 'bg-gradient-to-br from-gold-500/20 to-amber-600/10 border-gold-500/40'
+    ? 'bg-gradient-to-br from-cyan-500/20 to-blue-600/10 border-cyan-500/40'
     : isCompleted
     ? 'bg-emerald-500/5 border-emerald-500/20'
     : 'bg-slate-900/60 border-slate-800';
 
   // Glow for active
-  const glowClass = isActive ? 'shadow-lg shadow-gold-500/25' : '';
+  const glowClass = isActive ? 'shadow-lg shadow-cyan-500/25' : '';
 
   const imgSize = compact ? 'w-9 h-9' : 'w-12 h-12';
 
@@ -152,7 +152,7 @@ const RankNode = ({
           </div>
         )}
         {isActive && (
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gold-500 rounded-full flex items-center justify-center shadow-md shadow-gold-500/50 ring-2 ring-slate-950">
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-cyan-500 rounded-full flex items-center justify-center shadow-md shadow-cyan-500/50 ring-2 ring-slate-950">
             <Star size={10} className="text-white fill-white" />
           </div>
         )}
@@ -164,7 +164,7 @@ const RankNode = ({
 
         {/* Active pulse ring */}
         {isActive && (
-          <div className="absolute inset-0 rounded-full animate-ping bg-gold-500/20 pointer-events-none" />
+          <div className="absolute inset-0 rounded-full animate-ping bg-cyan-500/20 pointer-events-none" />
         )}
       </div>
 
@@ -175,7 +175,7 @@ const RankNode = ({
             compact ? 'text-[10px]' : 'text-xs'
           } ${
             isActive
-              ? 'text-gold-400'
+              ? 'text-cyan-400'
               : isCompleted
               ? 'text-emerald-400'
               : 'text-slate-500'
@@ -200,13 +200,13 @@ const Connector = ({ left, right }: { left: RankState; right: RankState }) => {
   return (
     <div className="flex items-center flex-1 min-w-[12px] mt-[-20px]">
       {/* Left dot */}
-      <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isDone ? 'bg-gold-500' : 'bg-slate-700'}`} />
+      <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isDone ? 'bg-cyan-500' : 'bg-slate-700'}`} />
       {/* Line */}
-      <div className={`flex-1 h-px ${isDone ? 'bg-gradient-to-r from-gold-500 to-gold-500/60' : 'bg-slate-800'}`} />
+      <div className={`flex-1 h-px ${isDone ? 'bg-gradient-to-r from-cyan-500 to-cyan-500/60' : 'bg-slate-800'}`} />
       {/* Arrow head */}
       <ChevronRight
         size={10}
-        className={`flex-shrink-0 ${isDone ? 'text-gold-500' : 'text-slate-700'}`}
+        className={`flex-shrink-0 ${isDone ? 'text-cyan-400' : 'text-slate-700'}`}
       />
     </div>
   );
@@ -218,7 +218,7 @@ const VerticalConnector = ({ left, right }: { left: RankState; right: RankState 
                  (left === 'completed' && right === 'active');
   return (
     <div className="flex flex-col items-center w-6 flex-shrink-0 py-1">
-      <div className={`flex-1 w-px ${isDone ? 'bg-gradient-to-b from-gold-500 to-gold-500/40' : 'bg-slate-800'}`}
+      <div className={`flex-1 w-px ${isDone ? 'bg-gradient-to-b from-cyan-500 to-cyan-500/40' : 'bg-slate-800'}`}
         style={{ minHeight: 24 }}
       />
     </div>
@@ -250,7 +250,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
               <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" /> Completed
             </span>
             <span className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-gold-500 inline-block" /> Current
+              <span className="w-2 h-2 rounded-full bg-cyan-500 inline-block" /> Current
             </span>
             <span className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-slate-700 inline-block" /> Locked
@@ -294,14 +294,14 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
                   <div
                     className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 ${
                       state === 'active'
-                        ? 'bg-gold-500/20 border-gold-500/50 shadow-md shadow-gold-500/20'
+                        ? 'bg-cyan-500/20 border-cyan-500/50 shadow-md shadow-cyan-500/20'
                         : state === 'completed'
                         ? 'bg-emerald-500/10 border-emerald-500/30'
                         : 'bg-slate-900 border-slate-800'
                     } ${state === 'locked' ? 'opacity-40' : ''}`}
                   >
                     {state === 'completed' && <Check size={12} className="text-emerald-400" strokeWidth={3} />}
-                    {state === 'active' && <Star size={12} className="text-gold-400 fill-gold-400" />}
+                    {state === 'active' && <Star size={12} className="text-cyan-400 fill-cyan-400" />}
                     {state === 'locked' && <Lock size={10} className="text-slate-600" />}
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
                 <div
                   className={`flex-1 flex items-center gap-3 py-3 ${
                     state === 'active'
-                      ? 'bg-gold-500/5 border border-gold-500/20 rounded-xl px-3'
+                      ? 'bg-cyan-500/5 border border-cyan-500/20 rounded-xl px-3'
                       : ''
                   } ${state === 'locked' ? 'opacity-40' : ''}`}
                 >
@@ -321,7 +321,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
                   />
                   <div className="flex-1 min-w-0">
                     <p className={`text-sm font-semibold ${
-                      state === 'active' ? 'text-gold-400' : state === 'completed' ? 'text-emerald-400' : 'text-slate-500'
+                      state === 'active' ? 'text-cyan-400' : state === 'completed' ? 'text-emerald-400' : 'text-slate-500'
                     }`}>
                       {def.name}
                     </p>
@@ -330,7 +330,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
                         <span className="text-[10px] text-slate-500">Target: ${def.target.toLocaleString()}</span>
                       )}
                       {def.monthlySalary > 0 && (
-                        <span className="text-[10px] text-gold-500/70">${def.monthlySalary}/mo</span>
+                        <span className="text-[10px] text-cyan-400/80">${def.monthlySalary}/mo</span>
                       )}
                       {def.bonus && (
                         <span className="text-[10px] text-emerald-500/70">{def.bonus}</span>
@@ -338,7 +338,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
                     </div>
                   </div>
                   {state === 'active' && (
-                    <span className="text-[10px] font-bold text-gold-500 bg-gold-500/10 border border-gold-500/20 px-2 py-0.5 rounded-full flex-shrink-0">
+                    <span className="text-[10px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full flex-shrink-0">
                       YOU ARE HERE
                     </span>
                   )}
@@ -362,7 +362,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
         <div className="hidden sm:flex items-center justify-center mt-5 pt-4 border-t border-slate-800">
           <p className="text-xs text-slate-500">
             You are currently{' '}
-            <span className="text-gold-400 font-semibold">
+            <span className="text-cyan-400 font-semibold">
               {definitions.find((d) => d.level === currentRank)?.name || 'Starter'}
             </span>
             {currentRank < 7 && (
@@ -374,7 +374,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
               </>
             )}
             {currentRank === 7 && (
-              <span className="text-gold-400"> · Maximum rank achieved! 🎉</span>
+              <span className="text-cyan-400"> · Maximum rank achieved! 🎉</span>
             )}
           </p>
         </div>

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.pipguardian.com/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/v1';
 
 // Base query with auth token
 const baseQuery = fetchBaseQuery({
@@ -88,6 +88,7 @@ export const baseApi = createApi({
     'PaymentGateways',
     'SavedAccounts',
     'Ranks',
+    'Community',
   ],
   endpoints: () => ({}),
 });

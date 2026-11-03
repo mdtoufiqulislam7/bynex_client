@@ -128,7 +128,7 @@ export default function PlanDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="animate-spin text-gold-500 mx-auto mb-4" size={48} />
+          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={48} />
           <p className="text-slate-400">Loading plan details...</p>
         </div>
       </div>
@@ -141,7 +141,7 @@ export default function PlanDetailPage() {
         <AlertCircle size={48} className="text-rose-500" />
         <h3 className="text-lg font-semibold text-white">Plan Not Found</h3>
         <p className="text-slate-400 text-sm">The investment plan you're looking for doesn't exist.</p>
-        <Link href="/dashboard/plans/invest" className="text-gold-500 hover:text-gold-400 font-medium text-sm flex items-center gap-1">
+        <Link href="/dashboard/plans/invest" className="text-cyan-400 hover:text-cyan-300 font-medium text-sm flex items-center gap-1">
           <ArrowLeft size={16} /> Back to Plans
         </Link>
       </div>
@@ -185,7 +185,7 @@ export default function PlanDetailPage() {
           <div className="flex items-center gap-3">
             <h2 className="text-xl sm:text-2xl font-bold text-white">{plan.name}</h2>
             {plan.isPopular && (
-              <span className="flex items-center gap-1 bg-gold-500/20 text-gold-500 px-2.5 py-1 rounded-full text-xs font-bold">
+              <span className="flex items-center gap-1 bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded-full text-xs font-bold">
                 <Star size={12} fill="currentColor" /> Popular
               </span>
             )}
@@ -264,7 +264,7 @@ export default function PlanDetailPage() {
           {/* Profit Calculator */}
           <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Calculator size={18} className="text-gold-500" /> Profit Calculator
+              <Calculator size={18} className="text-cyan-400" /> Profit Calculator
             </h3>
             <div className="space-y-4">
               <div>
@@ -278,7 +278,7 @@ export default function PlanDetailPage() {
                     placeholder={plan.minDeposit.toString()}
                     min={plan.minDeposit}
                     max={plan.maxDeposit}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                 </div>
                 <p className="text-xs text-slate-500 mt-1">Range: ${plan.minDeposit.toLocaleString()} — ${plan.maxDeposit.toLocaleString()}</p>
@@ -296,7 +296,7 @@ export default function PlanDetailPage() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 mb-1">Total Return</p>
-                    <p className="text-lg font-bold text-gold-500">${calc.totalReturn.toFixed(2)}</p>
+                    <p className="text-lg font-bold text-cyan-400">${calc.totalReturn.toFixed(2)}</p>
                   </div>
                 </div>
               </div>
@@ -306,7 +306,7 @@ export default function PlanDetailPage() {
           {/* Invest Button */}
           <button
             onClick={() => { setShowInvestModal(true); setInvestError(''); setInvestSuccess(false); setInvestAmount(''); }}
-            className="w-full bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-slate-950 font-bold py-4 px-4 rounded-xl shadow-lg shadow-gold-500/20 transform hover:-translate-y-1 transition-all flex items-center justify-center text-lg"
+            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-4 px-4 rounded-xl shadow-lg shadow-cyan-500/20 transform hover:-translate-y-1 transition-all flex items-center justify-center text-lg"
           >
             Invest Now <ArrowRight size={20} className="ml-2" />
           </button>
@@ -321,7 +321,7 @@ export default function PlanDetailPage() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-400 flex items-center gap-2"><Percent size={14} /> ROI</span>
-                <span className="text-sm font-bold text-gold-500">{plan.approximateRoi || `${plan.roi}% ${plan.roiType}`}</span>
+                <span className="text-sm font-bold text-cyan-400">{plan.approximateRoi || `${plan.roi}% ${plan.roiType}`}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-400 flex items-center gap-2"><Clock size={14} /> Duration</span>
@@ -362,7 +362,7 @@ export default function PlanDetailPage() {
           </div>
 
           {/* Balance Card */}
-          <div className="bg-gradient-to-br from-gold-500 to-amber-600 rounded-xl p-6 text-slate-950">
+          <div className="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl p-6 text-slate-950">
             <p className="text-sm font-bold opacity-70">Your Balance</p>
             <p className="text-2xl font-bold mt-1">${balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
             <Link href="/dashboard/deposit" className="text-xs font-bold mt-2 inline-flex items-center gap-1 bg-black/10 px-3 py-1 rounded-md">
@@ -398,13 +398,13 @@ export default function PlanDetailPage() {
                     value={investAmount}
                     onChange={(e) => setInvestAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     disabled={investing}
                   />
                   <button
                     type="button"
                     onClick={() => setInvestAmount(Math.min(balance, plan.maxDeposit).toString())}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-slate-800 text-gold-500 px-2 py-1 rounded hover:bg-slate-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-slate-800 text-cyan-400 px-2 py-1 rounded hover:bg-slate-700"
                     disabled={investing}
                   >
                     MAX
@@ -428,7 +428,7 @@ export default function PlanDetailPage() {
                     </div>
                     <div className="flex justify-between border-t border-emerald-500/20 pt-2 mt-2">
                       <span className="text-white font-medium">Total Return:</span>
-                      <span className="text-gold-500 font-bold">${investCalc.totalReturn.toFixed(2)}</span>
+                      <span className="text-cyan-400 font-bold">${investCalc.totalReturn.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -462,7 +462,7 @@ export default function PlanDetailPage() {
                 <button
                   onClick={handleInvest}
                   disabled={investing || !investAmount || parseFloat(investAmount) < plan.minDeposit}
-                  className="flex-1 py-3 rounded-lg bg-gold-500 hover:bg-gold-600 text-slate-950 font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex-1 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {investing ? (
                     <>
@@ -493,9 +493,9 @@ const DetailCard: React.FC<{
     emerald: 'bg-emerald-500/10 text-emerald-500',
     blue: 'bg-blue-500/10 text-blue-500',
     purple: 'bg-purple-500/10 text-purple-500',
-    amber: 'bg-amber-500/10 text-amber-500',
+    amber: 'bg-cyan-500/10 text-cyan-400',
     cyan: 'bg-cyan-500/10 text-cyan-500',
-    gold: 'bg-gold-500/10 text-gold-500',
+    gold: 'bg-cyan-500/10 text-cyan-400',
   };
 
   return (

@@ -101,7 +101,7 @@ export default function InvestmentDetail() {
     const colors = {
       active: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/30',
       completed: 'text-blue-500 bg-blue-500/10 border-blue-500/30',
-      paused: 'text-amber-500 bg-amber-500/10 border-amber-500/30',
+      paused: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
     }
     return colors[status]
   }
@@ -110,7 +110,7 @@ export default function InvestmentDetail() {
     const icons = {
       active: <Activity className="text-emerald-500" size={20} />,
       completed: <CheckCircle className="text-blue-500" size={20} />,
-      paused: <Pause className="text-amber-500" size={20} />,
+      paused: <Pause className="text-cyan-400" size={20} />,
     }
     return icons[status]
   }
@@ -136,7 +136,7 @@ export default function InvestmentDetail() {
         </div>
         <Link
           href={`/dashboard/profits/investment/${investmentId}`}
-          className="px-3 sm:px-4 py-2 bg-gold-500 hover:bg-gold-600 text-white rounded-lg font-medium transition-colors text-sm"
+          className="px-3 sm:px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-lg font-medium transition-colors text-sm"
         >
           Profit History
         </Link>
@@ -147,7 +147,7 @@ export default function InvestmentDetail() {
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-slate-400 text-sm">Investment Amount</p>
-            <DollarSign className="text-gold-500" size={20} />
+            <DollarSign className="text-cyan-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${investment.amount.toLocaleString()}</p>
           <p className="text-xs text-slate-400 mt-2">Principal amount</p>
@@ -191,7 +191,7 @@ export default function InvestmentDetail() {
             </p>
           </div>
           <div className="text-right">
-            <p className="text-xl sm:text-2xl font-bold text-gold-500">{investment.progress.toFixed(1)}%</p>
+            <p className="text-xl sm:text-2xl font-bold text-cyan-400">{investment.progress.toFixed(1)}%</p>
             <p className="text-xs text-slate-400 mt-1">Complete</p>
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function InvestmentDetail() {
         {/* Progress Bar */}
         <div className="relative w-full h-4 bg-slate-800 rounded-full overflow-hidden mb-6">
           <div
-            className="absolute top-0 left-0 h-full bg-gradient-to-r from-gold-500 to-amber-600 transition-all duration-500"
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-500"
             style={{ width: `${investment.progress}%` }}
           />
         </div>
@@ -208,7 +208,7 @@ export default function InvestmentDetail() {
           <div className="bg-slate-800/50 rounded-lg p-4">
             <p className="text-slate-400 text-xs mb-1">Time Remaining</p>
             <div className="flex items-center gap-2">
-              <Clock className="text-gold-500" size={16} />
+              <Clock className="text-cyan-400" size={16} />
               <p className="text-white font-semibold">{getRemainingTime()}</p>
             </div>
           </div>
@@ -259,8 +259,8 @@ export default function InvestmentDetail() {
                 <p className="text-slate-400 text-sm">Remaining Profit</p>
                 <p className="text-xl sm:text-2xl font-bold text-white mt-1">${investment.remainingProfit.toLocaleString()}</p>
               </div>
-              <div className="w-12 h-12 bg-gold-500/10 rounded-lg flex items-center justify-center">
-                <Clock className="text-gold-500" size={24} />
+              <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center">
+                <Clock className="text-cyan-400" size={24} />
               </div>
             </div>
           </div>
@@ -310,7 +310,7 @@ export default function InvestmentDetail() {
           </div>
           <Link
             href={`/dashboard/profits/investment/${investmentId}`}
-            className="text-gold-500 hover:text-gold-400 text-sm font-medium flex items-center gap-1"
+            className="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center gap-1"
           >
             View All
             <ArrowLeft className="rotate-180" size={16} />
@@ -332,7 +332,7 @@ export default function InvestmentDetail() {
                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                   profit.status === 'paid'
                     ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                    : 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
+                    : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
                 }`}>
                   {profit.status}
                 </span>

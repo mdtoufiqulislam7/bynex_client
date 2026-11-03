@@ -99,7 +99,7 @@ export default function InvestmentProfitHistory() {
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-slate-400 text-sm">Pending Profit</p>
-            <Clock className="text-amber-500" size={20} />
+            <Clock className="text-cyan-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${profitData.pendingProfit.toFixed(2)}</p>
           <p className="text-xs text-slate-400 mt-2">To be distributed</p>
@@ -155,12 +155,12 @@ export default function InvestmentProfitHistory() {
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                     record.status === 'paid'
                       ? 'bg-emerald-500/10'
-                      : 'bg-amber-500/10'
+                      : 'bg-cyan-500/10'
                   }`}>
                     {record.status === 'paid' ? (
                       <CheckCircle className="text-emerald-500" size={20} />
                     ) : (
-                      <Clock className="text-amber-500" size={20} />
+                      <Clock className="text-cyan-400" size={20} />
                     )}
                   </div>
                   <div>
@@ -172,14 +172,14 @@ export default function InvestmentProfitHistory() {
                   <span className={`px-2 py-1 rounded text-xs font-medium capitalize ${
                     record.type === 'daily'
                       ? 'bg-blue-500/10 text-blue-400'
-                      : 'bg-gold-500/10 text-gold-400'
+                      : 'bg-cyan-500/10 text-cyan-400'
                   }`}>
                     {record.type}
                   </span>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                     record.status === 'paid'
                       ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                      : 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
+                      : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
                   }`}>
                     {record.status}
                   </span>

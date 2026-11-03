@@ -200,7 +200,7 @@ export default function NotificationCenter() {
     const icons = {
       transaction: <DollarSign className="text-emerald-500" size={20} />,
       security: <Shield className="text-rose-500" size={20} />,
-      promotion: <Gift className="text-gold-500" size={20} />,
+      promotion: <Gift className="text-cyan-400" size={20} />,
       system: <AlertTriangle className="text-blue-500" size={20} />,
     }
     return icons[category as keyof typeof icons] || <Bell className="text-slate-500" size={20} />
@@ -211,7 +211,7 @@ export default function NotificationCenter() {
     const icons = {
       transaction: <DollarSign className="text-emerald-500" size={20} />,
       system: <AlertTriangle className="text-blue-500" size={20} />,
-      promotion: <Gift className="text-gold-500" size={20} />,
+      promotion: <Gift className="text-cyan-400" size={20} />,
       security: <Shield className="text-rose-500" size={20} />,
     }
     return icons[category as keyof typeof icons] || <Bell className="text-slate-500" size={20} />
@@ -372,7 +372,7 @@ export default function NotificationCenter() {
             </p>
             <button
               onClick={() => refetchNotifications()}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gold-500 hover:bg-gold-600 text-white rounded-lg transition-colors font-medium"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-lg transition-colors font-medium"
             >
               <RefreshCw size={18} />
               Retry
@@ -391,7 +391,7 @@ export default function NotificationCenter() {
           <div className="flex items-center gap-3">
             <h1 className="text-xl sm:text-2xl font-bold text-white">Notifications</h1>
             {unreadCount > 0 && (
-              <span className="px-2.5 py-1 bg-gold-500 text-white text-xs font-bold rounded-full">
+              <span className="px-2.5 py-1 bg-cyan-500 text-white text-xs font-bold rounded-full">
                 {unreadCount}
               </span>
             )}
@@ -442,7 +442,7 @@ export default function NotificationCenter() {
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
           <p className="text-slate-400 text-xs mb-1 font-medium">Unread</p>
-          <p className="text-xl sm:text-2xl font-bold text-gold-500">{stats.unread}</p>
+          <p className="text-xl sm:text-2xl font-bold text-cyan-400">{stats.unread}</p>
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
           <p className="text-slate-400 text-xs mb-1 font-medium">Read</p>
@@ -458,7 +458,7 @@ export default function NotificationCenter() {
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
           <p className="text-slate-400 text-xs mb-1 font-medium">Promotions</p>
-          <p className="text-xl sm:text-2xl font-bold text-gold-500">{stats.promotion}</p>
+          <p className="text-xl sm:text-2xl font-bold text-cyan-400">{stats.promotion}</p>
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
           <p className="text-slate-400 text-xs mb-1 font-medium">Security</p>
@@ -484,7 +484,7 @@ export default function NotificationCenter() {
             onClick={() => setFilter(key)}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
               filter === key
-                ? 'bg-gold-500 text-white shadow-lg shadow-gold-500/20'
+                ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20'
                 : 'bg-slate-900/50 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
             }`}
           >
@@ -525,7 +525,7 @@ export default function NotificationCenter() {
                 <div
                   key={notification.id}
                   className={`p-4 sm:p-5 hover:bg-slate-800/30 transition-all group cursor-pointer ${
-                    notification.status === 'unread' ? 'bg-slate-800/20 border-l-2 border-l-gold-500' : ''
+                    notification.status === 'unread' ? 'bg-slate-800/20 border-l-2 border-l-cyan-500' : ''
                   } ${isDeleting ? 'opacity-50' : ''}`}
                   onClick={() => handleNotificationClick(notification)}
                 >
@@ -538,7 +538,7 @@ export default function NotificationCenter() {
                         <div className="flex items-center gap-2 flex-1">
                           <h3 className="text-white font-semibold text-sm">{notification.title}</h3>
                           {notification.status === 'unread' && (
-                            <div className="w-2 h-2 bg-gold-500 rounded-full flex-shrink-0 animate-pulse" />
+                            <div className="w-2 h-2 bg-cyan-500 rounded-full flex-shrink-0 animate-pulse" />
                           )}
                         </div>
                         <span className="text-xs text-slate-500 whitespace-nowrap flex-shrink-0">
@@ -554,7 +554,7 @@ export default function NotificationCenter() {
                               : category === 'system'
                               ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
                               : category === 'promotion'
-                              ? 'bg-gold-500/10 text-gold-400 border border-gold-500/20'
+                              ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
                               : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                           }`}
                         >
@@ -567,7 +567,7 @@ export default function NotificationCenter() {
                               handleMarkAsRead(notification.id)
                             }}
                             disabled={isMarkingAsRead}
-                            className="text-xs text-gold-500 hover:text-gold-400 flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity font-medium"
+                            className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity font-medium"
                           >
                             <Check size={14} />
                             Mark as read

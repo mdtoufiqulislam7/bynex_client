@@ -59,7 +59,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const wallet = walletData?.data?.attributes;
   const balance = wallet?.balance || 0;
   const rankInfo = rankData?.data?.attributes;
-  const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || 'https://api.pipguardian.com';
+  const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || '';
 
   const pathname = usePathname();
 
@@ -247,8 +247,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <div className="h-full flex flex-col">
           {/* Logo Area */}
           <div className="h-20 flex items-center px-6 border-b border-slate-800">
-            <span className="text-xl font-serif font-bold tracking-wide leading-none">
-              Pip<span className="text-gold-500">guardian</span><span className="text-green-400 text-xs font-bold ml-0.5 align-bottom">elt</span>
+            <span className="text-xl font-serif font-bold tracking-wide leading-none text-white">
+              Bynex <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-400">Markets</span>
             </span>
           </div>
 
@@ -278,7 +278,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                             href={sub.path || '#'}
                             onClick={() => setSidebarOpen(false)}
                             className={`block px-4 py-2 text-sm transition-colors ${
-                              isActive(sub.path) ? 'text-gold-500 font-medium' : 'text-slate-500 hover:text-gold-400'
+                              isActive(sub.path) ? 'text-cyan-400 font-medium' : 'text-slate-500 hover:text-cyan-300'
                             }`}
                           >
                             {sub.label}
@@ -293,7 +293,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                     onClick={() => setSidebarOpen(false)}
                     className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                       isActive(item.path)
-                        ? 'bg-gold-500/10 text-gold-500 border border-gold-500/20'
+                        ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
                         : 'text-slate-400 hover:text-white hover:bg-slate-800'
                     }`}
                   >
@@ -376,7 +376,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                 <p className="text-sm font-medium text-white">
                   {user?.firstName} {user?.lastName}
                 </p>
-                <p className="text-xs text-gold-400 font-medium">
+                <p className="text-xs text-cyan-400 font-medium">
                   {rankInfo?.currentRankInfo?.name || 'Starter'}
                 </p>
               </div>

@@ -5,7 +5,7 @@ const About = () => {
   return (
     <section id="about" className="py-12 sm:py-24 bg-slate-950 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -13,11 +13,11 @@ const About = () => {
           {/* Left Column: Content */}
           <div>
             <div className="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-gold-500 text-sm font-bold uppercase tracking-wider">Our Mission</span>
+              <span className="text-cyan-400 text-sm font-bold uppercase tracking-wider">Our Mission</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight">
-              Redefining Pipguardian Management for the <span className="text-gold-500">Digital Age</span>
+              Redefining Wealth Management for the <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-400">Digital Age</span>
             </h2>
 
             <p className="text-slate-400 text-sm sm:text-lg mb-4 sm:mb-6 leading-relaxed">
@@ -25,12 +25,12 @@ const About = () => {
             </p>
 
             <p className="text-slate-400 text-sm sm:text-lg mb-6 sm:mb-8 leading-relaxed">
-              Beyond investing, we create pathways for career advancement, performance-based rewards, and global exposure. At PipGuardian, we are building a trusted platform where ambition meets opportunity and growth becomes a long-term journey.
+              Beyond investing, we create pathways for career advancement, performance-based rewards, and global exposure. At Bynex Markets, we are building a trusted platform where ambition meets opportunity and growth becomes a long-term journey.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex items-start space-x-4">
-                <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-gold-500">
+                <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-cyan-400">
                   <ShieldCheck size={24} />
                 </div>
                 <div>
@@ -39,7 +39,7 @@ const About = () => {
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-gold-500">
+                <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 text-cyan-400">
                   <Globe size={24} />
                 </div>
                 <div>
@@ -52,10 +52,10 @@ const About = () => {
 
           {/* Right Column: Visuals & Stats */}
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-gold-500/20 to-transparent rounded-3xl transform rotate-3"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-3xl transform rotate-3"></div>
             <img
               src="https://res.cloudinary.com/dshkbza19/image/upload/v1775410956/WhatsApp_Image_2026-04-05_at_6.04.47_PM_uz3rva.jpg"
-              alt="Pipguardian — Trade Forex, Crypto and Commodities"
+              alt="Bynex Markets — Trade Forex, Crypto and Commodities"
               className="relative rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-800 z-10 w-full h-[300px] sm:h-[450px] lg:h-[600px] object-cover object-top"
             />
 
@@ -76,7 +76,7 @@ const About = () => {
                   <span className="text-white font-bold">12,500+</span>
                 </div>
                 <div className="w-full bg-slate-800 h-1.5 rounded-full">
-                  <div className="bg-gold-500 h-1.5 rounded-full w-[85%]"></div>
+                  <div className="bg-cyan-400 h-1.5 rounded-full w-[85%]"></div>
                 </div>
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-slate-400">Avg. Annual Return</span>

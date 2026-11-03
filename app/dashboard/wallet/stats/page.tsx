@@ -15,7 +15,7 @@ export default function WalletStats() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-gold-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-slate-400">Loading wallet statistics...</p>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function WalletStats() {
         <select
           value={timeRange}
           onChange={(e) => setTimeRange(e.target.value as any)}
-          className="bg-slate-900 border border-slate-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500/50"
+          className="bg-slate-900 border border-slate-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
         >
           <option value="7d">Last 7 Days</option>
           <option value="30d">Last 30 Days</option>
@@ -60,7 +60,7 @@ export default function WalletStats() {
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-slate-400 text-sm">Current Balance</p>
-            <Wallet className="text-gold-500" size={20} />
+            <Wallet className="text-cyan-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${stats.balance.toLocaleString()}</p>
           <p className="text-xs text-emerald-400 mt-2">Available funds</p>
@@ -199,7 +199,7 @@ export default function WalletStats() {
               </div>
               <div className="relative w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                 <div
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-gold-500 to-amber-600 transition-all"
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all"
                   style={{ width: `${item.percentage}%` }}
                 />
               </div>
@@ -210,9 +210,9 @@ export default function WalletStats() {
       </div>
 
       {/* Additional Info */}
-      <div className="bg-gradient-to-r from-gold-500/10 to-amber-600/10 border border-gold-500/30 rounded-xl p-4 sm:p-6">
+      <div className="bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/30 rounded-xl p-4 sm:p-6">
         <div className="flex items-start gap-3">
-          <DollarSign className="text-gold-500 flex-shrink-0 mt-1" size={24} />
+          <DollarSign className="text-cyan-400 flex-shrink-0 mt-1" size={24} />
           <div>
             <h3 className="text-white font-semibold mb-2">Wallet Summary</h3>
             <p className="text-slate-300 text-sm mb-4">
@@ -231,7 +231,7 @@ export default function WalletStats() {
               </div>
               <div className="bg-slate-900/50 rounded-lg px-4 py-2">
                 <p className="text-xs text-slate-400">Net Profit</p>
-                <p className="text-gold-500 font-bold">${(stats.totalProfit + stats.referralEarnings).toLocaleString()}</p>
+                <p className="text-cyan-400 font-bold">${(stats.totalProfit + stats.referralEarnings).toLocaleString()}</p>
               </div>
             </div>
           </div>

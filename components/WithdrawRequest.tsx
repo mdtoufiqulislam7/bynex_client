@@ -160,7 +160,7 @@ const WithdrawRequest = () => {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="animate-spin text-gold-500 mx-auto mb-4" size={32} />
+          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={32} />
           <p className="text-slate-400">Loading...</p>
         </div>
       </div>
@@ -194,7 +194,7 @@ const WithdrawRequest = () => {
               <Link
                 href="/dashboard/plans/invest"
                 onClick={() => setShowInvestFirstModal(false)}
-                className="flex-1 text-center py-3 rounded-lg bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 font-bold text-sm hover:opacity-95 transition-opacity"
+                className="flex-1 text-center py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm hover:opacity-95 shadow-lg shadow-cyan-500/25 transition-opacity"
               >
                 View investment plans
               </Link>
@@ -243,7 +243,7 @@ const WithdrawRequest = () => {
                     <button
                       type="button"
                       onClick={openInvestFirstModal}
-                      className="text-gold-400 font-semibold underline hover:text-gold-300"
+                      className="text-cyan-400 font-semibold underline hover:text-cyan-300"
                     >
                       Learn more
                     </button>
@@ -287,7 +287,7 @@ const WithdrawRequest = () => {
                     setAccountNumber('');
                     setAccountName('');
                   }}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors"
+                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                   required
                 >
                   <option value="">Select withdrawal method</option>
@@ -318,13 +318,13 @@ const WithdrawRequest = () => {
                     placeholder="0.00"
                     step="0.01"
                     min="0"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setAmount((Math.floor((balance / 1.15) * 100) / 100).toString())}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-slate-800 text-gold-500 px-2 py-1 rounded hover:bg-slate-700 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-slate-800 text-cyan-400 px-2 py-1 rounded hover:bg-slate-700 transition-colors"
                   >
                     MAX
                   </button>
@@ -364,7 +364,7 @@ const WithdrawRequest = () => {
                   {filteredSavedAccounts.length > 0 && (
                     <div className="bg-slate-950/50 border border-slate-700 rounded-xl p-4 space-y-3">
                       <div className="flex items-center gap-2 text-sm text-slate-300">
-                        <Bookmark size={14} className="text-gold-500" />
+                        <Bookmark size={14} className="text-cyan-400" />
                         <span className="font-medium">Your Saved Accounts</span>
                       </div>
                       <div className="grid gap-2">
@@ -375,13 +375,13 @@ const WithdrawRequest = () => {
                             onClick={() => handleSavedAccountSelect(account.id)}
                             className={`w-full text-left p-3 rounded-lg border transition-all flex items-center justify-between ${
                               selectedSavedAccount === account.id
-                                ? 'border-gold-500 bg-gold-500/10 text-white'
+                                ? 'border-cyan-500 bg-cyan-500/10 text-white'
                                 : 'border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600 hover:bg-slate-800'
                             }`}
                           >
                             <div className="flex items-center gap-3">
                               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                                selectedSavedAccount === account.id ? 'bg-gold-500/20 text-gold-500' : 'bg-slate-800 text-slate-400'
+                                selectedSavedAccount === account.id ? 'bg-cyan-500/20 text-cyan-400' : 'bg-slate-800 text-slate-400'
                               }`}>
                                 {account.accountType === 'crypto' ? <Wallet size={14} /> : <Bookmark size={14} />}
                               </div>
@@ -389,7 +389,7 @@ const WithdrawRequest = () => {
                                 <div className="flex items-center gap-2">
                                   <span className="text-sm font-medium">{account.label}</span>
                                   {account.isDefault && (
-                                    <Star size={12} className="text-gold-500 fill-gold-500" />
+                                    <Star size={12} className="text-cyan-400 fill-cyan-400" />
                                   )}
                                 </div>
                                 <p className="text-xs text-slate-500 mt-0.5 font-mono">
@@ -401,7 +401,7 @@ const WithdrawRequest = () => {
                               </div>
                             </div>
                             {selectedSavedAccount === account.id && (
-                              <CheckCircle size={16} className="text-gold-500 flex-shrink-0" />
+                              <CheckCircle size={16} className="text-cyan-400 flex-shrink-0" />
                             )}
                           </button>
                         ))}
@@ -432,11 +432,11 @@ const WithdrawRequest = () => {
                         value={walletAddress}
                         onChange={(e) => { setWalletAddress(e.target.value); if (selectedSavedAccount) setSelectedSavedAccount(''); }}
                         placeholder="e.g. 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
-                        className={`w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors font-mono text-sm ${selectedSavedAccount ? 'opacity-60' : ''}`}
+                        className={`w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors font-mono text-sm ${selectedSavedAccount ? 'opacity-60' : ''}`}
                         readOnly={!!selectedSavedAccount}
                         required
                       />
-                      <p className="text-xs text-amber-400 mt-2 flex items-start gap-1">
+                      <p className="text-xs text-cyan-400 mt-2 flex items-start gap-1">
                         <AlertCircle size={12} className="mt-0.5 flex-shrink-0" />
                         Double-check your wallet address. Funds sent to wrong addresses cannot be recovered.
                       </p>
@@ -456,7 +456,7 @@ const WithdrawRequest = () => {
                           value={accountNumber}
                           onChange={(e) => { setAccountNumber(e.target.value); if (selectedSavedAccount) setSelectedSavedAccount(''); }}
                           placeholder="Enter your account number"
-                          className={`w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors ${selectedSavedAccount ? 'opacity-60' : ''}`}
+                          className={`w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors ${selectedSavedAccount ? 'opacity-60' : ''}`}
                           readOnly={!!selectedSavedAccount}
                           required
                         />
@@ -468,7 +468,7 @@ const WithdrawRequest = () => {
                           value={accountName}
                           onChange={(e) => { setAccountName(e.target.value); if (selectedSavedAccount) setSelectedSavedAccount(''); }}
                           placeholder="Enter account holder name"
-                          className={`w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors ${selectedSavedAccount ? 'opacity-60' : ''}`}
+                          className={`w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors ${selectedSavedAccount ? 'opacity-60' : ''}`}
                           readOnly={!!selectedSavedAccount}
                           required
                         />
@@ -504,7 +504,7 @@ const WithdrawRequest = () => {
                     !amount ||
                     parseFloat(amount) * 1.15 > balance
                   }
-                  className="w-full bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-slate-950 font-bold py-4 px-4 rounded-lg shadow-lg shadow-gold-500/20 transform hover:-translate-y-1 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-4 px-4 rounded-lg shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transform hover:-translate-y-1 transition-all flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {submitting ? (
                     <>
@@ -529,19 +529,19 @@ const WithdrawRequest = () => {
             <h4 className="text-white font-bold text-sm sm:text-base mb-3 sm:mb-4">Important Information</h4>
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start">
-                <span className="w-1.5 h-1.5 bg-gold-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                 Withdrawals are processed within 24 hours.
               </li>
               <li className="flex items-start">
-                <span className="w-1.5 h-1.5 bg-gold-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                 Minimum withdrawal amount is $10.00.
               </li>
               <li className="flex items-start">
-                <span className="w-1.5 h-1.5 bg-gold-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                 Ensure your wallet address is correct. We are not responsible for funds sent to wrong addresses.
               </li>
               <li className="flex items-start">
-                <span className="w-1.5 h-1.5 bg-gold-500 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                 A 2% fee applies to bank transfers. Crypto withdrawals are free.
               </li>
             </ul>

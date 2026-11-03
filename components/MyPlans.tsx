@@ -54,7 +54,7 @@ const MyPlans = () => {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="text-center">
-          <Loader2 className="animate-spin text-gold-500 mx-auto mb-4" size={48} />
+          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={48} />
           <p className="text-slate-400">Loading your investments...</p>
         </div>
       </div>
@@ -103,11 +103,11 @@ const MyPlans = () => {
              return (
               <div key={investment.id} className="bg-slate-900 border border-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 relative overflow-hidden">
                 {/* Background decoration */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gold-500/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
 
                 <div className="flex justify-between items-start mb-4 sm:mb-6 relative z-10">
                   <div className="flex items-center space-x-2 sm:space-x-3">
-                    <div className="bg-gradient-to-br from-gold-500 to-amber-600 p-2 sm:p-2.5 rounded-lg text-slate-950">
+                    <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-2 sm:p-2.5 rounded-lg text-slate-950">
                       <TrendingUp size={20} className="sm:hidden" />
                       <TrendingUp size={24} className="hidden sm:block" />
                     </div>
@@ -146,7 +146,7 @@ const MyPlans = () => {
                   </div>
                   <div className="bg-slate-950/50 p-2.5 sm:p-3 rounded-lg border border-slate-800">
                     <p className="text-[10px] sm:text-xs text-slate-400 mb-0.5 sm:mb-1">Expected Return</p>
-                    <p className="text-sm sm:text-lg font-bold text-gold-500">${(investment.amount + investment.expectedProfit).toLocaleString()}</p>
+                    <p className="text-sm sm:text-lg font-bold text-cyan-400">${(investment.amount + investment.expectedProfit).toLocaleString()}</p>
                   </div>
                   <div className="bg-slate-950/50 p-2.5 sm:p-3 rounded-lg border border-slate-800">
                     <p className="text-[10px] sm:text-xs text-slate-400 mb-0.5 sm:mb-1">Current Profit</p>
@@ -168,7 +168,7 @@ const MyPlans = () => {
                       <PlayCircle size={12} className="mr-1" />
                       Started: {formatDate(investment.startDate)}
                     </span>
-                    <span className="text-gold-500 font-medium">Ends: {formatDate(investment.endDate)}</span>
+                    <span className="text-cyan-400 font-medium">Ends: {formatDate(investment.endDate)}</span>
                   </div>
                 </div>
 
@@ -176,11 +176,11 @@ const MyPlans = () => {
                 <div className="mb-2">
                   <div className="flex justify-between text-xs mb-2">
                     <span className="text-slate-400">Progress</span>
-                    <span className="text-gold-500 font-medium">{investment.totalProfitDistributions} distributions</span>
+                    <span className="text-cyan-400 font-medium">{investment.totalProfitDistributions} distributions</span>
                   </div>
                   <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-gold-500 to-amber-600 rounded-full transition-all duration-1000"
+                      className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full transition-all duration-1000"
                       style={{ width: `${progress}%` }}
                     ></div>
                   </div>
@@ -216,7 +216,7 @@ const MyPlans = () => {
              </div>
              <h3 className="text-lg sm:text-xl font-bold text-white mb-2">No Active Plans</h3>
              <p className="text-slate-400 text-sm mb-6">You don't have any active investments at the moment.</p>
-             <Link href="/dashboard/plans/invest" className="inline-block bg-gold-500 text-slate-950 px-6 py-2 rounded-lg font-bold hover:bg-gold-600 transition-colors">
+             <Link href="/dashboard/plans/invest" className="inline-block bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:from-cyan-400 hover:to-blue-500 transition-colors">
                Start Investing
              </Link>
           </div>

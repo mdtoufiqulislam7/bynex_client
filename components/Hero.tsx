@@ -40,21 +40,21 @@ const Hero = () => {
         </div>
 
         <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight">
-          Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-amber-600">Wealth.</span>
+          Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500">Wealth.</span>
           <br />
           <span className="text-xl sm:text-4xl md:text-6xl text-slate-400 font-sans font-light">Secure Your Future.</span>
         </h1>
 
         <p className="text-sm sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-2 sm:px-0">
-          PipGuardian is a smart forex platform built for confident growth. We focus on disciplined trading and capital protection.
+          Bynex Markets is a next-generation algorithmic trading and investment platform built for sustainable wealth generation with institutional-grade capital protection.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6 px-4 sm:px-0">
-          <a href="#plans" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border border-slate-600 text-white hover:border-gold-500 hover:text-gold-500 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 flex items-center justify-center group">
+          <a href="#plans" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-transparent border border-slate-600 text-white hover:border-cyan-400 hover:text-cyan-400 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 flex items-center justify-center group">
             View Plans
             <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
-          <Link href="/dashboard" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gold-500 to-amber-600 text-slate-950 rounded-full font-bold text-sm sm:text-base shadow-lg shadow-gold-500/25 hover:shadow-gold-500/40 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
+          <Link href="/dashboard" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-full font-bold text-sm sm:text-base shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
             Get Started
             <ArrowRight className="ml-2 w-5 h-5" />
           </Link>
@@ -64,7 +64,7 @@ const Hero = () => {
       {/* Live Ticker */}
       <div className="absolute bottom-0 w-full bg-slate-900/80 border-t border-slate-800 backdrop-blur-md py-2.5 sm:py-4 z-20">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center justify-center sm:justify-between">
-          <div className="hidden sm:flex items-center space-x-2 text-gold-500 font-semibold uppercase tracking-widest text-xs">
+          <div className="hidden sm:flex items-center space-x-2 text-cyan-400 font-semibold uppercase tracking-widest text-xs">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             <span>Live Transactions</span>
           </div>

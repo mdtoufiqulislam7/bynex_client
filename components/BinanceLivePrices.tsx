@@ -166,7 +166,7 @@ const BinanceLivePrices = () => {
             load()
           }}
           disabled={loading}
-          className="inline-flex items-center gap-2 self-start sm:self-auto text-xs text-gold-500 hover:text-gold-400 font-medium disabled:opacity-50"
+          className="inline-flex items-center gap-2 self-start sm:self-auto text-xs text-cyan-400 hover:text-cyan-300 font-medium disabled:opacity-50"
         >
           <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
           Refresh
@@ -182,7 +182,7 @@ const BinanceLivePrices = () => {
 
       {loading && latest.length === 0 ? (
         <div className="flex items-center justify-center py-16 text-slate-500">
-          <Loader2 className="animate-spin text-gold-500 mr-2" size={24} />
+          <Loader2 className="animate-spin text-cyan-400 mr-2" size={24} />
           Loading…
         </div>
       ) : latest.length === 0 ? (
@@ -195,7 +195,7 @@ const BinanceLivePrices = () => {
               setLoading(true)
               load()
             }}
-            className="mt-4 text-gold-500 text-sm font-medium hover:underline"
+            className="mt-4 text-cyan-400 text-sm font-medium hover:underline"
           >
             Try again
           </button>
@@ -319,7 +319,7 @@ const BinanceLivePrices = () => {
                                 href={tradeUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-gold-500 transition-colors"
+                                className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-cyan-400 transition-colors"
                                 title="Trade on Binance"
                               >
                                 <LineChartIcon size={16} />
@@ -328,7 +328,7 @@ const BinanceLivePrices = () => {
                                 href={tradeUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-gold-500 transition-colors"
+                                className="p-1.5 rounded-lg hover:bg-slate-800 hover:text-cyan-400 transition-colors"
                                 title="Charts on Binance"
                               >
                                 <BarChart2 size={16} />

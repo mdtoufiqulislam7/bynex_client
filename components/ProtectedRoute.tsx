@@ -41,7 +41,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto mb-4"></div>
           <p className="text-slate-400">Loading...</p>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
           </div>
           <button
             onClick={() => router.push('/login')}
-            className="bg-gold-500 hover:bg-gold-600 text-slate-950 font-bold py-2 px-6 rounded-lg transition-colors"
+            className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 font-bold py-2 px-6 rounded-lg transition-colors"
           >
             Back to Login
           </button>

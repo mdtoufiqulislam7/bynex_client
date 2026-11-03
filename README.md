@@ -1,6 +1,6 @@
-# PipGuardian — Investment Website
+# bynex_client
 
-The user-facing Next.js 14 website for the **PipGuardian Premier** investment platform.
+The user-facing Next.js 14 website for the **Bynex Markets** investment platform.
 
 ## Tech Stack
 

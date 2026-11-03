@@ -5,9 +5,18 @@ import { Check, Info, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useGetActivePlansQuery } from '@/store/api/investmentPlanApi';
 
-const Plans = () => {
-  const { data: plansResponse, isLoading, error } = useGetActivePlansQuery();
-  const plans = plansResponse?.data?.attributes || [];
+interface PlansProps {
+  initialPlans?: any[];
+}
+
+const Plans: React.FC<PlansProps> = ({ initialPlans = [] }) => {
+  const { data: plansResponse, isLoading, error } = useGetActivePlansQuery(undefined, {
+    skip: initialPlans.length > 0,
+  });
+  
+  const plans = initialPlans.length > 0 
+    ? initialPlans 
+    : (plansResponse?.data?.attributes || []);
 
   const calculateReturns = (minDeposit: number, roi: number, roiType: string, duration: number) => {
     let totalProfit = 0;
@@ -30,20 +39,20 @@ const Plans = () => {
     return { totalReturn, profit: totalProfit, daily };
   };
 
-  if (isLoading) {
+  if (isLoading && plans.length === 0) {
     return (
       <section id="plans" className="py-24 bg-slate-950 relative">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="animate-spin text-gold-500" size={48} />
+            <Loader2 className="animate-spin text-cyan-400" size={48} />
           </div>
         </div>
       </section>
     );
   }
 
-  if (error || plans.length === 0) {
+  if ((error || plans.length === 0) && initialPlans.length === 0) {
     return (
       <section id="plans" className="py-24 bg-slate-950 relative">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent"></div>
@@ -73,14 +82,14 @@ const Plans = () => {
             return (
               <div
                 key={plan.id}
-                className={`relative bg-slate-900 rounded-xl sm:rounded-2xl p-5 sm:p-8 border ${
+                className={`relative bg-slate-900/90 backdrop-blur-sm rounded-xl sm:rounded-2xl p-5 sm:p-8 border ${
                   plan.isPopular
-                    ? 'border-gold-500/50 shadow-2xl shadow-gold-500/10 md:scale-105 z-10'
+                    ? 'border-cyan-500/60 shadow-2xl shadow-cyan-500/15 md:scale-105 z-10 ring-1 ring-cyan-500/30'
                     : 'border-slate-800 hover:border-slate-700'
                 } transition-all duration-300 flex flex-col h-full`}
               >
                 {plan.isPopular && (
-                  <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 bg-gold-500 text-slate-950 text-[10px] sm:text-xs font-bold uppercase tracking-wider py-1 px-3 sm:px-4 rounded-full">
+                  <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 text-[10px] sm:text-xs font-bold uppercase tracking-wider py-1 px-3 sm:px-4 rounded-full shadow-lg shadow-cyan-500/30">
                     Most Popular
                   </div>
                 )}
@@ -89,18 +98,18 @@ const Plans = () => {
                 <div className="mb-2">
                   <div className="flex items-baseline">
                     {plan.approximateRoi ? (
-                      <span className="text-xl sm:text-2xl font-bold text-gold-500">{plan.approximateRoi}</span>
+                      <span className="text-xl sm:text-2xl font-bold text-cyan-400">{plan.approximateRoi}</span>
                     ) : (
                       <>
-                        <span className="text-2xl sm:text-4xl font-bold text-gold-500">{plan.roi}%</span>
+                        <span className="text-2xl sm:text-4xl font-bold text-cyan-400">{plan.roi}%</span>
                         <span className="text-slate-400 ml-2 text-sm">{plan.roiType} ROI</span>
                       </>
                     )}
                   </div>
                   {/* Detailed Breakdown */}
-                  <div className="mt-2 bg-slate-950/50 rounded-lg p-3 border border-slate-800/50">
+                  <div className="mt-2 bg-slate-950/70 rounded-lg p-3 border border-slate-800/80">
                     <div className="flex items-start space-x-2 text-xs text-slate-400">
-                      <Info size={14} className="mt-0.5 text-gold-500 shrink-0" />
+                      <Info size={14} className="mt-0.5 text-cyan-400 shrink-0" />
                       <div className="space-y-1">
                         <p>Min. Deposit <strong>${plan.minDeposit}</strong> yields:</p>
                         <div className="flex justify-between w-full space-x-4">
@@ -109,7 +118,7 @@ const Plans = () => {
                         </div>
                          <div className="flex justify-between w-full space-x-4">
                            <span>Net Profit:</span>
-                           <span className="text-green-400 font-mono">+${profit.toLocaleString()}</span>
+                           <span className="text-emerald-400 font-mono">+${profit.toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between w-full space-x-4">
                            <span>Daily Profit:</span>
@@ -135,9 +144,9 @@ const Plans = () => {
                   </div>
                   {plan.features && plan.features.length > 0 && (
                     <div className="pt-3 sm:pt-4 space-y-2 sm:space-y-3">
-                      {plan.features.map((feat, i) => (
+                      {plan.features.map((feat: string, i: number) => (
                         <div key={i} className="flex items-center text-xs sm:text-sm text-slate-300">
-                          <Check className="w-4 h-4 text-green-500 mr-2 sm:mr-3 flex-shrink-0" />
+                          <Check className="w-4 h-4 text-emerald-400 mr-2 sm:mr-3 flex-shrink-0" />
                           {feat}
                         </div>
                       ))}
@@ -149,7 +158,7 @@ const Plans = () => {
                   href="/dashboard/plans/invest"
                   className={`w-full py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-base text-center transition-all block ${
                     plan.isPopular
-                      ? 'bg-gold-500 hover:bg-gold-600 text-slate-950 shadow-lg'
+                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25'
                       : 'bg-slate-800 hover:bg-slate-700 text-white'
                   }`}
                 >

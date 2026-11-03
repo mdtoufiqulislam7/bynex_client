@@ -158,7 +158,7 @@ export default function TicketDetail() {
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       open: 'text-blue-500 bg-blue-500/10 border-blue-500/30',
-      in_progress: 'text-amber-500 bg-amber-500/10 border-amber-500/30',
+      in_progress: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
       waiting_reply: 'text-purple-500 bg-purple-500/10 border-purple-500/30',
       resolved: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/30',
       closed: 'text-slate-500 bg-slate-500/10 border-slate-500/30',
@@ -191,7 +191,7 @@ export default function TicketDetail() {
           </div>
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-12 text-center">
-          <Loader2 className="mx-auto text-gold-500 mb-4 animate-spin" size={48} />
+          <Loader2 className="mx-auto text-cyan-400 mb-4 animate-spin" size={48} />
           <p className="text-slate-400">Loading ticket details...</p>
         </div>
       </div>
@@ -270,7 +270,7 @@ export default function TicketDetail() {
               {ticket.status === 'resolved' || ticket.status === 'closed' ? (
                 <CheckCircle className="text-emerald-500" size={16} />
               ) : (
-                <Clock className="text-amber-500" size={16} />
+                <Clock className="text-cyan-400" size={16} />
               )}
               <p className="text-white font-medium capitalize">{ticket.status.replace('_', ' ')}</p>
             </div>
@@ -294,7 +294,7 @@ export default function TicketDetail() {
               </div>
               <button
                 onClick={() => setShowRatingForm(true)}
-                className="px-4 py-2 bg-gold-500 hover:bg-gold-600 text-white rounded-lg font-medium transition-colors"
+                className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-lg font-medium transition-colors"
               >
                 Rate Ticket
               </button>
@@ -310,7 +310,7 @@ export default function TicketDetail() {
                 <Star
                   key={star}
                   size={20}
-                  className={star <= ticket.rating! ? 'text-gold-500 fill-gold-500' : 'text-slate-600'}
+                  className={star <= ticket.rating! ? 'text-cyan-400 fill-cyan-400' : 'text-slate-600'}
                 />
               ))}
             </div>
@@ -348,14 +348,14 @@ export default function TicketDetail() {
                   >
                     <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
                       isUser
-                        ? 'bg-gold-500/10 text-gold-500'
+                        ? 'bg-cyan-500/10 text-cyan-400'
                         : 'bg-blue-500/10 text-blue-500'
                     }`}>
                       {isUser ? <User size={20} /> : <Shield size={20} />}
                     </div>
                     <div className={`flex-1 max-w-2xl ${isUser ? 'items-end' : 'items-start'} flex flex-col`}>
                       <div className={`flex items-center gap-2 mb-1 ${isUser ? 'flex-row-reverse' : ''}`}>
-                        <span className={`text-sm font-medium ${isUser ? 'text-gold-500' : 'text-blue-500'}`}>
+                        <span className={`text-sm font-medium ${isUser ? 'text-cyan-400' : 'text-blue-500'}`}>
                           {senderName}
                         </span>
                         {isAdmin && (
@@ -365,7 +365,7 @@ export default function TicketDetail() {
                       </div>
                       <div className={`p-4 rounded-lg ${
                         isUser
-                          ? 'bg-gold-500/10 border border-gold-500/30 rounded-tr-sm'
+                          ? 'bg-cyan-500/10 border border-cyan-500/30 rounded-tr-sm'
                           : 'bg-slate-800/50 border border-slate-700 rounded-tl-sm'
                       }`}>
                         <p className="text-slate-200 text-sm whitespace-pre-wrap">{msg.message}</p>
@@ -389,7 +389,7 @@ export default function TicketDetail() {
               value={replyMessage}
               onChange={(e) => setReplyMessage(e.target.value)}
               rows={4}
-              className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 resize-none"
+              className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 resize-none"
               placeholder="Type your message here..."
               disabled={isReplying}
             />
@@ -400,7 +400,7 @@ export default function TicketDetail() {
               <button
                 type="submit"
                 disabled={isReplying || !replyMessage.trim()}
-                className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-amber-600 text-white px-6 py-2.5 rounded-lg hover:from-gold-600 hover:to-amber-700 transition-all shadow-lg shadow-gold-500/20 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-2.5 rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
               >
                 {isReplying ? (
                   <>
@@ -451,7 +451,7 @@ export default function TicketDetail() {
                 >
                   <Star
                     size={32}
-                    className={star <= rating ? 'text-gold-500 fill-gold-500' : 'text-slate-600 hover:text-slate-500'}
+                    className={star <= rating ? 'text-cyan-400 fill-cyan-400' : 'text-slate-600 hover:text-slate-500'}
                   />
                 </button>
               ))}
@@ -465,7 +465,7 @@ export default function TicketDetail() {
                 value={ratingFeedback}
                 onChange={(e) => setRatingFeedback(e.target.value)}
                 rows={3}
-                className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 resize-none"
+                className="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-none"
                 placeholder="Tell us more about your experience..."
               />
             </div>
@@ -481,7 +481,7 @@ export default function TicketDetail() {
               <button
                 onClick={handleRateTicket}
                 disabled={isRating || rating === 0}
-                className="flex-1 py-2.5 bg-gradient-to-r from-gold-500 to-amber-600 text-white rounded-lg hover:from-gold-600 hover:to-amber-700 transition-all shadow-lg shadow-gold-500/20 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="flex-1 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/20 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isRating ? (
                   <>

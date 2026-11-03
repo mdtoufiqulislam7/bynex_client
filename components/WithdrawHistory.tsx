@@ -54,7 +54,7 @@ const WithdrawHistory = () => {
 
   const getStatusColor = (status: string) => {
     if (status === 'completed') return 'bg-green-500/10 text-green-500';
-    if (status === 'pending' || status === 'processing') return 'bg-yellow-500/10 text-yellow-500';
+    if (status === 'pending' || status === 'processing') return 'bg-cyan-500/10 text-cyan-400';
     return 'bg-red-500/10 text-red-500';
   };
 
@@ -72,7 +72,7 @@ const WithdrawHistory = () => {
               placeholder="Search ID..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full sm:w-auto bg-slate-900 border border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-gold-500"
+              className="w-full sm:w-auto bg-slate-900 border border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500"
             />
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
           </div>
@@ -92,7 +92,7 @@ const WithdrawHistory = () => {
                 }}
                 className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-xs font-medium transition-colors border ${
                   statusFilter === status.value
-                    ? 'bg-gold-500 text-slate-900 border-gold-500'
+                    ? 'bg-cyan-500 text-white border-cyan-500 shadow-sm shadow-cyan-500/20'
                     : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
                 }`}
               >
@@ -106,7 +106,7 @@ const WithdrawHistory = () => {
       <div className="bg-slate-900 border border-slate-800 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="animate-spin text-gold-500" size={32} />
+            <Loader2 className="animate-spin text-cyan-400" size={32} />
           </div>
         ) : error ? (
           <div className="p-8 text-center">
@@ -132,7 +132,7 @@ const WithdrawHistory = () => {
                   {withdrawals.map((tx) => (
                     <tr key={tx.id} className="hover:bg-slate-800/50 transition-colors">
                       <td className="px-6 py-4 font-mono text-slate-500">
-                        <Link href={`/dashboard/transactions/${tx.id}`} className="flex items-center hover:text-gold-500 transition-colors">
+                        <Link href={`/dashboard/transactions/${tx.id}`} className="flex items-center hover:text-cyan-400 transition-colors">
                           <div className="bg-red-500/10 p-1.5 rounded-full mr-3 text-red-500">
                             <ArrowUpRight size={14} />
                           </div>

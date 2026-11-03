@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'PipGuardianElt',
-    short_name: 'PipGuardianElt',
-    description: 'Smart forex investment platform for confident growth and capital protection.',
+    name: 'Bynex Markets',
+    short_name: 'Bynex Markets',
+    description: 'Next-generation smart algorithmic investment platform for confident growth and capital protection.',
     start_url: '/',
     display: 'standalone',
     background_color: '#0f172a',
@@ -12,15 +12,21 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'portrait',
     icons: [
       {
-        src: 'https://res.cloudinary.com/dshkbza19/image/upload/v1775996191/WhatsApp_Image_2026-04-09_at_7.37.00_PM_yfqkei.jpg',
+        src: '/android-chrome-192x192.png?v=3',
         sizes: '192x192',
-        type: 'image/jpeg',
-        purpose: 'maskable',
+        type: 'image/png',
+        purpose: 'any',
       },
       {
-        src: 'https://res.cloudinary.com/dshkbza19/image/upload/v1775996191/WhatsApp_Image_2026-04-09_at_7.37.00_PM_yfqkei.jpg',
+        src: '/android-chrome-512x512.png?v=3',
         sizes: '512x512',
-        type: 'image/jpeg',
+        type: 'image/png',
+        purpose: 'any',
+      },
+      {
+        src: '/android-chrome-512x512.png?v=3',
+        sizes: '512x512',
+        type: 'image/png',
         purpose: 'maskable',
       },
     ],

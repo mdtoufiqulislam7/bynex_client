@@ -1,87 +1,92 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../store/api/authApi';
 import { setUser } from '../store/slices/authSlice';
 import { Toast, ToastType } from './Toast';
-import { TrendingUp, ArrowRight, Lock, Mail, AlertCircle, Loader2 } from 'lucide-react';
+import { TrendingUp, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 
-const Login = () => {
+export default function Login() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useDispatch();
-  const [login, { isLoading }] = useLoginMutation();
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false,
-  });
-
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-    setErrorMessage(''); // Clear error on input change
-  };
+  // Check if returning from Google OAuth callback with tokens in URL
+  useEffect(() => {
+    const token = searchParams.get('token');
+    const refreshToken = searchParams.get('refreshToken');
+    const error = searchParams.get('error');
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
+    if (error) {
+      setErrorMessage(decodeURIComponent(error));
+      setToast({ message: decodeURIComponent(error), type: 'error' });
+      return;
+    }
 
-    try {
-      const result = await login({
-        email: formData.email,
-        password: formData.password,
-      }).unwrap();
-
-      // Check if user is admin (admins should use admin panel)
-      const user = result.data.attributes.user;
-      if (user.role === 'admin' || user.role === 'superadmin') {
-        setErrorMessage('Access denied. This portal is for users only. Please use the admin panel.');
-        setToast({
-          message: 'Access denied. Please use the admin panel.',
-          type: 'error'
-        });
-        // Clear the stored tokens
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('user');
-        return;
+    if (token) {
+      setLoading(true);
+      localStorage.setItem('accessToken', token);
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
       }
 
-      // Set user in Redux store
-      dispatch(setUser(user));
+      // Fetch user profile using the new token
+      fetch('/api/v1/users/self/in', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const user = data.data?.attributes?.user || data.data?.user;
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            dispatch(setUser(user));
 
-      // Show success toast
-      setToast({
-        message: `Welcome back, ${user.firstName}! Redirecting to dashboard...`,
-        type: 'success'
-      });
-
-      // Navigate to dashboard after a short delay
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 1500);
-    } catch (error: any) {
-      const errorMsg = error.data?.message || 'Login failed. Please check your credentials.';
-      setErrorMessage(errorMsg);
-      setToast({
-        message: errorMsg,
-        type: 'error'
-      });
+            if (user.role === 'admin' || user.role === 'superAdmin') {
+              setToast({
+                message: 'Admin account verified! Redirecting to Admin Control Room...',
+                type: 'success',
+              });
+              setTimeout(() => {
+                window.location.href = 'http://localhost:7943';
+              }, 1200);
+            } else {
+              setToast({
+                message: `Welcome to Bynex Markets, ${user.firstName || user.fullName}!`,
+                type: 'success',
+              });
+              setTimeout(() => {
+                router.push('/dashboard');
+              }, 1200);
+            }
+          } else {
+            router.push('/dashboard');
+          }
+        })
+        .catch(() => {
+          router.push('/dashboard');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
+  }, [searchParams, dispatch, router]);
+
+  const handleGoogleLogin = () => {
+    setLoading(true);
+    // Redirect through the internal proxy to backend Google OAuth
+    window.location.href = '/api/v1/auth/google?redirect=true&source=website';
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-slate-950">
+    <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-slate-950 px-4">
       {/* Toast Notification */}
       {toast && (
         <Toast
@@ -91,144 +96,96 @@ const Login = () => {
         />
       )}
 
-      {/* Dynamic Background */}
+      {/* Dynamic Background with Modern Cyan/Emerald Accents */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://picsum.photos/seed/finance/1920/1080?grayscale&blur=4"
-          alt="Background"
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-slate-900/50"></div>
+        <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-2xl"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md px-4">
+      <div className="relative z-10 w-full max-w-md">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-2 mb-4 group">
-            <div className="bg-gradient-to-br from-gold-400 to-gold-600 p-2 rounded-lg group-hover:scale-110 transition-transform">
-              <TrendingUp className="h-6 w-6 text-slate-950" />
+          <Link href="/" className="inline-flex items-center space-x-2.5 mb-4 group">
+            <div className="bg-gradient-to-br from-emerald-400 via-cyan-500 to-blue-600 p-2.5 rounded-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+              <TrendingUp className="h-6 w-6 text-slate-950 font-black" />
             </div>
             <span className="text-2xl font-serif font-bold text-white tracking-wide">
-              Pip<span className="text-gold-500">guardian</span>
+              Bynex <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Markets</span>
             </span>
           </Link>
-          <h2 className="text-2xl font-bold text-white">Welcome Back</h2>
-          <p className="text-slate-400 text-sm mt-2">Access your portfolio and track your growth.</p>
+          <h2 className="text-3xl font-extrabold text-white tracking-tight">Institutional Access</h2>
+          <p className="text-slate-400 text-sm mt-2">
+            Secure, passwordless authentication powered by Google.
+          </p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-5 sm:p-8 rounded-2xl shadow-2xl">
-          <form onSubmit={handleLogin} className="space-y-6">
-            {/* Error Message */}
-            {errorMessage && (
-              <div className="bg-rose-500/10 border border-rose-500/50 rounded-lg p-4 flex items-start gap-3 animate-in slide-in-from-top-2">
-                <AlertCircle className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-rose-400">{errorMessage}</p>
-              </div>
-            )}
+        <div className="bg-slate-900/70 backdrop-blur-xl border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl">
+          {/* Error Message */}
+          {errorMessage && (
+            <div className="mb-6 bg-rose-500/10 border border-rose-500/30 rounded-xl p-4 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-rose-300">{errorMessage}</p>
+            </div>
+          )}
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-                  <Mail size={18} />
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg pl-10 pr-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors placeholder-slate-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                  placeholder="name@example.com"
-                />
-              </div>
+          <div className="space-y-6">
+            <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/80 text-center">
+              <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-1">Single Sign-On</p>
+              <p className="text-xs text-slate-400">
+                To guarantee maximum security against credential compromise, accounts are protected exclusively by Google SSO.
+              </p>
             </div>
 
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <label htmlFor="password" className="block text-sm font-medium text-slate-300">
-                  Password
-                </label>
-                <Link href="/forgot-password" className="text-xs text-gold-500 hover:text-gold-400">
-                  Forgot password?
-                </Link>
-              </div>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-                  <Lock size={18} />
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  disabled={isLoading}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg pl-10 pr-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors placeholder-slate-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                  placeholder="••••••••"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="rememberMe"
-                type="checkbox"
-                checked={formData.rememberMe}
-                onChange={handleChange}
-                disabled={isLoading}
-                className="h-4 w-4 rounded border-slate-700 bg-slate-900 text-gold-500 focus:ring-gold-500/50"
-              />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-400">
-                Remember me for 30 days
-              </label>
-            </div>
-
+            {/* Google Login Button */}
             <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 disabled:from-slate-600 disabled:to-slate-700 disabled:cursor-not-allowed text-slate-950 font-bold py-3 px-4 rounded-lg shadow-lg shadow-gold-500/20 disabled:shadow-none transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center group"
+              type="button"
+              onClick={handleGoogleLogin}
+              disabled={loading}
+              className="w-full relative flex items-center justify-center gap-3.5 px-6 py-4 rounded-2xl font-semibold text-sm sm:text-base text-slate-950 bg-white hover:bg-slate-100 shadow-xl shadow-white/5 active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer group"
             >
-              {isLoading ? (
+              {loading ? (
                 <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Signing In...
+                  <Loader2 className="w-5 h-5 animate-spin text-slate-900" />
+                  <span>Connecting with Google...</span>
                 </>
               ) : (
                 <>
-                  Sign In
-                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                    <path
+                      fill="#4285F4"
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                    />
+                  </svg>
+                  <span>Continue with Google</span>
+                  <ArrowRight className="w-4 h-4 ml-auto text-slate-400 group-hover:translate-x-1 transition-transform" />
                 </>
               )}
             </button>
-          </form>
+          </div>
 
-          <div className="mt-8 text-center">
-            <p className="text-slate-400 text-sm">
-              Don&apos;t have an account?{' '}
-              <Link href="/register" className="text-gold-500 font-semibold hover:text-gold-400 hover:underline">
-                Create Account
-              </Link>
+          <div className="mt-8 pt-6 border-t border-slate-800/80 text-center">
+            <p className="text-xs text-slate-500">
+              By connecting your account, you agree to Bynex Markets&apos;{' '}
+              <a href="#" className="text-cyan-400 hover:underline">Terms of Service</a> and{' '}
+              <a href="#" className="text-cyan-400 hover:underline">Privacy Policy</a>.
             </p>
           </div>
-        </div>
-
-        {/* Footer Links */}
-        <div className="mt-8 flex justify-center space-x-4 sm:space-x-6 text-xs text-slate-500">
-          <a href="#" className="hover:text-slate-300">Privacy Policy</a>
-          <a href="#" className="hover:text-slate-300">Terms of Service</a>
-          <a href="#" className="hover:text-slate-300">Help Center</a>
         </div>
       </div>
     </div>
   );
-};
-
-export default Login;
+}

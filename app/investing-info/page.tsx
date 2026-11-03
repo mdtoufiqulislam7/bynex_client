@@ -4,9 +4,9 @@ import Footer from '@/components/Footer'
 import InvestingInfoContent from '@/components/InvestingInfoContent'
 
 export const metadata: Metadata = {
-  title: 'Investing Info | Pipguardian Premier',
+  title: 'Investing Info | Bynex Markets',
   description:
-    'Forex introduction, global trading hubs, partnership benefits, income types, and PipGuardian rank structure — public investor guide.',
+    'Forex introduction, global trading hubs, partnership benefits, income types, and Bynex Markets rank structure — public investor guide.',
 }
 
 export default function InvestingInfoPage() {

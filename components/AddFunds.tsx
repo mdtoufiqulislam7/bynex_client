@@ -22,7 +22,7 @@ const AddFunds = () => {
   const [createDeposit, { isLoading: isSubmitting }] = useCreateDepositMutation();
 
   // Extract gateways from response
-  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || 'https://api.pipguardian.com';
+  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || '';
   const gateways: PaymentGateway[] = gatewaysResponse?.data?.attributes || [];
 
   const handleGatewaySelect = (id: string) => {
@@ -125,7 +125,7 @@ const AddFunds = () => {
         </p>
         <button
           onClick={resetForm}
-          className="bg-gold-500 hover:bg-gold-600 text-slate-950 px-8 py-3 rounded-lg font-bold transition-colors"
+          className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 px-8 py-3 rounded-lg font-bold transition-colors"
         >
           Make Another Deposit
         </button>
@@ -161,7 +161,7 @@ const AddFunds = () => {
             <>
               {loadingGateways ? (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="animate-spin text-gold-500" size={32} />
+                  <Loader2 className="animate-spin text-cyan-400" size={32} />
                 </div>
               ) : gateways.length === 0 ? (
                 <div className="text-center py-12 bg-slate-900 rounded-xl border border-slate-800">
@@ -184,16 +184,16 @@ const AddFunds = () => {
                         onClick={() => handleGatewaySelect(gateway.id)}
                         className={`relative p-4 sm:p-6 rounded-xl border flex flex-col items-start transition-all duration-200 ${
                           selectedGateway === gateway.id
-                            ? 'bg-slate-800 border-gold-500 shadow-[0_0_15px_rgba(234,179,8,0.1)]'
+                            ? 'bg-slate-800 border-cyan-500 shadow-[0_0_15px_rgba(14,165,233,0.15)]'
                             : 'bg-slate-900 border-slate-800 hover:border-slate-700'
                         }`}
                       >
                         {selectedGateway === gateway.id && (
-                          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-gold-500">
+                          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 text-cyan-400">
                             <CheckCircle2 size={18} />
                           </div>
                         )}
-                        <div className={`p-2 sm:p-3 rounded-lg mb-3 sm:mb-4 ${selectedGateway === gateway.id ? 'bg-gold-500 text-slate-900' : 'bg-slate-800 text-slate-400'}`}>
+                        <div className={`p-2 sm:p-3 rounded-lg mb-3 sm:mb-4 ${selectedGateway === gateway.id ? 'bg-cyan-500 text-slate-900' : 'bg-slate-800 text-slate-400'}`}>
                           {icon}
                         </div>
                         <h3 className="text-white font-bold text-sm sm:text-lg">{gateway.name}</h3>
@@ -222,7 +222,7 @@ const AddFunds = () => {
                     placeholder="0.00"
                     min={selectedGatewayData?.minDeposit || 0}
                     max={selectedGatewayData?.maxDeposit || 0}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-4 py-4 text-white text-lg focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-4 py-4 text-white text-lg focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                   />
                 </div>
                 {selectedGateway && selectedGatewayData && (
@@ -244,7 +244,7 @@ const AddFunds = () => {
                   <div>
                     <h3 className="text-white font-bold mb-1">Payment Instructions</h3>
                     <p className="text-sm text-slate-400">
-                      Please send exactly <span className="text-gold-500 font-bold">${calculateTotal().toFixed(2)}</span> to the address below.
+                      Please send exactly <span className="text-cyan-400 font-bold">${calculateTotal().toFixed(2)}</span> to the address below.
                     </p>
                   </div>
                 </div>
@@ -293,7 +293,7 @@ const AddFunds = () => {
                     value={transactionId}
                     onChange={(e) => setTransactionId(e.target.value)}
                     placeholder="Enter the transaction ID from your payment provider"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-colors"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
                   />
                 </div>
 
@@ -301,7 +301,7 @@ const AddFunds = () => {
                   <label className="block text-sm font-medium text-slate-300 mb-2">Upload Screenshot</label>
                   <div
                     className={`border-2 border-dashed rounded-xl p-5 sm:p-8 text-center transition-colors cursor-pointer ${
-                      screenshot ? 'border-gold-500/50 bg-gold-500/5' : 'border-slate-700 hover:border-slate-600 bg-slate-950'
+                      screenshot ? 'border-cyan-500/50 bg-cyan-500/5' : 'border-slate-700 hover:border-slate-600 bg-slate-950'
                     }`}
                     onClick={() => fileInputRef.current?.click()}
                     onDragOver={(e) => e.preventDefault()}
@@ -316,7 +316,7 @@ const AddFunds = () => {
                     />
 
                     {screenshot ? (
-                      <div className="flex items-center justify-center space-x-2 text-gold-500">
+                      <div className="flex items-center justify-center space-x-2 text-cyan-400">
                         <CheckCircle2 size={24} />
                         <span className="font-medium truncate max-w-xs">{screenshot.name}</span>
                         <button
@@ -348,7 +348,7 @@ const AddFunds = () => {
                   className={`w-full py-4 rounded-lg font-bold flex items-center justify-center transition-all ${
                     isSubmitting || !transactionId || !screenshot
                       ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                      : 'bg-gold-500 hover:bg-gold-600 text-slate-950 shadow-lg shadow-gold-500/20 transform hover:-translate-y-1'
+                      : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 shadow-lg shadow-cyan-500/20 transform hover:-translate-y-1'
                   }`}
                 >
                   {isSubmitting ? (
@@ -393,7 +393,7 @@ const AddFunds = () => {
               <div className="border-t border-slate-700 my-2"></div>
               <div className="flex justify-between text-lg font-bold">
                 <span className="text-white">Payable Total</span>
-                <span className="text-gold-500">
+                <span className="text-cyan-400">
                    ${calculateTotal().toFixed(2)}
                 </span>
               </div>
@@ -424,7 +424,7 @@ const AddFunds = () => {
                   disabled={!selectedGateway || !amount}
                   className={`w-full py-4 rounded-lg font-bold flex items-center justify-center transition-all ${
                     selectedGateway && amount
-                      ? 'bg-gold-500 hover:bg-gold-600 text-slate-950 shadow-lg shadow-gold-500/20 transform hover:-translate-y-1'
+                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 shadow-lg shadow-cyan-500/20 transform hover:-translate-y-1'
                       : 'bg-slate-700 text-slate-500 cursor-not-allowed'
                   }`}
                 >

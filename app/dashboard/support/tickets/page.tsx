@@ -43,7 +43,7 @@ export default function MyTickets() {
       case 'open':
         return <Clock className="text-blue-500" size={16} />
       case 'in_progress':
-        return <AlertCircle className="text-amber-500" size={16} />
+        return <AlertCircle className="text-cyan-400" size={16} />
       case 'resolved':
         return <CheckCircle className="text-emerald-500" size={16} />
       case 'closed':
@@ -54,7 +54,7 @@ export default function MyTickets() {
   const getStatusBadge = (status: Ticket['status']) => {
     const styles = {
       open: 'bg-blue-500/10 text-blue-500 border-blue-500/30',
-      in_progress: 'bg-amber-500/10 text-amber-500 border-amber-500/30',
+      in_progress: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
       resolved: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/30',
       closed: 'bg-slate-500/10 text-slate-500 border-slate-500/30',
     }
@@ -69,7 +69,7 @@ export default function MyTickets() {
     const styles = {
       low: 'bg-slate-500/10 text-slate-400',
       normal: 'bg-blue-500/10 text-blue-400',
-      high: 'bg-amber-500/10 text-amber-400',
+      high: 'bg-cyan-500/10 text-amber-400',
       urgent: 'bg-rose-500/10 text-rose-400',
     }
     return (
@@ -138,7 +138,7 @@ export default function MyTickets() {
         </div>
         <Link
           href="/dashboard/support"
-          className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-amber-600 text-white px-4 py-2.5 rounded-lg hover:from-gold-600 hover:to-amber-700 transition-all shadow-lg shadow-gold-500/20 font-medium"
+          className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2.5 rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all shadow-lg shadow-cyan-500/20 font-medium"
         >
           <Plus size={18} />
           New Ticket
@@ -153,7 +153,7 @@ export default function MyTickets() {
               <p className="text-slate-400 text-sm">Total Tickets</p>
               <p className="text-xl sm:text-2xl font-bold text-white mt-1">{isLoading ? '-' : stats.total}</p>
             </div>
-            <MessageSquare className="text-gold-500" size={24} />
+            <MessageSquare className="text-cyan-400" size={24} />
           </div>
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
@@ -169,9 +169,9 @@ export default function MyTickets() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-slate-400 text-sm">In Progress</p>
-              <p className="text-xl sm:text-2xl font-bold text-amber-500 mt-1">{isLoading ? '-' : stats.inProgress}</p>
+              <p className="text-xl sm:text-2xl font-bold text-cyan-400 mt-1">{isLoading ? '-' : stats.inProgress}</p>
             </div>
-            <AlertCircle className="text-amber-500" size={24} />
+            <AlertCircle className="text-cyan-400" size={24} />
           </div>
         </div>
         <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
@@ -194,7 +194,7 @@ export default function MyTickets() {
             placeholder="Search tickets by subject or ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-900/50 border border-slate-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500"
+            className="w-full bg-slate-900/50 border border-slate-800 rounded-lg pl-12 pr-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500"
             disabled={isLoading}
           />
         </div>
@@ -206,7 +206,7 @@ export default function MyTickets() {
               disabled={isLoading}
               className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
                 filter === status
-                  ? 'bg-gold-500 text-white shadow-lg shadow-gold-500/20'
+                  ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20'
                   : 'bg-slate-900/50 border border-slate-800 text-slate-400 hover:text-white'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
@@ -220,7 +220,7 @@ export default function MyTickets() {
       <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
         {isLoading ? (
           <div className="p-12 text-center">
-            <Loader2 className="mx-auto text-gold-500 mb-4 animate-spin" size={48} />
+            <Loader2 className="mx-auto text-cyan-400 mb-4 animate-spin" size={48} />
             <p className="text-slate-400">Loading tickets...</p>
           </div>
         ) : filteredTickets.length === 0 ? (
@@ -233,7 +233,7 @@ export default function MyTickets() {
             {!searchQuery && (
               <Link
                 href="/dashboard/support"
-                className="inline-flex items-center gap-2 mt-4 bg-gold-500 hover:bg-gold-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                className="inline-flex items-center gap-2 mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-4 py-2 rounded-lg font-medium transition-colors"
               >
                 <Plus size={18} />
                 Create Ticket
@@ -252,7 +252,7 @@ export default function MyTickets() {
                   <div className="flex items-start gap-3 flex-1 min-w-0">
                     <div className="mt-1 flex-shrink-0">{getStatusIcon(ticket.status)}</div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-white font-medium group-hover:text-gold-500 transition-colors truncate mb-1">
+                      <h3 className="text-white font-medium group-hover:text-cyan-400 transition-colors truncate mb-1">
                         {ticket.subject}
                       </h3>
                       <p className="text-slate-500 text-xs sm:text-sm">#{ticket.id.substring(0, 8).toUpperCase()}</p>
