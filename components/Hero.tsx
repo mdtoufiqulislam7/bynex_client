@@ -34,7 +34,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-900/60"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 sm:pt-28 pb-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 sm:pt-28 pb-12 overflow-x-hidden">
         {/* Prominent Middle Position Live Trading Broadcast Showcase */}
         <LiveTradingBanner />
 
@@ -43,13 +43,13 @@ const Hero = () => {
           <span className="text-xs sm:text-sm text-slate-300 font-medium">Platform Live & Paying</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight">
-          Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500">Wealth.</span>
+        <h1 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight px-1 sm:px-0">
+          Your Future. <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500">Your Investment.</span>
           <br />
-          <span className="text-xl sm:text-4xl md:text-6xl text-slate-400 font-sans font-light">Secure Your Future.</span>
+          <span className="text-lg sm:text-3xl md:text-5xl text-slate-400 font-sans font-light mt-1 inline-block">Invest Today. Grow Tomorrow.</span>
         </h1>
 
-        <p className="text-sm sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-2 sm:px-0">
+        <p className="text-xs sm:text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-2 sm:px-0">
           Bynex Markets is a next-generation algorithmic trading and investment platform built for sustainable wealth generation with institutional-grade capital protection.
         </p>
 

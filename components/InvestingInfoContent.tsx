@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -14,7 +16,36 @@ import {
   ArrowRight,
   Sparkles,
   User,
+  X,
+  Eye,
 } from 'lucide-react';
+
+interface CertificateItem {
+  id?: string;
+  _id?: string;
+  title: string;
+  subtitle?: string;
+  imageUrl: string;
+  registrationNumber?: string;
+  jurisdiction?: string;
+}
+
+const DEFAULT_CERTS: CertificateItem[] = [
+  {
+    title: 'Saint Lucia Certificate of Good Standing',
+    subtitle: 'Bynex Markets — Registration No. 2024-00230',
+    imageUrl: '/images/cert_good_standing_bynex.png',
+    registrationNumber: '2024-00230',
+    jurisdiction: 'Saint Lucia',
+  },
+  {
+    title: 'Saint Lucia Certificate of Incorporation',
+    subtitle: 'Bynex Markets — Registration No. 2024-00230',
+    imageUrl: '/images/cert_incorporation_bynex.png',
+    registrationNumber: '2024-00230',
+    jurisdiction: 'Saint Lucia',
+  },
+];
 
 const IMG_HERO =
   'https://res.cloudinary.com/dshkbza19/image/upload/v1775451078/trading_tcnxuf.png';
@@ -124,6 +155,23 @@ function PipWordmark({ className = '' }: { className?: string }) {
 }
 
 const InvestingInfoContent = () => {
+  const [certificates, setCertificates] = useState<CertificateItem[]>(DEFAULT_CERTS);
+  const [activeLightboxImage, setActiveLightboxImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/v1/certificates')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        const certs = data?.data?.attributes || data?.data;
+        if (Array.isArray(certs) && certs.length > 0) {
+          setCertificates(certs);
+        }
+      })
+      .catch(() => {
+        // Fallback silently to DEFAULT_CERTS
+      });
+  }, []);
+
   return (
     <div className="relative overflow-hidden bg-[#12151c]">
       {/* —— Hero: trading visual —— */}
@@ -159,36 +207,57 @@ const InvestingInfoContent = () => {
 
       {/* —— Certificates —— */}
       <section className="relative z-10 border-t border-slate-800/80 bg-[#1b202c] py-14 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
           <div className="text-center mb-4">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white">Official registration</h2>
-            <p className="text-slate-500 text-sm mt-2">Saint Lucia — Bynex Markets</p>
+            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-white">Official registration</h2>
+            <p className="text-slate-400 text-xs sm:text-sm mt-2">
+              Verified legal incorporation and compliance documentation
+            </p>
           </div>
 
-          <div className="flex flex-col items-center gap-8 text-center max-w-3xl mx-auto">
-            <PipWordmark className="justify-center" />
-            <div className="relative w-full max-w-md shadow-2xl shadow-black/50 rounded-lg overflow-hidden ring-1 ring-white/10 mx-auto">
-              <Image
-                src={IMG_CERT_GOOD_STANDING}
-                alt="Saint Lucia Certificate of Good Standing — Bynex Markets No. 2024-00230"
-                width={800}
-                height={1100}
-                className="w-full h-auto object-contain bg-[#0f1218] mx-auto"
-              />
-            </div>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-5xl mx-auto items-start">
+            {certificates.map((cert, idx) => (
+              <div
+                key={cert.id || cert._id || idx}
+                className="flex flex-col items-center gap-5 text-center bg-slate-900/60 p-4 sm:p-6 rounded-2xl border border-slate-800 shadow-xl backdrop-blur-sm group"
+              >
+                <PipWordmark className="justify-center" />
 
-          <div className="flex flex-col items-center gap-8 text-center max-w-4xl mx-auto">
-            <PipWordmark className="justify-center" />
-            <div className="relative w-full max-w-2xl shadow-2xl shadow-black/50 rounded-lg overflow-hidden ring-1 ring-white/10 mx-auto">
-              <Image
-                src={IMG_CERT_INCORPORATION}
-                alt="Saint Lucia Certificate of Incorporation — Bynex Markets No. 2024-00230"
-                width={1100}
-                height={800}
-                className="w-full h-auto object-contain bg-[#0f1218] mx-auto"
-              />
-            </div>
+                <div
+                  onClick={() => setActiveLightboxImage(cert.imageUrl)}
+                  className="relative w-full shadow-2xl shadow-black/60 rounded-xl overflow-hidden ring-1 ring-white/10 mx-auto cursor-zoom-in group/img bg-[#0f1218]"
+                >
+                  <img
+                    src={cert.imageUrl}
+                    alt={cert.title}
+                    className="w-full h-auto max-h-[500px] object-contain mx-auto group-hover/img:scale-[1.02] transition-transform duration-300"
+                    onError={(e: any) => {
+                      e.target.src = idx === 0 ? '/images/cert_good_standing_bynex.png' : '/images/cert_incorporation_bynex.png';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="px-3.5 py-1.5 rounded-lg bg-black/80 text-white text-xs font-bold border border-white/20 shadow-lg backdrop-blur-sm flex items-center gap-1.5">
+                      <Eye size={13} />
+                      Click to View Full Size
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                    {cert.title}
+                  </h3>
+                  {cert.subtitle && (
+                    <p className="text-xs text-slate-400">{cert.subtitle}</p>
+                  )}
+                  {cert.registrationNumber && (
+                    <p className="text-[11px] font-mono text-cyan-400 pt-0.5">
+                      Registration No: {cert.registrationNumber}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -465,6 +534,28 @@ const InvestingInfoContent = () => {
           </div>
         </div>
       </section>
+
+      {/* High-Res Certificate Lightbox */}
+      {activeLightboxImage && (
+        <div
+          onClick={() => setActiveLightboxImage(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200 cursor-zoom-out"
+        >
+          <div className="relative max-w-5xl max-h-[92vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setActiveLightboxImage(null)}
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/80 hover:bg-black text-white flex items-center justify-center border border-white/20 transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <img
+              src={activeLightboxImage}
+              alt="Official Certificate Full Size"
+              className="w-full h-auto max-h-[88vh] object-contain rounded-xl shadow-2xl border border-white/10"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

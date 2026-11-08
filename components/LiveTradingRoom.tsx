@@ -312,21 +312,21 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
 
       <div className={embedded ? 'space-y-6' : 'max-w-7xl mx-auto space-y-6'}>
         {/* Top Header Breadcrumb & Controls */}
-        <div className="flex items-center justify-between flex-wrap gap-4 pb-3 border-b border-slate-800/80">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between flex-wrap gap-2.5 sm:gap-4 pb-3 border-b border-slate-800/80">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <Link
               href={embedded ? '/dashboard' : '/'}
-              className="text-xs sm:text-sm font-semibold text-slate-400 hover:text-cyan-400 transition-colors"
+              className="text-xs sm:text-sm font-semibold text-slate-400 hover:text-cyan-400 transition-colors shrink-0"
             >
-              {embedded ? 'Dashboard' : '← Back to Home'}
+              {embedded ? 'Dashboard' : '← Back'}
             </Link>
             <span className="text-slate-600">/</span>
-            <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm font-bold text-white">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+              <span className="text-xs sm:text-sm font-bold text-white truncate">
                 Live Trading Floor
               </span>
               {stream?.status === 'live' && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-600 text-white text-xs font-black tracking-wider uppercase shadow-md shadow-red-600/30 animate-pulse">
+                <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] sm:text-xs font-black tracking-wider uppercase shadow-md shadow-red-600/30 animate-pulse shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                   LIVE
                 </span>
@@ -334,11 +334,11 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             <button
               onClick={() => fetchStream(true)}
               disabled={isRefreshing}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 hover:text-white transition-colors"
               title="Refresh Stream"
             >
               <RefreshCw
@@ -349,7 +349,7 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
             </button>
             <button
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-medium text-slate-300 hover:text-white transition-colors"
             >
               <Share2 size={13} />
               <span>Share</span>
@@ -367,22 +367,22 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
 
         {/* —— NON-LOGGED-IN GATE (Requires user login for access) —— */}
         {!isLoading && !isUserLoggedIn && (
-          <div className="rounded-3xl bg-gradient-to-b from-slate-900 via-[#0d1322] to-slate-950 border-2 border-cyan-500/30 p-8 sm:p-14 text-center shadow-2xl relative overflow-hidden">
+          <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-900 via-[#0d1322] to-slate-950 border-2 border-cyan-500/30 p-5 sm:p-14 text-center shadow-2xl relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent pointer-events-none" />
 
-            <div className="w-20 h-20 rounded-3xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-6 text-cyan-400 shadow-xl shadow-cyan-950/40">
-              <Lock size={36} />
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-4 sm:mb-6 text-cyan-400 shadow-xl shadow-cyan-950/40">
+              <Lock size={26} className="sm:w-9 sm:h-9" />
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-black uppercase tracking-wider mb-4">
-              <Radio size={13} className="animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/20 text-red-400 border border-red-500/30 text-[10px] sm:text-xs font-black uppercase tracking-wider mb-3 sm:mb-4">
+              <Radio size={12} className="animate-pulse" />
               Members Only Access
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-white mb-3 tracking-tight">
+            <h1 className="text-xl sm:text-3xl font-black text-white mb-2 sm:mb-3 tracking-tight">
               Sign In to Enter the Live Trading Room
             </h1>
-            <p className="text-slate-400 max-w-lg mx-auto text-sm sm:text-base leading-relaxed mb-8">
+            <p className="text-slate-400 max-w-lg mx-auto text-xs sm:text-base leading-relaxed mb-6 sm:mb-8 px-2">
               Live market execution, institutional strategy commentary, and live pinned signals are
               restricted to authenticated Bynex Markets members. Please sign in or create an account to access the broadcast.
             </p>
@@ -446,32 +446,32 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
 
         {/* Offline / No Live Stream State (When logged in but no active stream) */}
         {!isLoading && isUserLoggedIn && !stream && (
-          <div className="rounded-3xl bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-slate-950 border border-slate-800/80 p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden">
+          <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-slate-950 border border-slate-800/80 p-6 sm:p-16 text-center shadow-2xl relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-cyan-900/10 via-transparent to-transparent pointer-events-none" />
 
-            <div className="w-20 h-20 rounded-3xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center mx-auto mb-6 shadow-inner text-slate-400">
-              <Radio size={36} className="text-slate-500" />
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-inner text-slate-400">
+              <Radio size={28} className="sm:w-9 sm:h-9 text-slate-500" />
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-white mb-3">
+            <h1 className="text-xl sm:text-3xl font-black text-white mb-2 sm:mb-3">
               Trading Session Currently Offline
             </h1>
-            <p className="text-slate-400 max-w-lg mx-auto text-sm sm:text-base leading-relaxed mb-8">
+            <p className="text-slate-400 max-w-lg mx-auto text-xs sm:text-base leading-relaxed mb-6 sm:mb-8 px-2">
               Our market strategists stream live analysis, trade execution, and high-probability
               setups during London and New York market hours. The stream will automatically display here
               when an admin starts broadcasting.
             </p>
 
-            <div className="inline-flex flex-wrap items-center justify-center gap-3">
+            <div className="inline-flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto px-4 sm:px-0">
               <Link
                 href="/dashboard/plans/invest"
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-cyan-500/20"
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-500/20 text-center"
               >
                 Explore Investment Plans
               </Link>
               <Link
                 href="/community"
-                className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-semibold text-sm transition-all"
+                className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-semibold text-xs sm:text-sm transition-all text-center"
               >
                 View Community Feed
               </Link>
@@ -481,11 +481,11 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
 
         {/* Active Live Stream Trading Room Layout (When logged in & stream is active) */}
         {!isLoading && isUserLoggedIn && stream && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 items-start">
             {/* Left 8 Columns: Live Video Player & Stream Details */}
-            <div className="lg:col-span-8 space-y-5">
+            <div className="lg:col-span-8 space-y-4 sm:space-y-5">
               {/* YouTube Video Player Responsive Container */}
-              <div className="relative w-full rounded-2xl overflow-hidden bg-black border border-slate-800 shadow-2xl aspect-video group">
+              <div className="relative w-full rounded-xl sm:rounded-2xl overflow-hidden bg-black border border-slate-800 shadow-2xl aspect-video group">
                 <iframe
                   src={`https://www.youtube.com/embed/${stream.youtubeVideoId}?autoplay=1&mute=0&rel=0&modestbranding=1&playsinline=1`}
                   title={stream.title}
@@ -496,46 +496,46 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
               </div>
 
               {/* Stream Title, Host Info, Badges */}
-              <div className="rounded-2xl bg-slate-900/60 border border-slate-800/80 p-5 sm:p-6 backdrop-blur-md">
-                <div className="flex items-start justify-between gap-4 flex-wrap">
+              <div className="rounded-xl sm:rounded-2xl bg-slate-900/60 border border-slate-800/80 p-4 sm:p-6 backdrop-blur-md">
+                <div className="flex items-start justify-between gap-3 sm:gap-4 flex-wrap">
                   <div className="space-y-1.5 flex-1 min-w-0">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-red-600 text-white text-xs font-black tracking-wider uppercase shadow-md shadow-red-600/30">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                      <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-md bg-red-600 text-white text-[10px] sm:text-xs font-black tracking-wider uppercase shadow-md shadow-red-600/30">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                         LIVE NOW
                       </span>
-                      <span className="inline-flex items-center gap-1 text-xs text-cyan-300 bg-cyan-950/60 border border-cyan-800/40 px-2.5 py-0.5 rounded-md">
-                        <TrendingUp size={12} />
+                      <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-cyan-300 bg-cyan-950/60 border border-cyan-800/40 px-2 sm:px-2.5 py-0.5 rounded-md">
+                        <TrendingUp size={11} className="shrink-0" />
                         Professional Trading Floor
                       </span>
                       {stream.startedAt && (
-                        <span className="inline-flex items-center gap-1 text-xs text-slate-400">
-                          <Clock size={12} />
+                        <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-slate-400">
+                          <Clock size={11} className="shrink-0" />
                           Started {formatTime(stream.startedAt)}
                         </span>
                       )}
                     </div>
 
-                    <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
+                    <h1 className="text-lg sm:text-2xl font-black text-white tracking-tight leading-snug break-words">
                       {stream.title}
                     </h1>
 
-                    <div className="flex items-center gap-2 pt-1 text-xs sm:text-sm text-slate-400">
-                      <div className="w-6 h-6 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-xs">
+                    <div className="flex items-center gap-1.5 sm:gap-2 pt-1 text-xs sm:text-sm text-slate-400 flex-wrap">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold text-[10px] sm:text-xs shrink-0">
                         B
                       </div>
-                      <span className="font-semibold text-slate-200">
+                      <span className="font-semibold text-slate-200 truncate">
                         {stream.creatorName || 'Bynex Markets Admin'}
                       </span>
-                      <ShieldCheck size={14} className="text-cyan-400" />
+                      <ShieldCheck size={13} className="text-cyan-400 shrink-0" />
                       <span className="text-slate-600">•</span>
-                      <span>Official Broadcast</span>
+                      <span className="text-xs text-slate-400">Official Broadcast</span>
                     </div>
                   </div>
                 </div>
 
                 {stream.description && (
-                  <p className="mt-4 pt-4 border-t border-slate-800 text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+                  <p className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-800 text-xs sm:text-sm text-slate-300 leading-relaxed whitespace-pre-line break-words">
                     {stream.description}
                   </p>
                 )}
@@ -543,33 +543,28 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
 
               {/* Pinned Facebook-Style Highlight Card on Mobile / Desktop */}
               {pinnedHighlight && (
-                <div className="rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-cyan-500/10 border-2 border-amber-500/40 p-4 sm:p-5 shadow-xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-bl-lg flex items-center gap-1">
-                    <Pin size={11} className="fill-current" />
-                    Pinned by Host
+                <div className="rounded-xl sm:rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-cyan-500/10 border-2 border-amber-500/40 p-3.5 sm:p-5 shadow-xl relative overflow-hidden">
+                  <div className="flex items-center justify-between gap-2 mb-2 pb-2 border-b border-amber-500/20">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300 uppercase tracking-wide">
+                      <Sparkles size={14} className="text-amber-400 shrink-0" />
+                      <span>Official Pinned Announcement</span>
+                    </div>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider shrink-0">
+                      <Pin size={10} className="fill-current" />
+                      Pinned
+                    </span>
                   </div>
 
-                  <div className="flex items-start gap-3 pt-1">
-                    <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0 shadow-inner">
-                      <Sparkles size={18} />
-                    </div>
-
-                    <div className="flex-1 min-w-0 pr-16 sm:pr-20">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-bold text-amber-300 uppercase tracking-wide">
-                          Official Pinned Announcement
-                        </span>
-                        {pinnedHighlight.createdAt && (
-                          <span className="text-[11px] text-slate-400">
-                            • {formatTime(pinnedHighlight.createdAt)}
-                          </span>
-                        )}
+                  <div className="pt-0.5">
+                    {pinnedHighlight.createdAt && (
+                      <div className="text-[10px] sm:text-[11px] text-slate-400 mb-1.5">
+                        Broadcasted {formatTime(pinnedHighlight.createdAt)}
                       </div>
-                      <SolidTextDisplay
-                        text={pinnedHighlight.text}
-                        className="text-xs sm:text-sm text-slate-100"
-                      />
-                    </div>
+                    )}
+                    <SolidTextDisplay
+                      text={pinnedHighlight.text}
+                      className="text-xs sm:text-sm text-slate-100"
+                    />
                   </div>
                 </div>
               )}
@@ -577,7 +572,7 @@ export default function LiveTradingRoom({ embedded = false }: LiveTradingRoomPro
 
             {/* Right 4 Columns: Highlight Comments Feed (Facebook Live Pin Style) */}
             <div className="lg:col-span-4 space-y-4">
-              <div className="rounded-2xl bg-slate-900/70 border border-slate-800 p-4 sm:p-5 flex flex-col h-[650px] shadow-2xl backdrop-blur-md">
+              <div className="rounded-xl sm:rounded-2xl bg-slate-900/70 border border-slate-800 p-3.5 sm:p-5 flex flex-col h-[480px] sm:h-[550px] lg:h-[650px] shadow-2xl backdrop-blur-md">
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                   <div className="flex items-center gap-2">
