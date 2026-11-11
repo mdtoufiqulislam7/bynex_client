@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Download, Clock, CheckCircle, XCircle, AlertCircle, DollarSign, CreditCard, Hash, Calendar, FileText, User, Eye, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import { useGetTransactionByIdQuery } from '@/store/api/transactionApi'
+import { resolveImageUrl } from '@/lib/imageUrl'
 
 export default function TransactionDetail() {
   const params = useParams()
@@ -16,7 +17,6 @@ export default function TransactionDetail() {
   // Fetch transaction from API
   const { data: transactionResponse, isLoading, error } = useGetTransactionByIdQuery(transactionId)
 
-  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ''
   const transaction = transactionResponse?.data?.attributes
 
   if (isLoading) {
@@ -316,11 +316,14 @@ export default function TransactionDetail() {
                 <XCircle size={24} />
               </button>
             </div>
-            <div className="p-6">
+            <div className="p-6 flex justify-center">
               <img
-                src={`${IMAGE_BASE_URL}${transaction.proofImage}`}
+                src={resolveImageUrl(transaction.proofImage) || ''}
                 alt="Payment Proof"
-                className="w-full h-auto rounded-lg"
+                className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="160"><rect fill="%230f172a" width="240" height="160"/><text fill="%2394a3b8" font-size="14" x="50%" y="50%" text-anchor="middle" dy=".3em">Image not available</text></svg>';
+                }}
               />
             </div>
           </div>

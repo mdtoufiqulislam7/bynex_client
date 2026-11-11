@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Bitcoin, CreditCard, ArrowRight, CheckCircle2, Upload, Copy, AlertCircle, ArrowLeft, Loader2, X } from 'lucide-react';
 import { useGetActiveGatewaysQuery } from '@/store/api/paymentGatewayApi';
 import { useCreateDepositMutation } from '@/store/api/transactionApi';
 import type { PaymentGateway } from '@/store/api/paymentGatewayApi';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 const AddFunds = () => {
   const [step, setStep] = useState(1);
@@ -14,15 +15,25 @@ const AddFunds = () => {
   // Step 2 Verification States
   const [transactionId, setTransactionId] = useState('');
   const [screenshot, setScreenshot] = useState<File | null>(null);
+  const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!screenshot) {
+      setScreenshotPreview(null);
+      return;
+    }
+    const objectUrl = URL.createObjectURL(screenshot);
+    setScreenshotPreview(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [screenshot]);
 
   // API hooks
   const { data: gatewaysResponse, isLoading: loadingGateways } = useGetActiveGatewaysQuery({ purpose: 'deposit' });
   const [createDeposit, { isLoading: isSubmitting }] = useCreateDepositMutation();
 
   // Extract gateways from response
-  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || '';
   const gateways: PaymentGateway[] = gatewaysResponse?.data?.attributes || [];
 
   const handleGatewaySelect = (id: string) => {
@@ -267,9 +278,9 @@ const AddFunds = () => {
                 {selectedGatewayData?.qrCode && (
                   <div className="mt-4 flex justify-center">
                     <img
-                      src={`${IMAGE_BASE_URL}${selectedGatewayData.qrCode}`}
+                      src={resolveImageUrl(selectedGatewayData.qrCode) || ''}
                       alt="QR Code"
-                      className="w-48 h-48 border-2 border-slate-700 rounded-lg"
+                      className="w-48 h-48 border-2 border-slate-700 rounded-lg object-contain bg-white"
                     />
                   </div>
                 )}
@@ -316,19 +327,29 @@ const AddFunds = () => {
                     />
 
                     {screenshot ? (
-                      <div className="flex items-center justify-center space-x-2 text-cyan-400">
-                        <CheckCircle2 size={24} />
-                        <span className="font-medium truncate max-w-xs">{screenshot.name}</span>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setScreenshot(null);
-                          }}
-                          className="p-1 hover:bg-slate-800 rounded-full"
-                        >
-                          <X size={16} />
-                        </button>
+                      <div className="flex flex-col items-center justify-center gap-3 text-cyan-400">
+                        {screenshotPreview && (
+                          <img
+                            src={screenshotPreview}
+                            alt="Screenshot preview"
+                            className="max-h-40 w-auto rounded-lg border border-cyan-500/40 object-contain shadow-md"
+                          />
+                        )}
+                        <div className="flex items-center justify-center space-x-2">
+                          <CheckCircle2 size={20} className="shrink-0" />
+                          <span className="font-medium truncate max-w-[200px] sm:max-w-xs text-sm">{screenshot.name}</span>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setScreenshot(null);
+                              if (fileInputRef.current) fileInputRef.current.value = '';
+                            }}
+                            className="p-1 hover:bg-slate-800 rounded-full"
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <div className="space-y-2">
@@ -336,7 +357,7 @@ const AddFunds = () => {
                           <Upload size={24} />
                         </div>
                         <p className="text-sm text-slate-300 font-medium">Click to upload or drag and drop</p>
-                        <p className="text-xs text-slate-500">SVG, PNG, JPG or GIF (max. 5MB)</p>
+                        <p className="text-xs text-slate-500">PNG, JPG, WEBP, HEIC or PDF (max. 10MB)</p>
                       </div>
                     )}
                   </div>
