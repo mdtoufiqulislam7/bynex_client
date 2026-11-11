@@ -6,6 +6,7 @@ const nextConfig = {
       'res.cloudinary.com',
       '7ec64261da76a2f46a7c1f2d7011ab9a.r2.cloudflarestorage.com',
       'mlm.7ec64261da76a2f46a7c1f2d7011ab9a.r2.cloudflarestorage.com',
+      'media.bynex.tech',
       'lh3.googleusercontent.com',
     ],
   },
