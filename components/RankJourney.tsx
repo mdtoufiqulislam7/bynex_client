@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Lock, Check, ChevronRight, Star } from 'lucide-react';
 import type { RankDefinition } from '../store/api/rankApi';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 interface RankJourneyProps {
   currentRank: number;
@@ -26,7 +27,7 @@ const RankTooltip = ({ def, imageBase }: { def: RankDefinition; imageBase: strin
     <div className="bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-3 text-left">
       <div className="flex items-center gap-2 mb-2">
         <img
-          src={`${imageBase}${def.badgeImage}`}
+          src={resolveImageUrl(def.badgeImage) || `${imageBase}${def.badgeImage}`}
           alt={def.name}
           className="w-8 h-8 object-contain flex-shrink-0"
         />
@@ -139,7 +140,7 @@ const RankNode = ({
       >
         {/* Badge image */}
         <img
-          src={`${imageBase}${def.badgeImage}`}
+          src={resolveImageUrl(def.badgeImage) || `${imageBase}${def.badgeImage}`}
           alt={def.name}
           className={`${imgSize} object-contain`}
           style={{ opacity: isLocked ? 0.5 : 1 }}
@@ -315,7 +316,7 @@ export const RankJourney: React.FC<RankJourneyProps> = ({
                   } ${state === 'locked' ? 'opacity-40' : ''}`}
                 >
                   <img
-                    src={`${imageBase}${def.badgeImage}`}
+                    src={resolveImageUrl(def.badgeImage) || `${imageBase}${def.badgeImage}`}
                     alt={def.name}
                     className="w-10 h-10 object-contain flex-shrink-0"
                   />

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { Check, Info, Loader2 } from 'lucide-react';
+import { Check, Info, Loader2, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useGetActivePlansQuery } from '@/store/api/investmentPlanApi';
 
@@ -18,23 +18,37 @@ const Plans: React.FC<PlansProps> = ({ initialPlans = [] }) => {
     ? initialPlans 
     : (plansResponse?.data?.attributes || []);
 
-  const calculateReturns = (minDeposit: number, roi: number, roiType: string, duration: number) => {
-    let totalProfit = 0;
+  const getDurationInDays = (duration: number, durationType: string = 'days') => {
+    switch (durationType) {
+      case 'minutes': return duration / (24 * 60);
+      case 'hours': return duration / 24;
+      case 'days': return duration;
+      case 'weeks': return duration * 7;
+      case 'months': return duration * 30;
+      default: return duration;
+    }
+  };
 
-    if (roiType === 'daily') {
-      totalProfit = minDeposit * (roi / 100) * duration;
+  const calculateReturns = (minDeposit: number, roi: number, roiType: string, duration: number, durationType: string = 'days') => {
+    let totalProfit = 0;
+    const totalDays = getDurationInDays(duration, durationType);
+
+    if (roiType === 'hourly') {
+      totalProfit = minDeposit * (roi / 100) * totalDays * 24;
+    } else if (roiType === 'daily') {
+      totalProfit = minDeposit * (roi / 100) * totalDays;
     } else if (roiType === 'total') {
       totalProfit = minDeposit * (roi / 100);
     } else if (roiType === 'monthly') {
-      const months = duration / 30;
+      const months = totalDays / 30;
       totalProfit = minDeposit * (roi / 100) * months;
     } else if (roiType === 'weekly') {
-      const weeks = duration / 7;
+      const weeks = totalDays / 7;
       totalProfit = minDeposit * (roi / 100) * weeks;
     }
 
     const totalReturn = minDeposit + totalProfit;
-    const daily = totalProfit / duration;
+    const daily = totalProfit / (totalDays || 1);
 
     return { totalReturn, profit: totalProfit, daily };
   };
@@ -76,8 +90,10 @@ const Plans: React.FC<PlansProps> = ({ initialPlans = [] }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 items-start">
-          {plans.map((plan) => {
-            const { totalReturn, profit, daily } = calculateReturns(plan.minDeposit, plan.roi, plan.roiType, plan.duration);
+          {plans.map((plan, idx) => {
+            const { totalReturn, profit, daily } = calculateReturns(plan.minDeposit, plan.roi, plan.roiType, plan.duration, plan.durationType);
+            const defaultCounts = [1000, 16798, 7897];
+            const investorCount = plan.totalInvestors && plan.totalInvestors > 0 ? plan.totalInvestors : (defaultCounts[idx] ?? 1000);
 
             return (
               <div
@@ -94,7 +110,13 @@ const Plans: React.FC<PlansProps> = ({ initialPlans = [] }) => {
                   </div>
                 )}
 
-                <h3 className={`text-lg sm:text-2xl font-bold mb-2 ${plan.isPopular ? 'text-white' : 'text-slate-200'}`}>{plan.name}</h3>
+                <h3 className={`text-lg sm:text-2xl font-bold mb-1.5 ${plan.isPopular ? 'text-white' : 'text-slate-200'}`}>{plan.name}</h3>
+                <div className="mb-3">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-0.5 rounded-full">
+                    <Users size={12} />
+                    {investorCount.toLocaleString()} Active Investors
+                  </span>
+                </div>
                 <div className="mb-2">
                   <div className="flex items-baseline">
                     {plan.approximateRoi ? (

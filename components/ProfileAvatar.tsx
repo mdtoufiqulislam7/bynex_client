@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface ProfileAvatarProps {
   /** Full URL of the user's profile photo */
@@ -53,14 +53,25 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
   className = '',
 }) => {
   const sizeClass = SIZE_CLASSES[size] ?? size;
+  const [imgError, setImgError] = useState(false);
+  const [frameError, setFrameError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [src]);
+
+  useEffect(() => {
+    setFrameError(false);
+  }, [frameSrc]);
 
   return (
     <div className={`relative flex-shrink-0 ${sizeClass} ${className}`}>
       {/* ── Layer 1 & 2 : photo or initials fallback ── */}
-      {src ? (
+      {src && !imgError ? (
         <img
           src={src}
           alt={alt}
+          onError={() => setImgError(true)}
           className="absolute inset-0 w-full h-full rounded-full object-cover z-10"
         />
       ) : (
@@ -73,10 +84,11 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
       )}
 
       {/* ── Layer 3 : rank frame PNG on top ── */}
-      {frameSrc && (
+      {frameSrc && !frameError && (
         <img
           src={frameSrc}
           alt="rank frame"
+          onError={() => setFrameError(true)}
           className="absolute inset-0 w-full h-full z-20 pointer-events-none"
           style={{ objectFit: 'cover' }}
         />

@@ -32,6 +32,7 @@ import { useGetMyNotificationsQuery, useGetUnreadCountQuery, useMarkAllAsReadMut
 import { useGetWalletQuery } from '@/store/api/walletApi';
 import { useGetMyRankQuery } from '@/store/api/rankApi';
 import { ProfileAvatar } from './ProfileAvatar';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -369,12 +370,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             <div className="flex items-center space-x-2 sm:space-x-3 pl-2 sm:pl-4 border-l border-slate-800">
               {/* sm size on mobile, md on desktop */}
               <ProfileAvatar
-                src={user?.image ? `${IMAGE_BASE}${user.image}` : null}
-                frameSrc={
-                  rankInfo?.currentRankInfo?.frameImage
-                    ? `${IMAGE_BASE}${rankInfo.currentRankInfo.frameImage}`
-                    : null
-                }
+                src={resolveImageUrl(user?.image)}
+                frameSrc={resolveImageUrl(rankInfo?.currentRankInfo?.frameImage)}
                 initials={`${user?.firstName?.[0] ?? ''}${user?.lastName?.[0] ?? ''}`}
                 size="xs"
                 className="sm:!w-10 sm:!h-10"

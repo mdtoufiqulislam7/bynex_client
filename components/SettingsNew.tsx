@@ -16,6 +16,7 @@ import { Save, Lock, User, Upload, Trash2, Loader2, AlertTriangle, Wallet, Plus,
 import { useGetMyRankQuery, useCheckAndUpgradeRankMutation, useGetRankDefinitionsQuery } from '../store/api/rankApi';
 import { RankJourney } from './RankJourney';
 import { ProfileAvatar } from './ProfileAvatar';
+import { resolveImageUrl } from '@/lib/imageUrl';
 import {
   useGetSavedAccountsQuery,
   useCreateSavedAccountMutation,
@@ -114,9 +115,7 @@ export default function SettingsNew() {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   // Profile image URL from backend
-  const profileImageUrl = user?.image
-    ? (user.image.startsWith('http') ? user.image : `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL || ''}${user.image}`)
-    : null;
+  const profileImageUrl = resolveImageUrl(user?.image);
 
   // Handle file selection
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,19 +144,19 @@ export default function SettingsNew() {
       const formData = new FormData();
       formData.append('image', file);
 
-      const result = await uploadImage(formData).unwrap();
+      const result: any = await uploadImage(formData).unwrap();
 
       // Refetch to get fresh data with updated image
       const { data: updatedProfile } = await refetch();
 
       // Update user in Redux with fresh data from API
-      if (updatedProfile?.data?.attributes?.user) {
-        dispatch(setUser(updatedProfile.data.attributes.user));
+      const freshUser = updatedProfile?.data?.attributes?.user || result?.data?.attributes;
+      if (freshUser) {
+        dispatch(setUser(freshUser));
       }
 
       setToast({ message: 'Profile image updated successfully!', type: 'success' });
       setPreviewImage(null);
-      refetch();
     } catch (error: any) {
       setToast({ message: error.data?.message || 'Failed to upload image', type: 'error' });
       setPreviewImage(null);
@@ -168,14 +167,15 @@ export default function SettingsNew() {
     if (!confirm('Delete your profile image?')) return;
 
     try {
-      await deleteImage().unwrap();
+      const result: any = await deleteImage().unwrap();
 
       // Refetch to get fresh data after deletion
       const { data: updatedProfile } = await refetch();
 
       // Update user in Redux with fresh data from API
-      if (updatedProfile?.data?.attributes?.user) {
-        dispatch(setUser(updatedProfile.data.attributes.user));
+      const freshUser = updatedProfile?.data?.attributes?.user || result?.data?.attributes;
+      if (freshUser) {
+        dispatch(setUser(freshUser));
       }
 
       setToast({ message: 'Profile image deleted successfully!', type: 'success' });
@@ -399,11 +399,7 @@ export default function SettingsNew() {
                 <div className="relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
                   <ProfileAvatar
                     src={previewImage || profileImageUrl}
-                    frameSrc={
-                      rankInfo?.currentRankInfo?.frameImage
-                        ? `${IMAGE_BASE}${rankInfo.currentRankInfo.frameImage}`
-                        : null
-                    }
+                    frameSrc={resolveImageUrl(rankInfo?.currentRankInfo?.frameImage)}
                     initials={getInitials()}
                     size="lg"
                     className="sm:!w-24 sm:!h-24"
@@ -456,7 +452,7 @@ export default function SettingsNew() {
                     <div className="flex items-center gap-4">
                       <div className="relative w-14 h-14 flex-shrink-0">
                         <img
-                          src={`${IMAGE_BASE}${rankInfo.currentRankInfo.badgeImage}`}
+                          src={resolveImageUrl(rankInfo.currentRankInfo.badgeImage) || ''}
                           alt={`${rankInfo.currentRankInfo.name} badge`}
                           className="w-full h-full object-contain"
                         />
@@ -547,7 +543,7 @@ export default function SettingsNew() {
                       {/* Next rank badge */}
                       <div className="flex items-center gap-3 mt-2 bg-slate-900/50 rounded-lg p-3">
                         <img
-                          src={`${IMAGE_BASE}${rankInfo.nextRankInfo.badgeImage}`}
+                          src={resolveImageUrl(rankInfo.nextRankInfo.badgeImage) || ''}
                           alt={rankInfo.nextRankInfo.name}
                           className="w-8 h-8 object-contain opacity-60"
                         />

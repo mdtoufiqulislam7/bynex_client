@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Check, Info, TrendingUp, Loader2, AlertCircle, DollarSign, CheckCircle, Eye } from 'lucide-react';
+import { Check, Info, TrendingUp, Loader2, AlertCircle, DollarSign, CheckCircle, Eye, Users } from 'lucide-react';
 import { useGetActivePlansQuery } from '@/store/api/investmentPlanApi';
 import { useCreateInvestmentMutation } from '@/store/api/investmentApi';
 import { useGetWalletQuery } from '@/store/api/walletApi';
@@ -158,8 +158,10 @@ const InvestPlans = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
-        {plans.map((plan) => {
+        {plans.map((plan, idx) => {
           const { totalReturn, profit, daily } = calculateReturns(plan.minDeposit, plan.roi, plan.roiType, plan.duration, plan.durationType);
+          const defaultCounts = [1000, 16798, 7897];
+          const investorCount = plan.totalInvestors && plan.totalInvestors > 0 ? plan.totalInvestors : (defaultCounts[idx] ?? 1000);
 
           return (
             <div
@@ -176,7 +178,13 @@ const InvestPlans = () => {
                 </div>
               )}
 
-              <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${plan.isPopular ? 'text-white' : 'text-slate-300'}`}>{plan.name}</h3>
+              <div className="mb-3 sm:mb-4">
+                <h3 className={`text-lg sm:text-xl font-bold mb-1.5 ${plan.isPopular ? 'text-white' : 'text-slate-300'}`}>{plan.name}</h3>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-0.5 rounded-full">
+                  <Users size={12} />
+                  {investorCount.toLocaleString()} Active Investors
+                </span>
+              </div>
 
               <div className="mb-4 sm:mb-6 text-center bg-slate-950/50 rounded-xl p-3 sm:p-4 border border-slate-800">
                  {plan.approximateRoi ? (

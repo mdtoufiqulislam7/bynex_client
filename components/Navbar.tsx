@@ -9,8 +9,7 @@ import { RootState } from '../store/store';
 import { clearAuth } from '../store/slices/authSlice';
 import { useLogoutMutation } from '../store/api/authApi';
 import { useGetMyRankQuery } from '../store/api/rankApi';
-
-const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || '';
+import { resolveImageUrl } from '@/lib/imageUrl';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -87,8 +86,15 @@ const Navbar = () => {
     router.push('/');
   };
 
-  const avatarContent = user?.image
-    ? <img src={`${IMAGE_BASE}${user.image}`} alt="Profile" className="w-9 h-9 rounded-full object-cover border-2 border-cyan-400/40" />
+  const resolvedAvatar = resolveImageUrl(user?.image);
+  const [avatarFailed, setAvatarFailed] = useState(false);
+
+  useEffect(() => {
+    setAvatarFailed(false);
+  }, [resolvedAvatar]);
+
+  const avatarContent = resolvedAvatar && !avatarFailed
+    ? <img src={resolvedAvatar} alt="Profile" onError={() => setAvatarFailed(true)} className="w-9 h-9 rounded-full object-cover border-2 border-cyan-400/40" />
     : (
       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm border-2 border-cyan-400/40">
         {user?.firstName?.[0]}{user?.lastName?.[0]}
