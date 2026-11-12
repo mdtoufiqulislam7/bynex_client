@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-950 text-white antialiased">
+      <body className="bg-[#050505] text-white antialiased">
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

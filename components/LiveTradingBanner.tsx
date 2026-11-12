@@ -106,14 +106,14 @@ export default function LiveTradingBanner() {
           className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#1c0b17]/95 via-[#0c1220]/95 to-[#070b14]/95 border-2 border-red-500/80 text-white shadow-[0_0_50px_-10px_rgba(239,68,68,0.4)] backdrop-blur-2xl overflow-hidden cursor-pointer group hover:border-red-400 transition-all duration-300 transform hover:-translate-y-1"
         >
           {/* Top Live Bar */}
-          <div className="flex items-center justify-between px-3 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-red-950/90 via-slate-900 to-rose-950/90 border-b border-red-500/30">
+          <div className="flex items-center justify-between px-3 sm:px-8 py-2.5 sm:py-3.5 bg-gradient-to-r from-red-950/90 via-[#0D0D0D] to-rose-950/90 border-b border-red-500/30">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 mr-2">
               <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-red-600 text-white text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-md shadow-red-600/40 animate-pulse shrink-0">
                 <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white animate-ping" />
                 <Radio size={12} className="shrink-0 sm:w-[13px] sm:h-[13px]" />
                 STREAMING LIVE
               </span>
-              <span className="text-xs sm:text-base font-bold text-white truncate group-hover:text-cyan-400 transition-colors">
+              <span className="text-xs sm:text-base font-bold text-white truncate group-hover:text-amber-400 transition-colors">
                 {stream.title}
               </span>
             </div>
@@ -136,15 +136,15 @@ export default function LiveTradingBanner() {
             ) : null}
 
             {/* Dark Gradient Overlay for text clarity */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent flex flex-col justify-between p-3.5 sm:p-8 transition-all group-hover/player:from-slate-950/95">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/25 to-transparent flex flex-col justify-between p-3.5 sm:p-8 transition-all group-hover/player:from-[#050505]/95">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs text-slate-200 bg-black/80 border border-slate-700/70 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full backdrop-blur-md shadow-lg truncate max-w-full">
-                  <VolumeX size={12} className="text-slate-400 shrink-0" />
+                <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs text-neutral-200 bg-black/80 border border-neutral-800/70 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full backdrop-blur-md shadow-lg truncate max-w-full">
+                  <VolumeX size={12} className="text-neutral-400 shrink-0" />
                   <span className="sm:hidden">Muted Preview • Tap to Watch</span>
                   <span className="hidden sm:inline">Live Preview Playing • Click to join with audio</span>
                 </span>
-                <span className="hidden md:inline-flex items-center gap-1.5 text-xs text-cyan-300 bg-cyan-950/85 border border-cyan-500/40 px-3.5 py-1.5 rounded-full backdrop-blur-md font-semibold shadow-lg shrink-0">
-                  <ShieldCheck size={14} className="text-cyan-400" />
+                <span className="hidden md:inline-flex items-center gap-1.5 text-xs text-amber-300 bg-amber-950/85 border border-amber-500/40 px-3.5 py-1.5 rounded-full backdrop-blur-md font-semibold shadow-lg shrink-0">
+                  <ShieldCheck size={14} className="text-amber-400" />
                   Verified Institutional Desk
                 </span>
               </div>
@@ -181,12 +181,12 @@ export default function LiveTradingBanner() {
           </div>
 
           {/* Bottom Alert Footer */}
-          <div className="px-3 sm:px-8 py-2 sm:py-3 bg-slate-950 flex items-center justify-between text-[11px] sm:text-xs text-slate-400 border-t border-slate-800/80">
+          <div className="px-3 sm:px-8 py-2 sm:py-3 bg-[#050505] flex items-center justify-between text-[11px] sm:text-xs text-neutral-400 border-t border-neutral-800/80">
             <span className="flex items-center gap-1.5 sm:gap-2 truncate">
-              <TrendingUp size={13} className="text-cyan-400 shrink-0" />
+              <TrendingUp size={13} className="text-amber-400 shrink-0" />
               <span className="truncate">Real-time technical analysis, high-probability setups, and signals.</span>
             </span>
-            <span className="text-cyan-400 font-bold group-hover:underline shrink-0 hidden sm:inline ml-2">
+            <span className="text-amber-400 font-bold group-hover:underline shrink-0 hidden sm:inline ml-2">
               Join Live Floor (Members Only) →
             </span>
           </div>
@@ -196,15 +196,15 @@ export default function LiveTradingBanner() {
       {/* —— Login Required Modal (When Non-User Clicks to Enter) —— */}
       {authModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200">
-          <div className="bg-[#0f1422] border border-cyan-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-w-sm sm:max-w-md w-full shadow-2xl shadow-cyan-950/50 space-y-4 sm:space-y-5 text-center relative animate-in zoom-in-95 duration-200">
+          <div className="bg-[#050505] border border-amber-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-8 max-w-sm sm:max-w-md w-full shadow-2xl shadow-amber-950/50 space-y-4 sm:space-y-5 text-center relative animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setAuthModalOpen(false)}
-              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition-colors"
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-neutral-400 hover:text-white p-1 rounded-lg hover:bg-neutral-900 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500/20 to-cyan-500/20 border border-red-500/30 text-rose-400 flex items-center justify-center mx-auto shadow-lg shadow-rose-950/40">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500/20 to-amber-500/20 border border-red-500/30 text-rose-400 flex items-center justify-center mx-auto shadow-lg shadow-rose-950/40">
               <Lock className="w-8 h-8" />
             </div>
 
@@ -216,7 +216,7 @@ export default function LiveTradingBanner() {
               <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                 Members-Only Access
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm mx-auto">
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-sm mx-auto">
                 Real-time trade execution, proprietary market commentary, and live pinned signals are
                 exclusively accessible to authenticated Bynex members.
               </p>
@@ -226,7 +226,7 @@ export default function LiveTradingBanner() {
             <div className="space-y-3 pt-2">
               <button
                 onClick={handleGoogleLogin}
-                className="w-full inline-flex items-center justify-center gap-3 py-3 px-5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow-lg transition-all active:scale-95"
+                className="w-full inline-flex items-center justify-center gap-3 py-3 px-5 rounded-xl bg-white hover:bg-neutral-100 text-neutral-900 font-bold text-sm shadow-lg transition-all active:scale-95"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -257,7 +257,7 @@ export default function LiveTradingBanner() {
                       sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
                     }
                   }}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-colors"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs transition-colors"
                 >
                   <LogIn size={13} />
                   Sign In
@@ -269,7 +269,7 @@ export default function LiveTradingBanner() {
                       sessionStorage.setItem('post_login_redirect', '/dashboard/live-trading');
                     }
                   }}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white font-bold text-xs transition-colors"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border border-neutral-800 hover:border-neutral-700 text-neutral-300 hover:text-white font-bold text-xs transition-colors"
                 >
                   <UserPlus size={13} />
                   Register Free

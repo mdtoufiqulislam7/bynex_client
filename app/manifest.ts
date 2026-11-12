@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Next-generation smart algorithmic investment platform for confident growth and capital protection.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0f172a',
-    theme_color: '#0f172a',
+    background_color: '#050505',
+    theme_color: '#050505',
     orientation: 'portrait',
     icons: [
       {

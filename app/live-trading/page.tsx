@@ -12,7 +12,7 @@ export default function LiveTradingPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#070B14]">
+      <main className="min-h-screen bg-[#050505]">
         <LiveTradingRoom />
       </main>
       <Footer />

@@ -28,6 +28,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { MenuItem } from '@/types';
 import NotificationsDropdown from './NotificationsDropdown';
+import { BynexLogo } from './BynexLogo';
 import { useGetMyNotificationsQuery, useGetUnreadCountQuery, useMarkAllAsReadMutation, type Notification } from '@/store/api/notificationApi';
 import { useGetWalletQuery } from '@/store/api/walletApi';
 import { useGetMyRankQuery } from '@/store/api/rankApi';
@@ -179,7 +180,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="flex h-screen bg-slate-950 text-white overflow-hidden font-sans relative">
+    <div className="flex h-screen bg-[#050505] text-white overflow-hidden font-sans relative">
       {/* Toast Notification */}
       {toast && (
         <Toast
@@ -215,19 +216,19 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
       {/* Logout Confirmation Modal */}
       {showLogoutConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl transform scale-100 transition-all">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="bg-[#0D0D0D] border border-amber-500/20 rounded-2xl p-6 max-w-sm w-full shadow-2xl transform scale-100 transition-all">
             <div className="flex items-center space-x-3 mb-4">
               <div className="bg-red-500/10 p-2 rounded-full text-red-500">
                 <LogOut size={24} />
               </div>
               <h3 className="text-xl font-bold text-white">Sign Out</h3>
             </div>
-            <p className="text-slate-400 mb-6">Are you sure you want to log out of your account?</p>
+            <p className="text-neutral-400 mb-6">Are you sure you want to log out of your account?</p>
             <div className="flex space-x-3">
               <button
                 onClick={() => setShowLogoutConfirm(false)}
-                className="flex-1 py-2.5 rounded-lg border border-slate-700 text-slate-300 font-medium hover:bg-slate-800 transition-colors"
+                className="flex-1 py-2.5 rounded-lg border border-neutral-700 text-neutral-300 font-medium hover:bg-neutral-800 transition-colors"
               >
                 No, Cancel
               </button>
@@ -244,15 +245,15 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
       {/* Sidebar */}
       <aside className={`
-        fixed lg:static inset-y-0 left-0 z-30 w-64 bg-slate-900 border-r border-slate-800 transform transition-transform duration-300 ease-in-out
+        fixed lg:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-amber-500/15 transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="h-full flex flex-col">
           {/* Logo Area */}
-          <div className="h-20 flex items-center px-6 border-b border-slate-800">
-            <span className="text-xl font-serif font-bold tracking-wide leading-none text-white">
-              Bynex <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-400">Markets</span>
-            </span>
+          <div className="h-20 flex items-center px-6 border-b border-amber-500/15">
+            <Link href="/" className="flex items-center">
+              <BynexLogo size="sm" />
+            </Link>
           </div>
 
           {/* Navigation */}
@@ -264,7 +265,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                     <button
                       onClick={() => toggleMenu(item.label)}
                       className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors ${
-                        item.subItems.some(sub => isActive(sub.path)) ? 'text-white bg-slate-800' : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                        item.subItems.some(sub => isActive(sub.path)) ? 'text-amber-400 bg-amber-500/10 border border-amber-500/20' : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
                       }`}
                     >
                       <div className="flex items-center space-x-3">
@@ -274,14 +275,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                       {expandedMenus[item.label] ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                     </button>
                     {expandedMenus[item.label] && (
-                      <div className="ml-10 mt-1 space-y-1 border-l border-slate-700 pl-2">
+                      <div className="ml-10 mt-1 space-y-1 border-l border-amber-500/20 pl-2">
                         {item.subItems.map((sub) => (
                           <Link
                             key={sub.label}
                             href={sub.path || '#'}
                             onClick={() => setSidebarOpen(false)}
                             className={`block px-4 py-2 text-sm transition-colors ${
-                              isActive(sub.path) ? 'text-cyan-400 font-medium' : 'text-slate-500 hover:text-cyan-300'
+                              isActive(sub.path) ? 'text-amber-400 font-medium' : 'text-neutral-500 hover:text-amber-300'
                             }`}
                           >
                             {sub.label}
@@ -296,8 +297,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                     onClick={() => setSidebarOpen(false)}
                     className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                       isActive(item.path)
-                        ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                        ? 'bg-amber-500/10 text-amber-400 border border-amber-500/25'
+                        : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
                     }`}
                   >
                     <item.icon size={20} />
@@ -315,7 +316,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           </div>
 
           {/* User Profile Snippet in Sidebar Bottom */}
-          <div className="p-4 border-t border-slate-800">
+          <div className="p-4 border-t border-amber-500/15">
             <button
               onClick={() => setShowLogoutConfirm(true)}
               className="w-full flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
@@ -330,11 +331,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       {/* Main Content Wrapper */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className="h-16 sm:h-20 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 sticky top-0 z-10">
+        <header className="h-16 sm:h-20 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-amber-500/15 flex items-center justify-between px-3 sm:px-6 lg:px-8 sticky top-0 z-10">
           <div className="flex items-center">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden mr-2 sm:mr-4 text-slate-400 hover:text-white"
+              className="lg:hidden mr-2 sm:mr-4 text-amber-400 hover:text-amber-300"
             >
               <Menu size={22} />
             </button>
@@ -344,22 +345,22 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           <div className="flex items-center space-x-2 sm:space-x-6">
             {/* Balance Display - visible on all screens */}
             <div className="flex flex-col items-end mr-1 sm:mr-2">
-              <span className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider font-semibold">Balance</span>
-              <span className="text-xs sm:text-xl font-bold text-green-400">${balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span className="text-[10px] sm:text-xs text-neutral-400 uppercase tracking-wider font-semibold">Balance</span>
+              <span className="text-xs sm:text-xl font-bold text-emerald-400">${balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
 
             {/* Notification Bell */}
             <div className="relative">
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-1.5 sm:p-2 text-slate-400 hover:text-white transition-colors outline-none"
+                className="relative p-1.5 sm:p-2 text-neutral-400 hover:text-amber-400 transition-colors outline-none"
                 aria-label="Notifications"
                 aria-expanded={showNotifications}
               >
                 <Bell size={18} className="sm:hidden" />
                 <Bell size={20} className="hidden sm:block" />
                 {unreadCount > 0 && (
-                  <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 min-w-[16px] h-[16px] sm:min-w-[18px] sm:h-[18px] bg-red-500 rounded-full border-2 border-slate-900 flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-white">
+                  <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 min-w-[16px] h-[16px] sm:min-w-[18px] sm:h-[18px] bg-red-500 rounded-full border-2 border-[#0A0A0A] flex items-center justify-center text-[9px] sm:text-[10px] font-bold text-white">
                     {unreadCount > 9 ? '9+' : unreadCount}
                   </span>
                 )}
@@ -367,7 +368,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             </div>
 
             {/* Profile Avatar with Rank Frame */}
-            <div className="flex items-center space-x-2 sm:space-x-3 pl-2 sm:pl-4 border-l border-slate-800">
+            <div className="flex items-center space-x-2 sm:space-x-3 pl-2 sm:pl-4 border-l border-amber-500/15">
               {/* sm size on mobile, md on desktop */}
               <ProfileAvatar
                 src={resolveImageUrl(user?.image)}
@@ -381,7 +382,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                 <p className="text-sm font-medium text-white">
                   {user?.firstName} {user?.lastName}
                 </p>
-                <p className="text-xs text-cyan-400 font-medium">
+                <p className="text-xs text-amber-400 font-medium">
                   {rankInfo?.currentRankInfo?.name || 'Starter'}
                 </p>
               </div>

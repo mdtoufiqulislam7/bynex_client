@@ -13,7 +13,7 @@ export default function InvestingInfoPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-[50vh] pt-24 sm:pt-28 bg-slate-950">
+      <main className="min-h-[50vh] pt-24 sm:pt-28 bg-[#050505]">
         <InvestingInfoContent />
       </main>
       <Footer />

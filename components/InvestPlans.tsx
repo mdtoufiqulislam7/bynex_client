@@ -139,7 +139,7 @@ const InvestPlans = () => {
   if (plansLoading || walletLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="animate-spin text-cyan-400" size={48} />
+        <Loader2 className="animate-spin text-amber-400" size={48} />
       </div>
     );
   }
@@ -149,9 +149,9 @@ const InvestPlans = () => {
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-white">Invest & Earn</h2>
-          <p className="text-slate-400 text-xs sm:text-sm">Select a plan to start growing your portfolio today.</p>
+          <p className="text-neutral-400 text-xs sm:text-sm">Select a plan to start growing your portfolio today.</p>
         </div>
-        <div className="flex items-center space-x-2 text-cyan-400 bg-cyan-500/10 px-3 sm:px-4 py-2 rounded-lg w-fit">
+        <div className="flex items-center space-x-2 text-amber-400 bg-amber-500/10 px-3 sm:px-4 py-2 rounded-lg w-fit">
           <DollarSign size={18} />
           <span className="font-bold text-sm sm:text-base">Balance: ${balance.toLocaleString()}</span>
         </div>
@@ -166,59 +166,59 @@ const InvestPlans = () => {
           return (
             <div
               key={plan.id}
-              className={`relative bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border flex flex-col h-full transition-all duration-300 ${
+              className={`relative bg-[#0D0D0D] rounded-xl sm:rounded-2xl p-4 sm:p-6 border flex flex-col h-full transition-all duration-300 ${
                 plan.isPopular
-                  ? 'border-cyan-500 shadow-xl shadow-cyan-500/10'
-                  : 'border-slate-800 hover:border-slate-700'
+                  ? 'border-amber-500 shadow-xl shadow-amber-500/10'
+                  : 'border-neutral-800 hover:border-neutral-800'
               }`}
             >
               {plan.isPopular && (
-                <div className="absolute top-0 right-0 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
+                <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                   Recommended
                 </div>
               )}
 
               <div className="mb-3 sm:mb-4">
-                <h3 className={`text-lg sm:text-xl font-bold mb-1.5 ${plan.isPopular ? 'text-white' : 'text-slate-300'}`}>{plan.name}</h3>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-0.5 rounded-full">
+                <h3 className={`text-lg sm:text-xl font-bold mb-1.5 ${plan.isPopular ? 'text-white' : 'text-neutral-300'}`}>{plan.name}</h3>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
                   <Users size={12} />
                   {investorCount.toLocaleString()} Active Investors
                 </span>
               </div>
 
-              <div className="mb-4 sm:mb-6 text-center bg-slate-950/50 rounded-xl p-3 sm:p-4 border border-slate-800">
+              <div className="mb-4 sm:mb-6 text-center bg-[#050505]/50 rounded-xl p-3 sm:p-4 border border-neutral-800">
                  {plan.approximateRoi ? (
                    <>
-                     <span className="block text-slate-400 text-[10px] sm:text-xs uppercase tracking-wider mb-1">Approximate Return</span>
-                     <span className="text-xl sm:text-2xl font-bold text-cyan-400">{plan.approximateRoi}</span>
+                     <span className="block text-neutral-400 text-[10px] sm:text-xs uppercase tracking-wider mb-1">Approximate Return</span>
+                     <span className="text-xl sm:text-2xl font-bold text-amber-400">{plan.approximateRoi}</span>
                    </>
                  ) : (
                    <>
-                     <span className="block text-slate-400 text-[10px] sm:text-xs uppercase tracking-wider mb-1">{plan.roiType} Return</span>
-                     <span className="text-3xl sm:text-4xl font-bold text-cyan-400">{plan.roi}%</span>
+                     <span className="block text-neutral-400 text-[10px] sm:text-xs uppercase tracking-wider mb-1">{plan.roiType} Return</span>
+                     <span className="text-3xl sm:text-4xl font-bold text-amber-400">{plan.roi}%</span>
                    </>
                  )}
-                 <span className="block text-slate-500 text-xs mt-1">for {plan.duration} {plan.durationType}</span>
+                 <span className="block text-neutral-500 text-xs mt-1">for {plan.duration} {plan.durationType}</span>
               </div>
 
               {/* Breakdown */}
-              <div className="mb-4 sm:mb-6 bg-slate-800/30 rounded-lg p-3 sm:p-4 border border-slate-800/50">
+              <div className="mb-4 sm:mb-6 bg-neutral-900/30 rounded-lg p-3 sm:p-4 border border-neutral-800/50">
                  <div className="flex items-center space-x-2 mb-3">
-                    <Info size={16} className="text-slate-400" />
-                    <span className="text-sm font-semibold text-slate-200">Profit Calculator</span>
+                    <Info size={16} className="text-neutral-400" />
+                    <span className="text-sm font-semibold text-neutral-200">Profit Calculator</span>
                  </div>
                  <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Min. Invest</span>
+                      <span className="text-neutral-400">Min. Invest</span>
                       <span className="text-white font-medium">${plan.minDeposit}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Profit</span>
+                      <span className="text-neutral-400">Profit</span>
                       <span className="text-green-400 font-medium">+${profit.toLocaleString()}</span>
                     </div>
-                     <div className="flex justify-between border-t border-slate-700/50 pt-2 mt-2">
-                      <span className="text-slate-300">Total Return</span>
-                      <span className="text-cyan-400 font-bold">${totalReturn.toLocaleString()}</span>
+                     <div className="flex justify-between border-t border-neutral-800/50 pt-2 mt-2">
+                      <span className="text-neutral-300">Total Return</span>
+                      <span className="text-amber-400 font-bold">${totalReturn.toLocaleString()}</span>
                     </div>
                  </div>
               </div>
@@ -226,7 +226,7 @@ const InvestPlans = () => {
               {plan.features && plan.features.length > 0 && (
                 <div className="space-y-3 mb-8 flex-1">
                   {plan.features.map((feat, i) => (
-                    <div key={i} className="flex items-center text-sm text-slate-400">
+                    <div key={i} className="flex items-center text-sm text-neutral-400">
                       <Check className="w-4 h-4 text-green-500 mr-3 shrink-0" />
                       {feat}
                     </div>
@@ -235,22 +235,22 @@ const InvestPlans = () => {
               )}
 
               <div className="mt-auto">
-                 <div className="text-xs text-center text-slate-500 mb-3">
+                 <div className="text-xs text-center text-neutral-500 mb-3">
                     Deposit Range: ${plan.minDeposit} - ${plan.maxDeposit.toLocaleString()}
                  </div>
                  <button
                    onClick={() => handleChoosePlan(plan.id)}
                    className={`w-full py-3.5 rounded-lg font-bold transition-all ${
                      plan.isPopular
-                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 shadow-lg shadow-cyan-500/20'
-                       : 'bg-slate-800 hover:bg-slate-700 text-white'
+                       ? 'bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/25 shadow-lg shadow-amber-500/20'
+                       : 'bg-neutral-900 hover:bg-neutral-800 text-white'
                    }`}
                  >
                    Choose This Plan
                  </button>
                  <Link
                    href={`/dashboard/plans/${plan.id}`}
-                   className="w-full mt-2 py-2.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-slate-600 transition-all text-sm font-medium flex items-center justify-center gap-2"
+                   className="w-full mt-2 py-2.5 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 transition-all text-sm font-medium flex items-center justify-center gap-2"
                  >
                    <Eye size={14} /> View Details
                  </Link>
@@ -262,43 +262,43 @@ const InvestPlans = () => {
 
       {/* Investment Modal */}
       {showModal && selectedPlanData && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4" onClick={() => !investing && setShowModal(false)}>
-          <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050505]/90 backdrop-blur-sm p-4" onClick={() => !investing && setShowModal(false)}>
+          <div className="max-w-md w-full bg-[#0D0D0D] border border-neutral-800 rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6 border-b border-neutral-800">
               <h3 className="text-white font-bold text-xl">Invest in {selectedPlanData.name}</h3>
-              <p className="text-slate-400 text-sm mt-1">{selectedPlanData.approximateRoi || `${selectedPlanData.roi}% ${selectedPlanData.roiType} ROI`}</p>
+              <p className="text-neutral-400 text-sm mt-1">{selectedPlanData.approximateRoi || `${selectedPlanData.roi}% ${selectedPlanData.roiType} ROI`}</p>
             </div>
 
             <div className="p-6 space-y-6">
               {/* Balance Display */}
-              <div className="bg-slate-950/50 rounded-lg p-4 border border-slate-800">
-                <p className="text-slate-400 text-xs mb-1">Available Balance</p>
+              <div className="bg-[#050505]/50 rounded-lg p-4 border border-neutral-800">
+                <p className="text-neutral-400 text-xs mb-1">Available Balance</p>
                 <p className="text-2xl font-bold text-white">${balance.toLocaleString()}</p>
               </div>
 
               {/* Amount Input */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Investment Amount</label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Investment Amount</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 font-bold">$</span>
                   <input
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="w-full bg-[#050505] border border-neutral-800 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
                     disabled={investing}
                   />
                   <button
                     type="button"
                     onClick={() => setAmount(Math.min(balance, selectedPlanData.maxDeposit).toString())}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-slate-800 text-cyan-400 px-2 py-1 rounded hover:bg-slate-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-neutral-900 text-amber-400 px-2 py-1 rounded hover:bg-neutral-800"
                     disabled={investing}
                   >
                     MAX
                   </button>
                 </div>
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-neutral-400 mt-2">
                   Min: ${selectedPlanData.minDeposit} | Max: ${selectedPlanData.maxDeposit.toLocaleString()}
                 </p>
               </div>
@@ -313,16 +313,16 @@ const InvestPlans = () => {
                       return (
                         <>
                           <div className="flex justify-between">
-                            <span className="text-slate-400">Total Profit:</span>
+                            <span className="text-neutral-400">Total Profit:</span>
                             <span className="text-emerald-400 font-bold">+${calc.profit.toFixed(2)}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-slate-400">Daily Profit:</span>
-                            <span className="text-slate-300">~${calc.daily.toFixed(2)}</span>
+                            <span className="text-neutral-400">Daily Profit:</span>
+                            <span className="text-neutral-300">~${calc.daily.toFixed(2)}</span>
                           </div>
                           <div className="flex justify-between border-t border-emerald-500/20 pt-2 mt-2">
                             <span className="text-white font-medium">Total Return:</span>
-                            <span className="text-cyan-400 font-bold">${calc.totalReturn.toFixed(2)}</span>
+                            <span className="text-amber-400 font-bold">${calc.totalReturn.toFixed(2)}</span>
                           </div>
                         </>
                       );
@@ -354,7 +354,7 @@ const InvestPlans = () => {
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="flex-1 py-3 rounded-lg border border-slate-700 text-white hover:bg-slate-800 transition-colors"
+                  className="flex-1 py-3 rounded-lg border border-neutral-800 text-white hover:bg-neutral-900 transition-colors"
                   disabled={investing}
                 >
                   Cancel
@@ -362,7 +362,7 @@ const InvestPlans = () => {
                 <button
                   onClick={handleInvest}
                   disabled={investing || !amount || parseFloat(amount) < selectedPlanData.minDeposit}
-                  className="flex-1 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex-1 py-3 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/25 font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {investing ? (
                     <>

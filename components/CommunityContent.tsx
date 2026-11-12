@@ -28,7 +28,7 @@ import {
 } from 'lucide-react';
 
 const REACTION_CONFIG = [
-  { type: 'like' as const, emoji: '👍', label: 'Like', activeColor: 'text-blue-400 bg-blue-500/10 border-blue-500/30' },
+  { type: 'like' as const, emoji: '👍', label: 'Like', activeColor: 'text-amber-400 bg-amber-500/10 border-amber-500/30' },
   { type: 'love' as const, emoji: '❤️', label: 'Love', activeColor: 'text-rose-400 bg-rose-500/10 border-rose-500/30' },
   { type: 'fire' as const, emoji: '🔥', label: 'Fire', activeColor: 'text-amber-400 bg-amber-500/10 border-amber-500/30' },
   { type: 'rocket' as const, emoji: '🚀', label: 'Rocket', activeColor: 'text-purple-400 bg-purple-500/10 border-purple-500/30' },
@@ -236,33 +236,33 @@ export default function CommunityContent() {
   return (
     <div className="relative min-h-screen bg-[#12151c] text-white">
       {/* Background radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-cyan-500/10 via-blue-600/5 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-96 bg-gradient-to-b from-amber-500/10 via-yellow-500/5 to-transparent blur-3xl pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
         {/* —— Hero Header —— */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-slate-900/80 border border-cyan-500/30 rounded-full px-4 py-1.5 shadow-lg shadow-cyan-500/10">
-            <Sparkles className="text-cyan-400 w-4 h-4" />
-            <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-cyan-300">
+          <div className="inline-flex items-center gap-2 bg-[#0D0D0D]/80 border border-amber-500/30 rounded-full px-4 py-1.5 shadow-lg shadow-amber-500/10">
+            <Sparkles className="text-amber-400 w-4 h-4" />
+            <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-amber-300">
               Live Investor Feed • 1,000+ Active Posts
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
             Global Trader{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500">
               Community
             </span>
           </h1>
 
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
             Real-time milestone discussions, daily profit updates, live trading session inquiries, and deposit support across 80+ countries.
           </p>
 
           {/* Quick Stats Pill */}
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-neutral-400">
             <div className="flex items-center gap-1.5">
-              <Globe2 className="w-4 h-4 text-cyan-400" />
+              <Globe2 className="w-4 h-4 text-amber-400" />
               <span>Worldwide Members (USA, India, GCC, Asia)</span>
             </div>
             <div className="flex items-center gap-1.5">
@@ -277,11 +277,11 @@ export default function CommunityContent() {
         </div>
 
         {/* —— Create Post Box / Guest Callout —— */}
-        <div className="bg-[#1b202c]/90 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-2xl backdrop-blur-sm">
+        <div className="bg-[#1b202c]/90 border border-neutral-800 rounded-2xl p-5 sm:p-6 shadow-2xl backdrop-blur-sm">
           {isAuthenticated ? (
             <form onSubmit={handleCreatePost} className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm shrink-0 border border-cyan-400/40">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-black font-bold text-sm shrink-0 border border-amber-400/40">
                   {user?.firstName?.[0] || 'U'}{user?.lastName?.[0] || ''}
                 </div>
                 <div className="flex-1 space-y-2">
@@ -290,7 +290,7 @@ export default function CommunityContent() {
                     value={postContent}
                     onChange={(e) => setPostContent(e.target.value)}
                     placeholder="Share your profit update, ask about running live sessions, or share deposit experience..."
-                    className="w-full bg-[#12151c] border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors resize-none"
+                    className="w-full bg-[#12151c] border border-neutral-800/80 rounded-xl px-4 py-3 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors resize-none"
                     maxLength={3000}
                   />
 
@@ -298,7 +298,7 @@ export default function CommunityContent() {
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                     {/* Tag quick toggles */}
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="text-xs text-slate-500 font-medium mr-1">Tags:</span>
+                      <span className="text-xs text-neutral-500 font-medium mr-1">Tags:</span>
                       {['#Profit', '#Investment', '#LiveSession', '#India', '#Bangladesh'].map((tag) => {
                         const active = selectedTags.includes(tag);
                         return (
@@ -308,8 +308,8 @@ export default function CommunityContent() {
                             onClick={() => togglePostTag(tag)}
                             className={`text-xs px-2.5 py-1 rounded-full border transition-all ${
                               active
-                                ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 font-semibold'
-                                : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
+                                ? 'bg-amber-500/20 border-amber-400 text-amber-300 font-semibold'
+                                : 'bg-[#0D0D0D] border-neutral-800 text-neutral-400 hover:text-neutral-200'
                             }`}
                           >
                             {tag}
@@ -320,14 +320,14 @@ export default function CommunityContent() {
 
                     {/* Country Selector */}
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-slate-500 font-medium">Flag:</span>
+                      <span className="text-xs text-neutral-500 font-medium">Flag:</span>
                       <select
                         value={selectedCountry.code}
                         onChange={(e) => {
                           const found = QUICK_COUNTRIES.find((c) => c.code === e.target.value);
                           if (found) setSelectedCountry(found);
                         }}
-                        className="bg-slate-900 border border-slate-700 text-xs text-white rounded-lg px-2.5 py-1 focus:outline-none focus:border-cyan-500"
+                        className="bg-[#0D0D0D] border border-neutral-800 text-xs text-white rounded-lg px-2.5 py-1 focus:outline-none focus:border-amber-500"
                       >
                         {QUICK_COUNTRIES.map((c) => (
                           <option key={c.code} value={c.code}>
@@ -341,14 +341,14 @@ export default function CommunityContent() {
               </div>
 
               {/* Action row */}
-              <div className="flex items-center justify-between pt-2 border-t border-slate-800">
-                <span className="text-xs text-slate-500">
+              <div className="flex items-center justify-between pt-2 border-t border-neutral-800">
+                <span className="text-xs text-neutral-500">
                   {postContent.length}/3000 characters
                 </span>
                 <button
                   type="submit"
                   disabled={isSubmittingPost || !postContent.trim()}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 text-white font-bold text-sm px-5 py-2.5 rounded-full shadow-lg shadow-cyan-500/25 transition-all"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 disabled:opacity-50 text-black font-bold text-sm px-5 py-2.5 rounded-full shadow-lg shadow-amber-500/25 transition-all"
                 >
                   {isSubmittingPost ? (
                     <>
@@ -375,24 +375,24 @@ export default function CommunityContent() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-2 text-center sm:text-left">
               <div className="space-y-1">
                 <h3 className="text-base sm:text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-2">
-                  <MessageSquare className="w-5 h-5 text-cyan-400" />
+                  <MessageSquare className="w-5 h-5 text-amber-400" />
                   Join the Bynex Global Conversation
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400">
+                <p className="text-xs sm:text-sm text-neutral-400">
                   Anyone can read posts freely. Log in or create an account to share profit achievements, ask live trading questions, and react with emojis.
                 </p>
               </div>
               <div className="flex items-center gap-2.5 shrink-0">
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-700 hover:border-slate-500 text-white text-xs sm:text-sm font-semibold hover:bg-slate-800/80 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-neutral-800 hover:border-neutral-500 text-white text-xs sm:text-sm font-semibold hover:bg-neutral-900/80 transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   Log In
                 </Link>
                 <Link
                   href="/register"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs sm:text-sm font-bold shadow-lg shadow-cyan-500/25 hover:scale-105 transition-transform"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-xs sm:text-sm font-bold shadow-lg shadow-amber-500/25 hover:scale-105 transition-transform"
                 >
                   <UserPlus className="w-4 h-4" />
                   Register
@@ -417,8 +417,8 @@ export default function CommunityContent() {
                   }}
                   className={`text-xs sm:text-sm px-3.5 py-1.5 rounded-full whitespace-nowrap transition-all border font-medium ${
                     active
-                      ? 'bg-cyan-500 text-slate-950 border-cyan-400 font-bold shadow-md shadow-cyan-500/20'
-                      : 'bg-[#1b202c] text-slate-300 border-slate-800 hover:border-slate-700'
+                      ? 'bg-amber-500 text-neutral-950 border-amber-400 font-bold shadow-md shadow-amber-500/20'
+                      : 'bg-[#1b202c] text-neutral-300 border-neutral-800 hover:border-neutral-800'
                   }`}
                 >
                   {tag}
@@ -429,7 +429,7 @@ export default function CommunityContent() {
 
           {/* Search box */}
           <div className="relative min-w-[240px]">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
             <input
               type="text"
               value={searchQuery}
@@ -438,12 +438,12 @@ export default function CommunityContent() {
                 setPage(1);
               }}
               placeholder="Search posts, users, or country..."
-              className="w-full bg-[#1b202c] border border-slate-800 rounded-full pl-9 pr-4 py-2 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="w-full bg-[#1b202c] border border-neutral-800 rounded-full pl-9 pr-4 py-2 text-xs sm:text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-amber-500 transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -453,8 +453,8 @@ export default function CommunityContent() {
 
         {/* Loading Spinner */}
         {isLoading && (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-500 space-y-3">
-            <Loader2 className="w-8 h-8 animate-spin text-cyan-400" />
+          <div className="flex flex-col items-center justify-center py-20 text-neutral-500 space-y-3">
+            <Loader2 className="w-8 h-8 animate-spin text-amber-400" />
             <p className="text-sm font-medium">Loading community feed from Redis...</p>
           </div>
         )}
@@ -462,8 +462,8 @@ export default function CommunityContent() {
         {/* —— Community Post Cards Feed —— */}
         <div className="space-y-4">
           {!isLoading && posts.length === 0 && (
-            <div className="bg-[#1b202c] border border-slate-800 rounded-2xl p-12 text-center text-slate-400 space-y-2">
-              <MessageSquare className="w-8 h-8 mx-auto text-slate-600 mb-2" />
+            <div className="bg-[#1b202c] border border-neutral-800 rounded-2xl p-12 text-center text-neutral-400 space-y-2">
+              <MessageSquare className="w-8 h-8 mx-auto text-neutral-600 mb-2" />
               <p className="font-semibold text-white">No community posts found</p>
               <p className="text-sm">Try selecting a different filter or clearing your search term.</p>
             </div>
@@ -476,7 +476,7 @@ export default function CommunityContent() {
             return (
               <article
                 key={post.id}
-                className="bg-[#1b202c] border border-slate-800/90 rounded-2xl p-5 sm:p-6 hover:border-slate-700/80 transition-all shadow-xl"
+                className="bg-[#1b202c] border border-neutral-800/90 rounded-2xl p-5 sm:p-6 hover:border-neutral-800/80 transition-all shadow-xl"
               >
                 {/* Author row */}
                 <div className="flex items-center justify-between gap-3 mb-3">
@@ -484,7 +484,7 @@ export default function CommunityContent() {
                     <img
                       src={post.author.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${post.author.name}`}
                       alt={post.author.name}
-                      className="w-10 h-10 rounded-full object-cover bg-slate-800 border border-slate-700"
+                      className="w-10 h-10 rounded-full object-cover bg-neutral-900 border border-neutral-800"
                       onError={(e) => {
                         (e.target as HTMLElement).style.display = 'none';
                       }}
@@ -495,18 +495,18 @@ export default function CommunityContent() {
                           {post.author.name}
                         </span>
                         {!post.isSeed && (
-                          <span className="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[10px] font-semibold px-1.5 py-0.2 rounded">
+                          <span className="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-semibold px-1.5 py-0.2 rounded">
                             Verified Investor
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
+                      <div className="flex items-center gap-2 text-xs text-neutral-400 mt-0.5">
                         <span className="flex items-center gap-1">
                           <span>{post.author.countryFlag || '🌐'}</span>
                           <span>{post.author.country}</span>
                         </span>
                         <span>•</span>
-                        <span className="text-slate-500 font-mono text-[11px]">
+                        <span className="text-neutral-500 font-mono text-[11px]">
                           {getPostDisplayTime(post)}
                         </span>
                       </div>
@@ -520,7 +520,7 @@ export default function CommunityContent() {
                 </div>
 
                 {/* Content body */}
-                <div className="text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-wrap break-words py-1">
+                <div className="text-neutral-200 text-sm sm:text-base leading-relaxed whitespace-pre-wrap break-words py-1">
                   {post.content}
                 </div>
 
@@ -534,7 +534,7 @@ export default function CommunityContent() {
                           setSelectedTag(tag);
                           setPage(1);
                         }}
-                        className="text-xs text-cyan-400/90 hover:text-cyan-300 font-mono cursor-pointer hover:underline"
+                        className="text-xs text-amber-400/90 hover:text-amber-300 font-mono cursor-pointer hover:underline"
                       >
                         {tag.startsWith('#') ? tag : `#${tag}`}
                       </span>
@@ -543,7 +543,7 @@ export default function CommunityContent() {
                 )}
 
                 {/* Reactions and Likes Action Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/80">
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-neutral-800/80">
                   <div className="flex flex-wrap items-center gap-1.5">
                     {REACTION_CONFIG.map(({ type, emoji, label, activeColor }) => {
                       const isSelected = userReaction === type;
@@ -558,7 +558,7 @@ export default function CommunityContent() {
                           className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
                             isSelected
                               ? activeColor
-                              : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+                              : 'bg-[#0D0D0D]/80 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-800'
                           }`}
                         >
                           <span className="text-sm leading-none">{emoji}</span>
@@ -568,7 +568,7 @@ export default function CommunityContent() {
                     })}
                   </div>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-500 font-mono">
+                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
                     <span>{totalReactions} total reactions</span>
                   </div>
                 </div>
@@ -583,17 +583,17 @@ export default function CommunityContent() {
             <button
               disabled={page <= 1 || isFetching}
               onClick={() => setPage((p) => Math.max(1, p - 1))}
-              className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-sm font-semibold text-slate-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 rounded-lg bg-[#0D0D0D] border border-neutral-800 text-sm font-semibold text-neutral-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Previous
             </button>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-neutral-400">
               Page {page} of {totalPages} ({totalResults.toLocaleString()} posts)
             </span>
             <button
               disabled={page >= totalPages || isFetching}
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-sm font-semibold text-slate-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 rounded-lg bg-[#0D0D0D] border border-neutral-800 text-sm font-semibold text-neutral-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               Next
             </button>
@@ -604,21 +604,21 @@ export default function CommunityContent() {
       {/* —— Login Required Modal —— */}
       {authModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-[#1b202c] border border-slate-700 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5 text-center relative animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-[#1b202c] border border-neutral-800 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5 text-center relative animate-in fade-in zoom-in-95 duration-200">
             <button
               onClick={() => setAuthModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto shadow-lg shadow-cyan-500/10">
+            <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center mx-auto shadow-lg shadow-amber-500/10">
               <Lock className="w-7 h-7" />
             </div>
 
             <div className="space-y-2">
               <h3 className="text-xl font-serif font-bold text-white">Authentication Required</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-neutral-400 leading-relaxed">
                 {authModalReason === 'react'
                   ? 'Please log in to like and react to posts in the Bynex Markets community.'
                   : 'Please log in to publish posts and interact with global investors.'}
@@ -628,14 +628,14 @@ export default function CommunityContent() {
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
               <Link
                 href="/login"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-black font-bold text-sm shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all"
               >
                 <LogIn className="w-4 h-4" />
                 Sign In Now
               </Link>
               <Link
                 href="/register"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full border border-slate-700 text-slate-300 hover:text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full border border-neutral-800 text-neutral-300 hover:text-white text-sm font-semibold hover:bg-neutral-900 transition-colors"
               >
                 <UserPlus className="w-4 h-4" />
                 Create Account

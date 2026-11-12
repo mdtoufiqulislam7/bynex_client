@@ -29,7 +29,7 @@ export const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration =
       case 'warning':
         return <AlertCircle className="w-6 h-6 text-amber-500" />;
       case 'info':
-        return <Info className="w-6 h-6 text-blue-500" />;
+        return <Info className="w-6 h-6 text-amber-500" />;
     }
   };
 
@@ -42,7 +42,7 @@ export const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration =
       case 'warning':
         return 'bg-amber-500/10 border-amber-500/50 text-amber-400';
       case 'info':
-        return 'bg-blue-500/10 border-blue-500/50 text-blue-400';
+        return 'bg-amber-500/10 border-amber-500/50 text-amber-400';
     }
   };
 
@@ -59,7 +59,7 @@ export const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration =
       <div className="flex-1 text-sm font-medium text-white">{message}</div>
       <button
         type="button"
-        className="flex-shrink-0 rounded-lg p-1.5 hover:bg-white/10 transition-colors text-slate-400 hover:text-white"
+        className="flex-shrink-0 rounded-lg p-1.5 hover:bg-white/10 transition-colors text-neutral-400 hover:text-white"
         onClick={onClose}
       >
         <X className="w-4 h-4" />

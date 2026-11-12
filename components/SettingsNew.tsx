@@ -363,12 +363,12 @@ export default function SettingsNew() {
 
       <div>
         <h1 className="text-xl sm:text-2xl font-bold text-white">Settings</h1>
-        <p className="text-slate-400 text-xs sm:text-sm mt-1">Manage your account settings and preferences</p>
+        <p className="text-neutral-400 text-xs sm:text-sm mt-1">Manage your account settings and preferences</p>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl overflow-hidden">
         {/* Tabs */}
-        <div className="flex border-b border-slate-800 overflow-x-auto">
+        <div className="flex border-b border-neutral-800 overflow-x-auto">
           {[
             { key: 'profile', label: 'Profile', icon: User },
             { key: 'security', label: 'Security', icon: Lock },
@@ -380,8 +380,8 @@ export default function SettingsNew() {
               onClick={() => setActiveTab(tab.key as any)}
               className={`flex-1 min-w-0 py-3 sm:py-4 text-xs sm:text-sm font-medium flex items-center justify-center gap-1 sm:gap-2 border-b-2 transition-colors whitespace-nowrap ${
                 activeTab === tab.key
-                  ? 'border-cyan-500 text-white'
-                  : 'border-transparent text-slate-400 hover:text-white'
+                  ? 'border-amber-500 text-white'
+                  : 'border-transparent text-neutral-400 hover:text-white'
               }`}
             >
               <tab.icon size={16} /> <span className="hidden sm:inline">{tab.label}</span><span className="sm:hidden">{tab.label}</span>
@@ -424,7 +424,7 @@ export default function SettingsNew() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={isUploading || isDeleting}
-                    className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-500/20 disabled:bg-neutral-600 text-black px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                   >
                     <Upload size={16} /> Upload Image
                   </button>
@@ -434,19 +434,19 @@ export default function SettingsNew() {
                       type="button"
                       onClick={handleImageDelete}
                       disabled={isUploading || isDeleting}
-                      className="flex items-center gap-2 bg-rose-500/10 hover:bg-rose-500/20 disabled:bg-slate-800 text-rose-400 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="flex items-center gap-2 bg-rose-500/10 hover:bg-rose-500/20 disabled:bg-neutral-900 text-rose-400 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       <Trash2 size={16} /> Delete
                     </button>
                   )}
 
-                  <p className="text-xs text-slate-500">Max 5MB, JPG/PNG</p>
+                  <p className="text-xs text-neutral-500">Max 5MB, JPG/PNG</p>
                 </div>
               </div>
 
               {/* ── Rank Badge Card ─────────────────────────────────────── */}
               {rankInfo && (
-                <div className="bg-slate-950/60 border border-slate-700 rounded-xl p-4 space-y-4">
+                <div className="bg-[#050505]/60 border border-neutral-800 rounded-xl p-4 space-y-4">
                   <div className="flex items-center justify-between flex-wrap gap-3">
                     {/* Left: badge + rank info */}
                     <div className="flex items-center gap-4">
@@ -458,10 +458,10 @@ export default function SettingsNew() {
                         />
                       </div>
                       <div>
-                        <p className="text-xs text-slate-400 uppercase tracking-wider">Current Rank</p>
+                        <p className="text-xs text-neutral-400 uppercase tracking-wider">Current Rank</p>
                         <p className="text-lg font-bold text-white">{rankInfo.currentRankInfo.name}</p>
                         {rankInfo.currentRankInfo.monthlySalary > 0 && (
-                          <p className="text-xs text-cyan-400">
+                          <p className="text-xs text-amber-400">
                             Monthly Salary: <span className="font-semibold">${rankInfo.currentRankInfo.monthlySalary}</span>
                           </p>
                         )}
@@ -478,7 +478,7 @@ export default function SettingsNew() {
                       type="button"
                       onClick={handleCheckRankUpgrade}
                       disabled={isCheckingUpgrade || rankInfo.currentRank >= 7}
-                      className="flex items-center gap-2 bg-cyan-500/10 hover:bg-cyan-500/20 disabled:opacity-40 text-cyan-400 border border-cyan-500/30 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="flex items-center gap-2 bg-amber-500/10 hover:bg-amber-500/20 disabled:opacity-40 text-amber-400 border border-amber-500/30 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                     >
                       <Star size={14} />
                       {rankInfo.currentRank >= 7 ? 'Max Rank' : isCheckingUpgrade ? 'Checking…' : 'Check Upgrade'}
@@ -487,22 +487,22 @@ export default function SettingsNew() {
 
                   {/* Progress toward next rank */}
                   {rankInfo.nextRankInfo && rankInfo.progress && (
-                    <div className="space-y-3 pt-3 border-t border-slate-700">
-                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                    <div className="space-y-3 pt-3 border-t border-neutral-800">
+                      <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">
                         Progress to {rankInfo.nextRankInfo.name}
                       </p>
 
                       {/* Business Volume */}
                       <div>
                         <div className="flex justify-between text-xs mb-1">
-                          <span className="text-slate-400">Business Volume</span>
+                          <span className="text-neutral-400">Business Volume</span>
                           <span className="text-white">
                             ${rankInfo.progress.businessVolume.current.toLocaleString()} / ${rankInfo.progress.businessVolume.required.toLocaleString()}
                           </span>
                         </div>
-                        <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-neutral-900 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-cyan-500 rounded-full transition-all"
+                            className="h-full bg-amber-500 rounded-full transition-all"
                             style={{ width: `${rankInfo.progress.businessVolume.percentage}%` }}
                           />
                         </div>
@@ -511,14 +511,14 @@ export default function SettingsNew() {
                       {/* Direct Referrals */}
                       <div>
                         <div className="flex justify-between text-xs mb-1">
-                          <span className="text-slate-400">Direct Referrals</span>
+                          <span className="text-neutral-400">Direct Referrals</span>
                           <span className="text-white">
                             {rankInfo.progress.directReferrals.current} / {rankInfo.progress.directReferrals.required}
                           </span>
                         </div>
-                        <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-neutral-900 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-blue-500 rounded-full transition-all"
+                            className="h-full bg-amber-500 rounded-full transition-all"
                             style={{ width: `${rankInfo.progress.directReferrals.percentage}%` }}
                           />
                         </div>
@@ -527,12 +527,12 @@ export default function SettingsNew() {
                       {/* Personal Investment */}
                       <div>
                         <div className="flex justify-between text-xs mb-1">
-                          <span className="text-slate-400">Personal Investment</span>
+                          <span className="text-neutral-400">Personal Investment</span>
                           <span className="text-white">
                             ${rankInfo.progress.personalInvestment.current.toLocaleString()} / ${rankInfo.progress.personalInvestment.required.toLocaleString()}
                           </span>
                         </div>
-                        <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-neutral-900 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-emerald-500 rounded-full transition-all"
                             style={{ width: `${rankInfo.progress.personalInvestment.percentage}%` }}
@@ -541,16 +541,16 @@ export default function SettingsNew() {
                       </div>
 
                       {/* Next rank badge */}
-                      <div className="flex items-center gap-3 mt-2 bg-slate-900/50 rounded-lg p-3">
+                      <div className="flex items-center gap-3 mt-2 bg-[#0D0D0D]/50 rounded-lg p-3">
                         <img
                           src={resolveImageUrl(rankInfo.nextRankInfo.badgeImage) || ''}
                           alt={rankInfo.nextRankInfo.name}
                           className="w-8 h-8 object-contain opacity-60"
                         />
-                        <div className="text-xs text-slate-400">
+                        <div className="text-xs text-neutral-400">
                           Next: <span className="text-white font-semibold">{rankInfo.nextRankInfo.name}</span>
                           {rankInfo.nextRankInfo.bonus && (
-                            <span className="text-cyan-400"> · {rankInfo.nextRankInfo.bonus}</span>
+                            <span className="text-amber-400"> · {rankInfo.nextRankInfo.bonus}</span>
                           )}
                         </div>
                       </div>
@@ -559,7 +559,7 @@ export default function SettingsNew() {
 
                   {/* Salary earned so far */}
                   {rankInfo.totalSalaryEarned > 0 && (
-                    <p className="text-xs text-slate-500 pt-1 border-t border-slate-800">
+                    <p className="text-xs text-neutral-500 pt-1 border-t border-neutral-800">
                       Total salary earned: <span className="text-white font-medium">${rankInfo.totalSalaryEarned.toLocaleString()}</span>
                     </p>
                   )}
@@ -569,30 +569,30 @@ export default function SettingsNew() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">First Name</label>
+                  <label className="block text-sm font-medium text-neutral-300 mb-2">First Name</label>
                   <input
                     type="text"
                     value={profileForm.firstName}
                     onChange={(e) => setProfileForm({ ...profileForm, firstName: e.target.value })}
-                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 cursor-text"
+                    className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 cursor-text"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+                  <label className="block text-sm font-medium text-neutral-300 mb-2">Last Name</label>
                   <input
                     type="text"
                     value={profileForm.lastName}
                     onChange={(e) => setProfileForm({ ...profileForm, lastName: e.target.value })}
-                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 cursor-text"
+                    className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 cursor-text"
                   />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                  <label className="block text-sm font-medium text-neutral-300 mb-2">Email</label>
                   <input
                     type="email"
                     value={profileForm.email}
                     disabled
-                    className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-slate-500 cursor-not-allowed"
+                    className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-neutral-500 cursor-not-allowed"
                   />
                 </div>
               </div>
@@ -600,7 +600,7 @@ export default function SettingsNew() {
               <button
                 type="submit"
                 disabled={isUpdating}
-                className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-500/20 disabled:bg-neutral-600 text-black px-6 py-3 rounded-lg font-medium transition-colors"
               >
                 {isUpdating ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 {isUpdating ? 'Saving...' : 'Save Changes'}
@@ -625,33 +625,33 @@ export default function SettingsNew() {
           {activeTab === 'security' && (
             <form onSubmit={handlePasswordUpdate} className="space-y-6 max-w-lg">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Current Password</label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Current Password</label>
                 <input
                   type="password"
                   value={passwordForm.oldPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, oldPassword: e.target.value })}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">New Password</label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">New Password</label>
                 <input
                   type="password"
                   value={passwordForm.newPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                   required
                   minLength={8}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Confirm New Password</label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Confirm New Password</label>
                 <input
                   type="password"
                   value={passwordForm.confirmPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                   required
                 />
               </div>
@@ -659,7 +659,7 @@ export default function SettingsNew() {
               <button
                 type="submit"
                 disabled={isChangingPassword}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-500/20 disabled:bg-neutral-600 text-black px-6 py-3 rounded-lg font-medium transition-colors"
               >
                 {isChangingPassword ? <Loader2 size={18} className="animate-spin" /> : <Lock size={18} />}
                 {isChangingPassword ? 'Updating...' : 'Update Password'}
@@ -673,11 +673,11 @@ export default function SettingsNew() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <h3 className="text-base sm:text-lg font-semibold text-white">Saved Withdrawal Accounts</h3>
-                  <p className="text-xs sm:text-sm text-slate-400">Manage your saved wallets and bank accounts</p>
+                  <p className="text-xs sm:text-sm text-neutral-400">Manage your saved wallets and bank accounts</p>
                 </div>
                 <button
                   onClick={handleOpenAddModal}
-                  className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors w-fit"
+                  className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-500/20 text-black px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors w-fit"
                 >
                   <Plus size={16} /> Add Account
                 </button>
@@ -685,10 +685,10 @@ export default function SettingsNew() {
 
               {loadingAccounts ? (
                 <div className="flex items-center justify-center py-12">
-                  <Loader2 className="animate-spin text-cyan-400" size={32} />
+                  <Loader2 className="animate-spin text-amber-400" size={32} />
                 </div>
               ) : savedAccounts.length === 0 ? (
-                <div className="text-center py-12 text-slate-400">
+                <div className="text-center py-12 text-neutral-400">
                   <CreditCard size={48} className="mx-auto mb-4 opacity-50" />
                   <p className="text-lg font-medium">No saved accounts yet</p>
                   <p className="text-sm mt-1">Add a wallet or bank account for faster withdrawals</p>
@@ -698,21 +698,21 @@ export default function SettingsNew() {
                   {savedAccounts.map((account: SavedAccount) => (
                     <div
                       key={account.id}
-                      className="bg-slate-950/50 border border-slate-700 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                      className="bg-[#050505]/50 border border-neutral-800 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                     >
                       <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                        <div className={`p-2.5 sm:p-3 rounded-full flex-shrink-0 ${account.accountType === 'crypto' ? 'bg-amber-500/10 text-amber-500' : 'bg-blue-500/10 text-blue-500'}`}>
+                        <div className={`p-2.5 sm:p-3 rounded-full flex-shrink-0 ${account.accountType === 'crypto' ? 'bg-amber-500/10 text-amber-500' : 'bg-amber-500/10 text-amber-500'}`}>
                           {account.accountType === 'crypto' ? <Wallet size={18} /> : <CreditCard size={18} />}
                         </div>
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                             <span className="text-white font-medium text-sm">{account.label}</span>
                             {account.isDefault && (
-                              <span className="bg-cyan-500/20 text-cyan-400 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-medium">Default</span>
+                              <span className="bg-amber-500/20 text-amber-400 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-medium">Default</span>
                             )}
-                            <span className="bg-slate-800 text-slate-400 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full capitalize">{account.accountType}</span>
+                            <span className="bg-neutral-900 text-neutral-400 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full capitalize">{account.accountType}</span>
                           </div>
-                          <p className="text-xs sm:text-sm text-slate-400 mt-0.5 truncate">
+                          <p className="text-xs sm:text-sm text-neutral-400 mt-0.5 truncate">
                             {account.accountType === 'crypto'
                               ? `${account.currency || ''} ${account.network ? `(${account.network})` : ''} — ${account.walletAddress ? account.walletAddress.slice(0, 8) + '...' + account.walletAddress.slice(-6) : ''}`
                               : `${account.bankDetails?.bankName || ''} — ****${account.bankDetails?.accountNumber?.slice(-4) || ''} (${account.bankDetails?.accountName || ''})`
@@ -724,7 +724,7 @@ export default function SettingsNew() {
                         {!account.isDefault && (
                           <button
                             onClick={() => handleSetDefault(account.id)}
-                            className="text-slate-400 hover:text-cyan-400 p-2 rounded-lg hover:bg-slate-800 transition-colors"
+                            className="text-neutral-400 hover:text-amber-400 p-2 rounded-lg hover:bg-neutral-900 transition-colors"
                             title="Set as default"
                           >
                             <Star size={16} />
@@ -732,14 +732,14 @@ export default function SettingsNew() {
                         )}
                         <button
                           onClick={() => handleOpenEditModal(account)}
-                          className="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition-colors"
+                          className="text-neutral-400 hover:text-white p-2 rounded-lg hover:bg-neutral-900 transition-colors"
                           title="Edit"
                         >
                           <Edit3 size={16} />
                         </button>
                         <button
                           onClick={() => handleDeleteAccount(account.id)}
-                          className="text-slate-400 hover:text-rose-400 p-2 rounded-lg hover:bg-slate-800 transition-colors"
+                          className="text-neutral-400 hover:text-rose-400 p-2 rounded-lg hover:bg-neutral-900 transition-colors"
                           title="Delete"
                         >
                           <Trash2 size={16} />
@@ -752,8 +752,8 @@ export default function SettingsNew() {
 
               {/* Add/Edit Account Modal */}
               {showAddAccountModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050505]/80 backdrop-blur-sm">
+                  <div className="bg-[#0D0D0D] border border-neutral-800 rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
                     <h3 className="text-xl font-bold text-white mb-4">
                       {editingAccount ? 'Edit Account' : 'Add Withdrawal Account'}
                     </h3>
@@ -761,11 +761,11 @@ export default function SettingsNew() {
                       {/* Account Type (only for new) */}
                       {!editingAccount && (
                         <div>
-                          <label className="block text-sm font-medium text-slate-300 mb-2">Account Type</label>
+                          <label className="block text-sm font-medium text-neutral-300 mb-2">Account Type</label>
                           <select
                             value={accountForm.accountType}
                             onChange={(e) => setAccountForm({ ...accountForm, accountType: e.target.value as any })}
-                            className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                            className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                           >
                             <option value="crypto">Crypto Wallet</option>
                             <option value="bank">Bank Account</option>
@@ -776,13 +776,13 @@ export default function SettingsNew() {
 
                       {/* Label */}
                       <div>
-                        <label className="block text-sm font-medium text-slate-300 mb-2">Label</label>
+                        <label className="block text-sm font-medium text-neutral-300 mb-2">Label</label>
                         <input
                           type="text"
                           value={accountForm.label}
                           onChange={(e) => setAccountForm({ ...accountForm, label: e.target.value })}
                           placeholder="e.g. My Bitcoin Wallet"
-                          className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                          className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                           required
                           maxLength={50}
                         />
@@ -792,34 +792,34 @@ export default function SettingsNew() {
                       {accountForm.accountType === 'crypto' && (
                         <>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Currency</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Currency</label>
                             <input
                               type="text"
                               value={accountForm.currency}
                               onChange={(e) => setAccountForm({ ...accountForm, currency: e.target.value })}
                               placeholder="e.g. BTC, USDT, ETH"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                               required
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Network (optional)</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Network (optional)</label>
                             <input
                               type="text"
                               value={accountForm.network}
                               onChange={(e) => setAccountForm({ ...accountForm, network: e.target.value })}
                               placeholder="e.g. ERC-20, TRC-20, BEP-20"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Wallet Address</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Wallet Address</label>
                             <input
                               type="text"
                               value={accountForm.walletAddress}
                               onChange={(e) => setAccountForm({ ...accountForm, walletAddress: e.target.value })}
                               placeholder="Enter wallet address"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 font-mono text-sm"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 font-mono text-sm"
                               required
                             />
                           </div>
@@ -830,80 +830,80 @@ export default function SettingsNew() {
                       {accountForm.accountType === 'bank' && (
                         <>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Bank Name</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Bank Name</label>
                             <input
                               type="text"
                               value={accountForm.bankDetails.bankName}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, bankName: e.target.value } })}
                               placeholder="Enter bank name"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                               required
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Account Number</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Account Number</label>
                             <input
                               type="text"
                               value={accountForm.bankDetails.accountNumber}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, accountNumber: e.target.value } })}
                               placeholder="Enter account number"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                               required
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Account Name</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">Account Name</label>
                             <input
                               type="text"
                               value={accountForm.bankDetails.accountName}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, accountName: e.target.value } })}
                               placeholder="Enter account holder name"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                               required
                             />
                           </div>
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <label className="block text-sm font-medium text-slate-300 mb-2">Routing #</label>
+                              <label className="block text-sm font-medium text-neutral-300 mb-2">Routing #</label>
                               <input
                                 type="text"
                                 value={accountForm.bankDetails.routingNumber}
                                 onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, routingNumber: e.target.value } })}
                                 placeholder="Optional"
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                                className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-slate-300 mb-2">SWIFT Code</label>
+                              <label className="block text-sm font-medium text-neutral-300 mb-2">SWIFT Code</label>
                               <input
                                 type="text"
                                 value={accountForm.bankDetails.swiftCode}
                                 onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, swiftCode: e.target.value } })}
                                 placeholder="Optional"
-                                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                                className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                               />
                             </div>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">IBAN (optional)</label>
+                            <label className="block text-sm font-medium text-neutral-300 mb-2">IBAN (optional)</label>
                             <input
                               type="text"
                               value={accountForm.bankDetails.iban}
                               onChange={(e) => setAccountForm({ ...accountForm, bankDetails: { ...accountForm.bankDetails, iban: e.target.value } })}
                               placeholder="Enter IBAN"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500"
+                              className="w-full bg-[#050505] border border-neutral-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500"
                             />
                           </div>
                         </>
                       )}
 
                       {/* Default checkbox */}
-                      <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                      <label className="flex items-center gap-2 text-sm text-neutral-300 cursor-pointer">
                         <input
                           type="checkbox"
                           checked={accountForm.isDefault}
                           onChange={(e) => setAccountForm({ ...accountForm, isDefault: e.target.checked })}
-                          className="rounded border-slate-700"
+                          className="rounded border-neutral-800"
                         />
                         Set as default withdrawal account
                       </label>
@@ -913,14 +913,14 @@ export default function SettingsNew() {
                         <button
                           type="button"
                           onClick={() => { setShowAddAccountModal(false); resetAccountForm(); }}
-                          className="flex-1 bg-slate-800 hover:bg-slate-700 text-white px-4 py-3 rounded-lg font-medium transition-colors"
+                          className="flex-1 bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-3 rounded-lg font-medium transition-colors"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
                           disabled={isCreating || isUpdatingAccount}
-                          className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 disabled:bg-slate-600 text-white px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                          className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 shadow-md shadow-amber-500/20 disabled:bg-neutral-600 text-black px-4 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
                         >
                           {(isCreating || isUpdatingAccount) && <Loader2 size={18} className="animate-spin" />}
                           {editingAccount ? 'Update' : 'Save Account'}
@@ -940,7 +940,7 @@ export default function SettingsNew() {
                 <h3 className="text-rose-400 font-semibold mb-2 flex items-center gap-2">
                   <AlertTriangle size={20} /> Danger Zone
                 </h3>
-                <p className="text-slate-300 text-sm">
+                <p className="text-neutral-300 text-sm">
                   Once you delete your account, there is no going back. Please be certain.
                 </p>
               </div>
@@ -953,27 +953,27 @@ export default function SettingsNew() {
               </button>
 
               {showDeleteModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050505]/80 backdrop-blur-sm">
+                  <div className="bg-[#0D0D0D] border border-neutral-800 rounded-2xl p-6 max-w-md w-full">
                     <h3 className="text-xl font-bold text-white mb-4">Delete Account</h3>
                     <form onSubmit={handleAccountDelete} className="space-y-4">
                       <div>
-                        <label className="block text-sm text-slate-300 mb-2">Enter your password</label>
+                        <label className="block text-sm text-neutral-300 mb-2">Enter your password</label>
                         <input
                           type="password"
                           value={deleteForm.password}
                           onChange={(e) => setDeleteForm({ ...deleteForm, password: e.target.value })}
-                          className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white"
+                          className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white"
                           required
                         />
                       </div>
                       <div>
-                        <label className="block text-sm text-slate-300 mb-2">Type DELETE to confirm</label>
+                        <label className="block text-sm text-neutral-300 mb-2">Type DELETE to confirm</label>
                         <input
                           type="text"
                           value={deleteForm.confirmation}
                           onChange={(e) => setDeleteForm({ ...deleteForm, confirmation: e.target.value })}
-                          className="w-full bg-slate-950/50 border border-slate-700 rounded-lg px-4 py-3 text-white"
+                          className="w-full bg-[#050505]/50 border border-neutral-800 rounded-lg px-4 py-3 text-white"
                           required
                         />
                       </div>
@@ -981,14 +981,14 @@ export default function SettingsNew() {
                         <button
                           type="button"
                           onClick={() => setShowDeleteModal(false)}
-                          className="flex-1 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg"
+                          className="flex-1 bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-2 rounded-lg"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
                           disabled={isDeletingAccount}
-                          className="flex-1 bg-rose-600 hover:bg-rose-700 disabled:bg-slate-600 text-white px-4 py-2 rounded-lg"
+                          className="flex-1 bg-rose-600 hover:bg-rose-700 disabled:bg-neutral-600 text-white px-4 py-2 rounded-lg"
                         >
                           {isDeletingAccount ? 'Deleting...' : 'Delete Account'}
                         </button>

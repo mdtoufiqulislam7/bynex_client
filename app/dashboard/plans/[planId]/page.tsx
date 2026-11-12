@@ -128,8 +128,8 @@ export default function PlanDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <Loader2 className="animate-spin text-cyan-400 mx-auto mb-4" size={48} />
-          <p className="text-slate-400">Loading plan details...</p>
+          <Loader2 className="animate-spin text-amber-400 mx-auto mb-4" size={48} />
+          <p className="text-neutral-400">Loading plan details...</p>
         </div>
       </div>
     );
@@ -140,8 +140,8 @@ export default function PlanDetailPage() {
       <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
         <AlertCircle size={48} className="text-rose-500" />
         <h3 className="text-lg font-semibold text-white">Plan Not Found</h3>
-        <p className="text-slate-400 text-sm">The investment plan you're looking for doesn't exist.</p>
-        <Link href="/dashboard/plans/invest" className="text-cyan-400 hover:text-cyan-300 font-medium text-sm flex items-center gap-1">
+        <p className="text-neutral-400 text-sm">The investment plan you're looking for doesn't exist.</p>
+        <Link href="/dashboard/plans/invest" className="text-amber-400 hover:text-amber-300 font-medium text-sm flex items-center gap-1">
           <ArrowLeft size={16} /> Back to Plans
         </Link>
       </div>
@@ -180,14 +180,14 @@ export default function PlanDetailPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <Link href="/dashboard/plans/invest" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm mb-4">
+        <Link href="/dashboard/plans/invest" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors text-sm mb-4">
           <ArrowLeft size={18} /> Back to Plans
         </Link>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <h2 className="text-xl sm:text-2xl font-bold text-white">{plan.name}</h2>
             {plan.isPopular && (
-              <span className="flex items-center gap-1 bg-cyan-500/20 text-cyan-400 px-2.5 py-1 rounded-full text-xs font-bold">
+              <span className="flex items-center gap-1 bg-amber-500/20 text-amber-400 px-2.5 py-1 rounded-full text-xs font-bold">
                 <Star size={12} fill="currentColor" /> Popular
               </span>
             )}
@@ -200,7 +200,7 @@ export default function PlanDetailPage() {
         <div className="lg:col-span-2 space-y-6">
 
           {/* ROI Hero Card */}
-          <div className="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-2xl p-5 sm:p-8 text-white shadow-xl relative overflow-hidden">
+          <div className="bg-gradient-to-br from-amber-600 to-amber-600 rounded-2xl p-5 sm:p-8 text-white shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 opacity-10">
               <TrendingUp size={120} />
             </div>
@@ -229,14 +229,14 @@ export default function PlanDetailPage() {
 
           {/* Description */}
           {plan.description && (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
+            <div className="bg-[#0D0D0D] border border-neutral-800 rounded-xl p-4 sm:p-6">
               <h3 className="text-white font-semibold mb-3">About This Plan</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">{plan.description}</p>
+              <p className="text-neutral-300 text-sm leading-relaxed">{plan.description}</p>
             </div>
           )}
 
           {/* Details Grid */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
+          <div className="bg-[#0D0D0D] border border-neutral-800 rounded-xl p-4 sm:p-6">
             <h3 className="text-white font-semibold mb-4">Plan Details</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <DetailCard icon={DollarSign} label="Min Deposit" value={`$${plan.minDeposit.toLocaleString()}`} color="emerald" />
@@ -250,13 +250,13 @@ export default function PlanDetailPage() {
 
           {/* Features */}
           {plan.features && plan.features.length > 0 && (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
+            <div className="bg-[#0D0D0D] border border-neutral-800 rounded-xl p-4 sm:p-6">
               <h3 className="text-white font-semibold mb-4">Features</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {plan.features.map((feature: string, idx: number) => (
-                  <div key={idx} className="flex items-center gap-3 bg-slate-800/50 px-4 py-3 rounded-lg">
+                  <div key={idx} className="flex items-center gap-3 bg-neutral-900/50 px-4 py-3 rounded-lg">
                     <Check size={16} className="text-emerald-500 flex-shrink-0" />
-                    <span className="text-sm text-slate-300">{feature}</span>
+                    <span className="text-sm text-neutral-300">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -264,15 +264,15 @@ export default function PlanDetailPage() {
           )}
 
           {/* Profit Calculator */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
+          <div className="bg-[#0D0D0D] border border-neutral-800 rounded-xl p-4 sm:p-6">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Calculator size={18} className="text-cyan-400" /> Profit Calculator
+              <Calculator size={18} className="text-amber-400" /> Profit Calculator
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Investment Amount</label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Investment Amount</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 font-bold">$</span>
                   <input
                     type="number"
                     value={calcAmount}
@@ -280,25 +280,25 @@ export default function PlanDetailPage() {
                     placeholder={plan.minDeposit.toString()}
                     min={plan.minDeposit}
                     max={plan.maxDeposit}
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="w-full bg-[#050505] border border-neutral-800 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
                   />
                 </div>
-                <p className="text-xs text-slate-500 mt-1">Range: ${plan.minDeposit.toLocaleString()} — ${plan.maxDeposit.toLocaleString()}</p>
+                <p className="text-xs text-neutral-500 mt-1">Range: ${plan.minDeposit.toLocaleString()} — ${plan.maxDeposit.toLocaleString()}</p>
               </div>
 
               <div className="bg-emerald-500/5 border border-emerald-500/30 rounded-lg p-5">
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <p className="text-xs text-slate-400 mb-1">Total Profit</p>
+                    <p className="text-xs text-neutral-400 mb-1">Total Profit</p>
                     <p className="text-lg font-bold text-emerald-400">+${calc.profit.toFixed(2)}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400 mb-1">Daily Profit</p>
-                    <p className="text-lg font-bold text-slate-300">~${calc.daily.toFixed(2)}</p>
+                    <p className="text-xs text-neutral-400 mb-1">Daily Profit</p>
+                    <p className="text-lg font-bold text-neutral-300">~${calc.daily.toFixed(2)}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400 mb-1">Total Return</p>
-                    <p className="text-lg font-bold text-cyan-400">${calc.totalReturn.toFixed(2)}</p>
+                    <p className="text-xs text-neutral-400 mb-1">Total Return</p>
+                    <p className="text-lg font-bold text-amber-400">${calc.totalReturn.toFixed(2)}</p>
                   </div>
                 </div>
               </div>
@@ -308,7 +308,7 @@ export default function PlanDetailPage() {
           {/* Invest Button */}
           <button
             onClick={() => { setShowInvestModal(true); setInvestError(''); setInvestSuccess(false); setInvestAmount(''); }}
-            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-4 px-4 rounded-xl shadow-lg shadow-cyan-500/20 transform hover:-translate-y-1 transition-all flex items-center justify-center text-lg"
+            className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 text-neutral-950 font-bold py-4 px-4 rounded-xl shadow-lg shadow-amber-500/20 transform hover:-translate-y-1 transition-all flex items-center justify-center text-lg"
           >
             Invest Now <ArrowRight size={20} className="ml-2" />
           </button>
@@ -318,53 +318,53 @@ export default function PlanDetailPage() {
         <div className="space-y-6">
 
           {/* Quick Stats */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
+          <div className="bg-[#0D0D0D] border border-neutral-800 rounded-xl p-4 sm:p-6">
             <h3 className="text-white font-semibold mb-4">Quick Stats</h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-400 flex items-center gap-2"><Percent size={14} /> ROI</span>
-                <span className="text-sm font-bold text-cyan-400">{plan.approximateRoi || `${plan.roi}% ${plan.roiType}`}</span>
+                <span className="text-sm text-neutral-400 flex items-center gap-2"><Percent size={14} /> ROI</span>
+                <span className="text-sm font-bold text-amber-400">{plan.approximateRoi || `${plan.roi}% ${plan.roiType}`}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-400 flex items-center gap-2"><Clock size={14} /> Duration</span>
+                <span className="text-sm text-neutral-400 flex items-center gap-2"><Clock size={14} /> Duration</span>
                 <span className="text-sm font-bold text-white">{plan.duration} {plan.durationType}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-400 flex items-center gap-2"><DollarSign size={14} /> Min Deposit</span>
+                <span className="text-sm text-neutral-400 flex items-center gap-2"><DollarSign size={14} /> Min Deposit</span>
                 <span className="text-sm font-bold text-white">${plan.minDeposit.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-400 flex items-center gap-2"><DollarSign size={14} /> Max Deposit</span>
+                <span className="text-sm text-neutral-400 flex items-center gap-2"><DollarSign size={14} /> Max Deposit</span>
                 <span className="text-sm font-bold text-white">${plan.maxDeposit.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-400 flex items-center gap-2"><Gift size={14} /> Referral Bonus</span>
+                <span className="text-sm text-neutral-400 flex items-center gap-2"><Gift size={14} /> Referral Bonus</span>
                 <span className="text-sm font-bold text-white">{plan.referralBonus}%</span>
               </div>
             </div>
           </div>
 
           {/* Timestamps */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-6">
+          <div className="bg-[#0D0D0D] border border-neutral-800 rounded-xl p-4 sm:p-6">
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Calendar size={16} className="text-slate-400" /> Timeline
+              <Calendar size={16} className="text-neutral-400" /> Timeline
             </h3>
             <div className="space-y-3">
               <div>
-                <p className="text-xs text-slate-500 mb-1">Created</p>
-                <p className="text-sm font-medium text-slate-300">{formatDate(plan.createdAt)}</p>
+                <p className="text-xs text-neutral-500 mb-1">Created</p>
+                <p className="text-sm font-medium text-neutral-300">{formatDate(plan.createdAt)}</p>
               </div>
               {plan.updatedAt && plan.updatedAt !== plan.createdAt && (
                 <div>
-                  <p className="text-xs text-slate-500 mb-1">Last Updated</p>
-                  <p className="text-sm font-medium text-slate-300">{formatDate(plan.updatedAt)}</p>
+                  <p className="text-xs text-neutral-500 mb-1">Last Updated</p>
+                  <p className="text-sm font-medium text-neutral-300">{formatDate(plan.updatedAt)}</p>
                 </div>
               )}
             </div>
           </div>
 
           {/* Balance Card */}
-          <div className="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl p-6 text-slate-950">
+          <div className="bg-gradient-to-br from-amber-500 to-yellow-500 rounded-xl p-6 text-neutral-950">
             <p className="text-sm font-bold opacity-70">Your Balance</p>
             <p className="text-2xl font-bold mt-1">${balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
             <Link href="/dashboard/deposit" className="text-xs font-bold mt-2 inline-flex items-center gap-1 bg-black/10 px-3 py-1 rounded-md">
@@ -376,43 +376,43 @@ export default function PlanDetailPage() {
 
       {/* Investment Modal */}
       {showInvestModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-sm p-4" onClick={() => !investing && setShowInvestModal(false)}>
-          <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050505]/90 backdrop-blur-sm p-4" onClick={() => !investing && setShowInvestModal(false)}>
+          <div className="max-w-md w-full bg-[#0D0D0D] border border-neutral-800 rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6 border-b border-neutral-800">
               <h3 className="text-white font-bold text-xl">Invest in {plan.name}</h3>
-              <p className="text-slate-400 text-sm mt-1">{plan.approximateRoi || `${plan.roi}% ${plan.roiType} ROI`}</p>
+              <p className="text-neutral-400 text-sm mt-1">{plan.approximateRoi || `${plan.roi}% ${plan.roiType} ROI`}</p>
             </div>
 
             <div className="p-6 space-y-6">
               {/* Balance */}
-              <div className="bg-slate-950/50 rounded-lg p-4 border border-slate-800">
-                <p className="text-slate-400 text-xs mb-1">Available Balance</p>
+              <div className="bg-[#050505]/50 rounded-lg p-4 border border-neutral-800">
+                <p className="text-neutral-400 text-xs mb-1">Available Balance</p>
                 <p className="text-2xl font-bold text-white">${balance.toLocaleString()}</p>
               </div>
 
               {/* Amount */}
               <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">Investment Amount</label>
+                <label className="block text-sm font-medium text-neutral-300 mb-2">Investment Amount</label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 font-bold">$</span>
                   <input
                     type="number"
                     value={investAmount}
                     onChange={(e) => setInvestAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                    className="w-full bg-[#050505] border border-neutral-800 rounded-lg pl-8 pr-20 py-3 text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
                     disabled={investing}
                   />
                   <button
                     type="button"
                     onClick={() => setInvestAmount(Math.min(balance, plan.maxDeposit).toString())}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-slate-800 text-cyan-400 px-2 py-1 rounded hover:bg-slate-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-neutral-900 text-amber-400 px-2 py-1 rounded hover:bg-neutral-800"
                     disabled={investing}
                   >
                     MAX
                   </button>
                 </div>
-                <p className="text-xs text-slate-400 mt-2">Min: ${plan.minDeposit} | Max: ${plan.maxDeposit.toLocaleString()}</p>
+                <p className="text-xs text-neutral-400 mt-2">Min: ${plan.minDeposit} | Max: ${plan.maxDeposit.toLocaleString()}</p>
               </div>
 
               {/* Returns Preview */}
@@ -421,16 +421,16 @@ export default function PlanDetailPage() {
                   <p className="text-emerald-400 text-xs font-medium mb-2">Expected Returns</p>
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Total Profit:</span>
+                      <span className="text-neutral-400">Total Profit:</span>
                       <span className="text-emerald-400 font-bold">+${investCalc.profit.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Daily Profit:</span>
-                      <span className="text-slate-300">~${investCalc.daily.toFixed(2)}</span>
+                      <span className="text-neutral-400">Daily Profit:</span>
+                      <span className="text-neutral-300">~${investCalc.daily.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between border-t border-emerald-500/20 pt-2 mt-2">
                       <span className="text-white font-medium">Total Return:</span>
-                      <span className="text-cyan-400 font-bold">${investCalc.totalReturn.toFixed(2)}</span>
+                      <span className="text-amber-400 font-bold">${investCalc.totalReturn.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -456,7 +456,7 @@ export default function PlanDetailPage() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowInvestModal(false)}
-                  className="flex-1 py-3 rounded-lg border border-slate-700 text-white hover:bg-slate-800 transition-colors"
+                  className="flex-1 py-3 rounded-lg border border-neutral-800 text-white hover:bg-neutral-900 transition-colors"
                   disabled={investing}
                 >
                   Cancel
@@ -464,7 +464,7 @@ export default function PlanDetailPage() {
                 <button
                   onClick={handleInvest}
                   disabled={investing || !investAmount || parseFloat(investAmount) < plan.minDeposit}
-                  className="flex-1 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex-1 py-3 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 text-black font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {investing ? (
                     <>
@@ -493,19 +493,19 @@ const DetailCard: React.FC<{
 }> = ({ icon: Icon, label, value, color }) => {
   const colorMap: Record<string, string> = {
     emerald: 'bg-emerald-500/10 text-emerald-500',
-    blue: 'bg-blue-500/10 text-blue-500',
+    blue: 'bg-amber-500/10 text-amber-500',
     purple: 'bg-purple-500/10 text-purple-500',
-    amber: 'bg-cyan-500/10 text-cyan-400',
-    cyan: 'bg-cyan-500/10 text-cyan-500',
-    gold: 'bg-cyan-500/10 text-cyan-400',
+    amber: 'bg-amber-500/10 text-amber-400',
+    cyan: 'bg-amber-500/10 text-amber-500',
+    gold: 'bg-amber-500/10 text-amber-400',
   };
 
   return (
-    <div className="bg-slate-800/50 rounded-lg p-4">
-      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-2 ${colorMap[color] || 'bg-slate-700 text-slate-400'}`}>
+    <div className="bg-neutral-900/50 rounded-lg p-4">
+      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-2 ${colorMap[color] || 'bg-neutral-800 text-neutral-400'}`}>
         <Icon size={16} />
       </div>
-      <p className="text-xs text-slate-500 font-medium">{label}</p>
+      <p className="text-xs text-neutral-500 font-medium">{label}</p>
       <p className="text-sm font-bold text-white mt-0.5">{value}</p>
     </div>
   );

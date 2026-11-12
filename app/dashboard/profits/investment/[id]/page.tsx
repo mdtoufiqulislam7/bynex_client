@@ -60,17 +60,17 @@ export default function InvestmentProfitHistory() {
       <div className="flex items-start gap-3 sm:gap-4 flex-wrap">
         <button
           onClick={() => router.back()}
-          className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+          className="p-2 hover:bg-neutral-900 rounded-lg transition-colors"
         >
-          <ArrowLeft className="text-slate-400" size={20} />
+          <ArrowLeft className="text-neutral-400" size={20} />
         </button>
         <div className="flex-1 min-w-0">
           <h1 className="text-lg sm:text-2xl font-bold text-white">Profit Distribution History</h1>
-          <p className="text-slate-400 text-xs sm:text-sm mt-1">{profitData.planName} • ID: {investmentId}</p>
+          <p className="text-neutral-400 text-xs sm:text-sm mt-1">{profitData.planName} • ID: {investmentId}</p>
         </div>
         <Link
           href={`/dashboard/investments/${investmentId}`}
-          className="px-3 sm:px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-lg transition-colors text-sm"
+          className="px-3 sm:px-4 py-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-white rounded-lg transition-colors text-sm"
         >
           View Investment
         </Link>
@@ -78,36 +78,36 @@ export default function InvestmentProfitHistory() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">Total Expected Profit</p>
-            <TrendingUp className="text-blue-500" size={20} />
+            <p className="text-neutral-400 text-sm">Total Expected Profit</p>
+            <TrendingUp className="text-amber-500" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${profitData.totalProfit.toFixed(2)}</p>
-          <p className="text-xs text-slate-400 mt-2">Complete investment profit</p>
+          <p className="text-xs text-neutral-400 mt-2">Complete investment profit</p>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">Profit Received</p>
+            <p className="text-neutral-400 text-sm">Profit Received</p>
             <CheckCircle className="text-emerald-500" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-emerald-400">${profitData.paidProfit.toFixed(2)}</p>
           <p className="text-xs text-emerald-400 mt-2">{((profitData.paidProfit / profitData.totalProfit) * 100).toFixed(1)}% distributed</p>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-slate-400 text-sm">Pending Profit</p>
-            <Clock className="text-cyan-400" size={20} />
+            <p className="text-neutral-400 text-sm">Pending Profit</p>
+            <Clock className="text-amber-400" size={20} />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-white">${profitData.pendingProfit.toFixed(2)}</p>
-          <p className="text-xs text-slate-400 mt-2">To be distributed</p>
+          <p className="text-xs text-neutral-400 mt-2">To be distributed</p>
         </div>
       </div>
 
       {/* Profit Chart */}
-      <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 sm:p-6">
+      <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 sm:p-6">
         <h3 className="text-white font-semibold text-lg mb-4">Cumulative Profit Over Time</h3>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -123,7 +123,7 @@ export default function InvestmentProfitHistory() {
               <YAxis stroke="#64748B" style={{ fontSize: '12px' }} tickFormatter={(val) => `$${val}`} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#1E293B',
+                  backgroundColor: '#141414',
                   border: '1px solid #334155',
                   borderRadius: '8px',
                   color: '#fff',
@@ -142,44 +142,44 @@ export default function InvestmentProfitHistory() {
       </div>
 
       {/* Distribution Records */}
-      <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
-        <div className="p-4 sm:p-6 border-b border-slate-800">
+      <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl overflow-hidden">
+        <div className="p-4 sm:p-6 border-b border-neutral-800">
           <h3 className="text-white font-semibold text-base sm:text-lg">Distribution Records</h3>
-          <p className="text-slate-400 text-sm mt-1">{profitData.profitRecords.length} total distributions</p>
+          <p className="text-neutral-400 text-sm mt-1">{profitData.profitRecords.length} total distributions</p>
         </div>
-        <div className="divide-y divide-slate-800">
+        <div className="divide-y divide-neutral-800">
           {profitData.profitRecords.map((record) => (
-            <div key={record.id} className="p-4 sm:p-6 hover:bg-slate-800/30 transition-colors">
+            <div key={record.id} className="p-4 sm:p-6 hover:bg-neutral-900/30 transition-colors">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                     record.status === 'paid'
                       ? 'bg-emerald-500/10'
-                      : 'bg-cyan-500/10'
+                      : 'bg-amber-500/10'
                   }`}>
                     {record.status === 'paid' ? (
                       <CheckCircle className="text-emerald-500" size={20} />
                     ) : (
-                      <Clock className="text-cyan-400" size={20} />
+                      <Clock className="text-amber-400" size={20} />
                     )}
                   </div>
                   <div>
                     <p className="text-white font-medium">${record.amount.toFixed(2)}</p>
-                    <p className="text-slate-400 text-sm">{formatDate(record.date)}</p>
+                    <p className="text-neutral-400 text-sm">{formatDate(record.date)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className={`px-2 py-1 rounded text-xs font-medium capitalize ${
                     record.type === 'daily'
-                      ? 'bg-blue-500/10 text-blue-400'
-                      : 'bg-cyan-500/10 text-cyan-400'
+                      ? 'bg-amber-500/10 text-amber-400'
+                      : 'bg-amber-500/10 text-amber-400'
                   }`}>
                     {record.type}
                   </span>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                     record.status === 'paid'
                       ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                      : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
+                      : 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
                   }`}>
                     {record.status}
                   </span>

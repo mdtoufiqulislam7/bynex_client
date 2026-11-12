@@ -43,7 +43,7 @@ const showToast = (message: string, type: 'success' | 'error' | 'info' = 'succes
       ? 'bg-emerald-500/90 border-emerald-400 text-white'
       : type === 'error'
       ? 'bg-rose-500/90 border-rose-400 text-white'
-      : 'bg-blue-500/90 border-blue-400 text-white'
+      : 'bg-amber-400 border-amber-300 text-black'
   }`
 
   const icon =
@@ -102,21 +102,21 @@ function ConfirmationModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl animate-in zoom-in-95">
+      <div className="bg-[#0D0D0D] border border-neutral-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl animate-in zoom-in-95">
         <div className="flex items-start gap-4 mb-4">
           <div className="flex-shrink-0 w-12 h-12 bg-rose-500/10 rounded-xl flex items-center justify-center">
             <AlertTriangle className="text-rose-500" size={24} />
           </div>
           <div className="flex-1">
             <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-            <p className="text-slate-400 text-sm">{message}</p>
+            <p className="text-neutral-400 text-sm">{message}</p>
           </div>
         </div>
         <div className="flex gap-3">
           <button
             onClick={onClose}
             disabled={isLoading}
-            className="flex-1 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium border border-slate-700"
+            className="flex-1 px-4 py-2.5 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium border border-neutral-800"
           >
             Cancel
           </button>
@@ -139,14 +139,14 @@ function NotificationSkeleton() {
   return (
     <div className="p-6 animate-pulse">
       <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 w-5 h-5 bg-slate-800 rounded mt-1" />
+        <div className="flex-shrink-0 w-5 h-5 bg-neutral-900 rounded mt-1" />
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
-            <div className="h-5 bg-slate-800 rounded w-1/3" />
-            <div className="h-4 bg-slate-800 rounded w-20" />
+            <div className="h-5 bg-neutral-900 rounded w-1/3" />
+            <div className="h-4 bg-neutral-900 rounded w-20" />
           </div>
-          <div className="h-4 bg-slate-800 rounded w-full mb-3" />
-          <div className="h-4 bg-slate-800 rounded w-2/3" />
+          <div className="h-4 bg-neutral-900 rounded w-full mb-3" />
+          <div className="h-4 bg-neutral-900 rounded w-2/3" />
         </div>
       </div>
     </div>
@@ -200,21 +200,21 @@ export default function NotificationCenter() {
     const icons = {
       transaction: <DollarSign className="text-emerald-500" size={20} />,
       security: <Shield className="text-rose-500" size={20} />,
-      promotion: <Gift className="text-cyan-400" size={20} />,
-      system: <AlertTriangle className="text-blue-500" size={20} />,
+      promotion: <Gift className="text-amber-400" size={20} />,
+      system: <AlertTriangle className="text-amber-500" size={20} />,
     }
-    return icons[category as keyof typeof icons] || <Bell className="text-slate-500" size={20} />
+    return icons[category as keyof typeof icons] || <Bell className="text-neutral-500" size={20} />
   }
 
   // Get category icon
   const getCategoryIcon = (category: string) => {
     const icons = {
       transaction: <DollarSign className="text-emerald-500" size={20} />,
-      system: <AlertTriangle className="text-blue-500" size={20} />,
-      promotion: <Gift className="text-cyan-400" size={20} />,
+      system: <AlertTriangle className="text-amber-500" size={20} />,
+      promotion: <Gift className="text-amber-400" size={20} />,
       security: <Shield className="text-rose-500" size={20} />,
     }
-    return icons[category as keyof typeof icons] || <Bell className="text-slate-500" size={20} />
+    return icons[category as keyof typeof icons] || <Bell className="text-neutral-500" size={20} />
   }
 
   // Format relative date
@@ -314,21 +314,21 @@ export default function NotificationCenter() {
         {/* Header Skeleton */}
         <div className="flex justify-between items-start">
           <div>
-            <div className="h-8 bg-slate-800 rounded w-48 mb-2" />
-            <div className="h-4 bg-slate-800 rounded w-64" />
+            <div className="h-8 bg-neutral-900 rounded w-48 mb-2" />
+            <div className="h-4 bg-neutral-900 rounded w-64" />
           </div>
           <div className="flex gap-2">
-            <div className="h-10 bg-slate-800 rounded w-32" />
-            <div className="h-10 bg-slate-800 rounded w-32" />
+            <div className="h-10 bg-neutral-900 rounded w-32" />
+            <div className="h-10 bg-neutral-900 rounded w-32" />
           </div>
         </div>
 
         {/* Stats Skeleton */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
           {[...Array(7)].map((_, i) => (
-            <div key={i} className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 animate-pulse">
-              <div className="h-3 bg-slate-800 rounded w-16 mb-2" />
-              <div className="h-8 bg-slate-800 rounded w-12" />
+            <div key={i} className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 animate-pulse">
+              <div className="h-3 bg-neutral-900 rounded w-16 mb-2" />
+              <div className="h-8 bg-neutral-900 rounded w-12" />
             </div>
           ))}
         </div>
@@ -336,12 +336,12 @@ export default function NotificationCenter() {
         {/* Filters Skeleton */}
         <div className="flex gap-2">
           {[...Array(7)].map((_, i) => (
-            <div key={i} className="h-10 bg-slate-800 rounded w-24" />
+            <div key={i} className="h-10 bg-neutral-900 rounded w-24" />
           ))}
         </div>
 
         {/* Notifications Skeleton */}
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden divide-y divide-slate-800">
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl overflow-hidden divide-y divide-neutral-800">
           {[...Array(5)].map((_, i) => (
             <NotificationSkeleton key={i} />
           ))}
@@ -357,22 +357,22 @@ export default function NotificationCenter() {
         <div className="flex justify-between items-start">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-white">Notifications</h1>
-            <p className="text-slate-400 text-sm mt-1">Error loading notifications</p>
+            <p className="text-neutral-400 text-sm mt-1">Error loading notifications</p>
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-12">
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-12">
           <div className="text-center">
             <div className="w-16 h-16 bg-rose-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
               <XCircle className="text-rose-500" size={32} />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">Failed to Load Notifications</h3>
-            <p className="text-slate-400 mb-6 max-w-md mx-auto">
+            <p className="text-neutral-400 mb-6 max-w-md mx-auto">
               {(notificationsError as any)?.data?.message || 'An error occurred while loading your notifications. Please try again.'}
             </p>
             <button
               onClick={() => refetchNotifications()}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-lg transition-colors font-medium"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-amber-500 text-black rounded-lg transition-colors font-medium"
             >
               <RefreshCw size={18} />
               Retry
@@ -391,12 +391,12 @@ export default function NotificationCenter() {
           <div className="flex items-center gap-3">
             <h1 className="text-xl sm:text-2xl font-bold text-white">Notifications</h1>
             {unreadCount > 0 && (
-              <span className="px-2.5 py-1 bg-cyan-500 text-white text-xs font-bold rounded-full">
+              <span className="px-2.5 py-1 bg-amber-400 text-black font-semibold text-xs font-bold rounded-full">
                 {unreadCount}
               </span>
             )}
           </div>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-neutral-400 text-sm mt-1">
             {unreadCount > 0
               ? `You have ${unreadCount} unread notification${unreadCount !== 1 ? 's' : ''}`
               : 'All caught up!'}
@@ -407,7 +407,7 @@ export default function NotificationCenter() {
             <button
               onClick={handleMarkAllAsRead}
               disabled={isMarkingAllAsRead}
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors border border-slate-700 font-medium"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors border border-neutral-800 font-medium"
             >
               {isMarkingAllAsRead ? (
                 <Loader2 className="animate-spin" size={18} />
@@ -436,32 +436,32 @@ export default function NotificationCenter() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">All</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">All</p>
           <p className="text-xl sm:text-2xl font-bold text-white">{stats.all}</p>
         </div>
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">Unread</p>
-          <p className="text-xl sm:text-2xl font-bold text-cyan-400">{stats.unread}</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">Unread</p>
+          <p className="text-xl sm:text-2xl font-bold text-amber-400">{stats.unread}</p>
         </div>
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">Read</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">Read</p>
           <p className="text-xl sm:text-2xl font-bold text-emerald-500">{stats.read}</p>
         </div>
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">Transactions</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">Transactions</p>
           <p className="text-xl sm:text-2xl font-bold text-emerald-500">{stats.transaction}</p>
         </div>
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">System</p>
-          <p className="text-xl sm:text-2xl font-bold text-blue-500">{stats.system}</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">System</p>
+          <p className="text-xl sm:text-2xl font-bold text-amber-500">{stats.system}</p>
         </div>
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">Promotions</p>
-          <p className="text-xl sm:text-2xl font-bold text-cyan-400">{stats.promotion}</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">Promotions</p>
+          <p className="text-xl sm:text-2xl font-bold text-amber-400">{stats.promotion}</p>
         </div>
-        <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 hover:border-slate-700 transition-colors">
-          <p className="text-slate-400 text-xs mb-1 font-medium">Security</p>
+        <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl p-4 hover:border-neutral-800 transition-colors">
+          <p className="text-neutral-400 text-xs mb-1 font-medium">Security</p>
           <p className="text-xl sm:text-2xl font-bold text-rose-500">{stats.security}</p>
         </div>
       </div>
@@ -484,8 +484,8 @@ export default function NotificationCenter() {
             onClick={() => setFilter(key)}
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
               filter === key
-                ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20'
-                : 'bg-slate-900/50 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+                ? 'bg-amber-400 text-black font-semibold shadow-lg shadow-amber-500/20'
+                : 'bg-[#0D0D0D]/50 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-800'
             }`}
           >
             {label}
@@ -494,11 +494,11 @@ export default function NotificationCenter() {
       </div>
 
       {/* Notifications List */}
-      <div className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden">
+      <div className="bg-[#0D0D0D]/50 border border-neutral-800 rounded-xl overflow-hidden">
         {filteredNotifications.length === 0 ? (
           <div className="p-8 sm:p-12 text-center">
-            <div className="w-20 h-20 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Bell className="text-slate-600" size={40} />
+            <div className="w-20 h-20 bg-neutral-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Bell className="text-neutral-600" size={40} />
             </div>
             <h3 className="text-xl font-bold text-white mb-2">
               {filter === 'all'
@@ -507,7 +507,7 @@ export default function NotificationCenter() {
                 ? 'No Unread Notifications'
                 : `No ${filter.charAt(0).toUpperCase() + filter.slice(1)} Notifications`}
             </h3>
-            <p className="text-slate-500 text-sm">
+            <p className="text-neutral-500 text-sm">
               {filter === 'all'
                 ? "You're all caught up! No notifications to show."
                 : filter === 'unread'
@@ -516,7 +516,7 @@ export default function NotificationCenter() {
             </p>
           </div>
         ) : (
-          <div className="divide-y divide-slate-800">
+          <div className="divide-y divide-neutral-800">
             {filteredNotifications.map((notification) => {
               const category = mapTypeToCategory(notification)
               const isDeleting = deletingId === notification.id
@@ -524,8 +524,8 @@ export default function NotificationCenter() {
               return (
                 <div
                   key={notification.id}
-                  className={`p-4 sm:p-5 hover:bg-slate-800/30 transition-all group cursor-pointer ${
-                    notification.status === 'unread' ? 'bg-slate-800/20 border-l-2 border-l-cyan-500' : ''
+                  className={`p-4 sm:p-5 hover:bg-neutral-900/30 transition-all group cursor-pointer ${
+                    notification.status === 'unread' ? 'bg-neutral-900/20 border-l-2 border-l-amber-500' : ''
                   } ${isDeleting ? 'opacity-50' : ''}`}
                   onClick={() => handleNotificationClick(notification)}
                 >
@@ -538,23 +538,23 @@ export default function NotificationCenter() {
                         <div className="flex items-center gap-2 flex-1">
                           <h3 className="text-white font-semibold text-sm">{notification.title}</h3>
                           {notification.status === 'unread' && (
-                            <div className="w-2 h-2 bg-cyan-500 rounded-full flex-shrink-0 animate-pulse" />
+                            <div className="w-2 h-2 bg-amber-500 rounded-full flex-shrink-0 animate-pulse" />
                           )}
                         </div>
-                        <span className="text-xs text-slate-500 whitespace-nowrap flex-shrink-0">
+                        <span className="text-xs text-neutral-500 whitespace-nowrap flex-shrink-0">
                           {formatDate(notification.createdAt)}
                         </span>
                       </div>
-                      <p className="text-slate-400 text-sm mb-3 leading-relaxed">{notification.content}</p>
+                      <p className="text-neutral-400 text-sm mb-3 leading-relaxed">{notification.content}</p>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span
                           className={`text-xs font-medium px-2.5 py-1 rounded-full capitalize ${
                             category === 'transaction'
                               ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                               : category === 'system'
-                              ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                              ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                               : category === 'promotion'
-                              ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                              ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
                               : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                           }`}
                         >
@@ -567,7 +567,7 @@ export default function NotificationCenter() {
                               handleMarkAsRead(notification.id)
                             }}
                             disabled={isMarkingAsRead}
-                            className="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity font-medium"
+                            className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity font-medium"
                           >
                             <Check size={14} />
                             Mark as read
