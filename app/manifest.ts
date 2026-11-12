@@ -12,19 +12,19 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'portrait',
     icons: [
       {
-        src: '/android-chrome-192x192.png?v=3',
+        src: '/android-chrome-192x192.png?v=4',
         sizes: '192x192',
         type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/android-chrome-512x512.png?v=3',
+        src: '/android-chrome-512x512.png?v=4',
         sizes: '512x512',
         type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/android-chrome-512x512.png?v=3',
+        src: '/android-chrome-512x512.png?v=4',
         sizes: '512x512',
         type: 'image/png',
         purpose: 'maskable',
